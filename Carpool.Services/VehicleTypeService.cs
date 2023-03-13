@@ -31,14 +31,14 @@ namespace Carpool.Services
                 dbContext.VehicleTypes.Add(vehicleType);
                 dbContext.SaveChanges();
 
-                response = new(200, "Success", true);
+                response = new(201, "Success", true);
                 response.Message = "VehicleType succesfully added";
                 response.Data = vehicleType;
 
             }
             catch
             {
-                response = new(404, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! Unsuccessful addition";
                 response.Data = null;
             }
@@ -59,7 +59,7 @@ namespace Carpool.Services
             }
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = $"Error! Unsuccessful retireval of vehicleTypes;\n{ex.Message}";
                 response.Data = null;
             }
@@ -84,13 +84,13 @@ namespace Carpool.Services
             }
             catch (DataNotFoundException ex)
             {
-                response = new(410, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
             }
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = "Error! Unsucceful retrieval of vehicleType";
                 response.Data = null;
             }
@@ -123,14 +123,14 @@ namespace Carpool.Services
 
             catch (DataNotFoundException ex)
             {
-                response = new(410, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
             }
 
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = "Error! Unsuccessful edit of the existing vehicleType";
                 response.Data = null;
             }
@@ -162,14 +162,14 @@ namespace Carpool.Services
 
             catch (DataNotFoundException ex)
             {
-                response = new(410, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
             }
 
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = "Error! Unsuccessful deletion of the existing vehicleType";
                 response.Data = null;
             }

@@ -25,6 +25,13 @@ namespace Carpool.Data
         public DbSet<VehicleType> VehicleTypes { get; set; }
 
         public DbSet<Location> Locations { get; set; }
+
+        public DbSet<BookingTransaction> BookingTransactions { get; set; }
+
+        public DbSet<OfferTransaction> OfferTransactions { get; set; }
+
+        public DbSet<RideTransaction> RideTransactions { get; set; }
+
     }
 }
 

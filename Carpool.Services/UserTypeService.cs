@@ -32,14 +32,14 @@ namespace Carpool.Services
                 dbContext.UserTypes.Add(userType);
                 dbContext.SaveChanges();
 
-                response = new(200, "Success", true);
+                response = new(201, "Success", true);
                 response.Message = "UserType succesfully added";
                 response.Data = userType;
 
             }
             catch
             {
-                response = new(404, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! Unsuccessful addition";
                 response.Data = null;
             }
@@ -60,7 +60,7 @@ namespace Carpool.Services
             }
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = $"Error! Unsuccessful retireval of userTypes;\n{ex.Message}";
                 response.Data = null;
             }
@@ -85,13 +85,13 @@ namespace Carpool.Services
             }
             catch (DataNotFoundException ex)
             {
-                response = new(410, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
             }
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = "Error! Unsucceful retrieval of userType";
                 response.Data = null;
             }
@@ -124,14 +124,14 @@ namespace Carpool.Services
 
             catch (DataNotFoundException ex)
             {
-                response = new(410, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
             }
 
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = "Error! Unsuccessful edit of the existing userType";
                 response.Data = null;
             }
@@ -163,14 +163,14 @@ namespace Carpool.Services
 
             catch (DataNotFoundException ex)
             {
-                response = new(410, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
             }
 
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = "Error! Unsuccessful deletion of the existing userType";
                 response.Data = null;
             }

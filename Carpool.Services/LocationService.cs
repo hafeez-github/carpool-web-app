@@ -39,14 +39,14 @@ namespace Carpool.Services
                 dbContext.Locations.Add(location);
                 dbContext.SaveChanges();
 
-                response = new(200, "Success", true);
+                response = new(201, "Success", true);
                 response.Message = "Location succesfully added";
                 response.Data = location;
 
             }
             catch(Exception ex)
             {
-                response = new(404, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! Unsuccessful addition"+ ex.Message;
                 response.Data = null;
             }
@@ -67,7 +67,7 @@ namespace Carpool.Services
             }
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = $"Error! Unsuccessful retireval of locations;\n{ex.Message}";
                 response.Data = null;
             }
@@ -92,13 +92,13 @@ namespace Carpool.Services
             }
             catch (DataNotFoundException ex)
             {
-                response = new(410, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
             }
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = "Error! Unsucceful retrieval of location";
                 response.Data = null;
             }
@@ -137,14 +137,14 @@ namespace Carpool.Services
 
             catch (DataNotFoundException ex)
             {
-                response = new(410, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
             }
 
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = "Error! Unsuccessful edit of the existing location";
                 response.Data = null;
             }
@@ -176,14 +176,14 @@ namespace Carpool.Services
 
             catch (DataNotFoundException ex)
             {
-                response = new(410, "Failure", false);
+                response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
             }
 
             catch (Exception ex)
             {
-                response = new(410, "Failure", false);
+                response = new(404, "Failure", false);
                 response.Message = "Error! Unsuccessful deletion of the existing location";
                 response.Data = null;
             }
