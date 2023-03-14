@@ -7,10 +7,12 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { LayoutModule } from './layout/layout.module';
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +20,7 @@ import { SharedModule } from './shared/shared.module';
     AuthenticationModule,
     LayoutModule,
     PagesModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

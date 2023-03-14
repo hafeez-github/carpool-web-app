@@ -6,6 +6,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -13,11 +14,19 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     SignUpComponent,
     LogInComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
     AuthenticationRoutingModule
+  ],
+  exports:[
+    LogInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    HomeComponent
   ]
 })
 export class AuthenticationModule { }
