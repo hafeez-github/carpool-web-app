@@ -21,6 +21,7 @@ namespace Carpool.Services.Authentication
             ApiResponse<User> response;
             User user = new User()
             {
+                Username = "defaultUsername",
                 UserType = 3,
                 IsActive=true,
                 Mobile="defaultMobile",
@@ -32,7 +33,8 @@ namespace Carpool.Services.Authentication
             try
             {
 
-                if (String.IsNullOrEmpty(model.Email) && String.IsNullOrEmpty(model.Password) && String.IsNullOrEmpty(model.Username))
+                if (String.IsNullOrEmpty(model.Email) && String.IsNullOrEmpty(model.Password))
+                     //&& String.IsNullOrEmpty(model.Username)
                 {
                     throw new Exception("Credentials can't be empty");
                 }
@@ -59,22 +61,22 @@ namespace Carpool.Services.Authentication
                         throw new Exception("Password can't be empty");
                     }
 
-                    if (!String.IsNullOrEmpty(model.Username))
-                    {
-                        var result=dbContext.Users.Where(n => n.Username == model.Username).ToList();
-                        if (result.Count==0)
-                        {
-                            user.Username = model.Username;
-                        }
-                        else
-                        {
-                            throw new Exception("Username already exists. Try another one.");
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception("Username can't be empty");
-                    }
+                    //if (!String.IsNullOrEmpty(model.Username))
+                    //{
+                    //    var result=dbContext.Users.Where(n => n.Username == model.Username).ToList();
+                    //    if (result.Count==0)
+                    //    {
+                    //        user.Username = model.Username;
+                    //    }
+                    //    else
+                    //    {
+                    //        throw new Exception("Username already exists. Try another one.");
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    throw new Exception("Username can't be empty");
+                    //}
 
                     response = new(200, "Success", true);
                     response.Message = "Successful SignUp";
@@ -92,7 +94,7 @@ namespace Carpool.Services.Authentication
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
             }
-            Console.WriteLine(user);
+            //Console.WriteLine(user);
             return response;
         }
     }

@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AccountRoutingModule } from '../account/account-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AccountRoutingModule } from '../account/account-routing.module';
   imports: [
     CommonModule,
     AuthenticationRoutingModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    FormsModule
   ],
   exports:[
     SignupComponent,

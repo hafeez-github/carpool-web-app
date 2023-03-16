@@ -74,6 +74,8 @@ namespace Carpool.Services.AuthenticationServices
             return response;
         }
 
+
+        //helper function
         private ApiResponse<User> VerifyPassword(LogIn model, User user, ApiResponse<User> response)
         {
             if (model.Password == user.Password)
