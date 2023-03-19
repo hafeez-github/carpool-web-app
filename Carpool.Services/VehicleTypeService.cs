@@ -3,11 +3,12 @@ using Carpool.API.Exceptions;
 using Carpool.Data;
 using Carpool.Data.Entities;
 using Carpool.Models;
+using Carpool.Services.Interfaces;
 using Carpool.Utilities;
 
 namespace Carpool.Services
 {
-	public class VehicleTypeService
+	public class VehicleTypeService:IVehicleTypeService
 	{
         private readonly ApplicationDbContext dbContext;
 
