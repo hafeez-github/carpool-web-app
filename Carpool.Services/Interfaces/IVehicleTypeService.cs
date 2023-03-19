@@ -7,7 +7,7 @@ namespace Carpool.Services.Interfaces
 {
 	public interface IVehicleTypeService
 	{
-        ApiResponse<VehicleType> AddVehicleType(VehicleRequest vehicleType);
+        ApiResponse<VehicleType> AddVehicleType(VehicleTypeRequest vehicleType);
         ApiResponse<IEnumerable<VehicleType>> GetVehicleTypes();
         ApiResponse<VehicleType> GetVehicleType(int id);
         ApiResponse<VehicleType> UpdateVehicleType(int id, VehicleTypeRequest editedVehicleType);

@@ -5,11 +5,12 @@ using Carpool.API.Exceptions;
 using Carpool.Data;
 using Carpool.Data.Entities;
 using Carpool.Models;
+using Carpool.Services.Interfaces;
 using Carpool.Utilities;
 
 namespace Carpool.Services
 {
-	public class LocationService
+	public class LocationService:ILocationService
 	{
         private readonly ApplicationDbContext dbContext;
 
