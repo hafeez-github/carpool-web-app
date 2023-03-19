@@ -7,6 +7,7 @@ import { OfferRideComponent } from './offer-ride/offer-ride.component';
 import { BookRideComponent } from './book-ride/book-ride.component';
 import { MyRidesComponent } from './my-rides/my-rides.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   imports: [
     CommonModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    SharedModule
   ]
 })
 export class AccountModule { }
