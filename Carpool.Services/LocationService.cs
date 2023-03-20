@@ -20,10 +20,8 @@ namespace Carpool.Services
         }
 
         //Post
-        public ApiResponse<Location> AddLocation(LocationRequest newLocation)
+        public async Task<Location> AddLocation(LocationRequest newLocation)
         {
-            ApiResponse<Location> response;
-
             try
             {
                 Location location = new Location()
@@ -37,84 +35,63 @@ namespace Carpool.Services
                     Longitude = newLocation.Longitude,
                 };
 
-                dbContext.Locations.Add(location);
-                dbContext.SaveChanges();
+                await dbContext.Locations.AddAsync(location);
+                await dbContext.SaveChangesAsync();
 
-                response = new(201, "Success", true);
-                response.Message = "Location succesfully added";
-                response.Data = location;
-
+                return location;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! Unsuccessful addition"+ ex.Message;
-                response.Data = null;
+                throw ex;
             }
-            return response;
+
         }
 
         //Get All
-        public ApiResponse<IEnumerable<Location>> GetLocations()
+        public async Task<IEnumerable<Location>> GetLocations()
         {
-            ApiResponse<IEnumerable<Location>> response;
-
             try
             {
-                response = new(200, "Success", true);
-                response.Message = "Successfully fetched locations";
-                response.Data = dbContext.Locations;
-
+                return dbContext.Locations;
             }
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = $"Error! Unsuccessful retireval of locations;\n{ex.Message}";
-                response.Data = null;
+                throw ex;
             }
-
-            return response;
         }
 
         //Get by Id
-        public ApiResponse<Location> GetLocation(int id)
+        public async Task<Location> GetLocation(int id)
         {
-            ApiResponse<Location> response;
-
             try
             {
-                response = new(200, "Success", true);
-                response.Message = "Successfully fetched location";
-                response.Data = dbContext.Locations.Find(id);
-                if (response.Data == null)
+                Location location = await dbContext.Locations.FindAsync(id);
+                if ( location== null)
                 {
                     throw new DataNotFoundException("The required location doesn't exist");
                 }
+                return location;
             }
+
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsucceful retrieval of location";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
 
         //Update
-        public ApiResponse<Location> UpdateLocation(int id, LocationRequest editedLocation)
+        public async Task<Location> UpdateLocation(int id, LocationRequest editedLocation)
         {
-            ApiResponse<Location> response;
-
+            Location location;
             try
             {
-                Location location = dbContext.Locations.Find(id);
+                location= await dbContext.Locations.FindAsync(id);
+
                 if (location == null)
                 {
                     throw new DataNotFoundException("Location corresponding to specified id doesn't exist");
@@ -129,67 +106,50 @@ namespace Carpool.Services
                 location.Latitude = editedLocation.Latitude;
                 location.Longitude = editedLocation.Longitude;
 
-                dbContext.SaveChanges();
-
-                response = new(200, "Success", true);
-                response.Message = "Successfully updated location";
-                response.Data = location;
+                await dbContext.SaveChangesAsync();
+                return location;
             }
 
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful edit of the existing location";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
 
 
         //Delete
-        public ApiResponse<Location> DeleteLocation(int id)
+        public async Task<Location> DeleteLocation(int id)
         {
-            ApiResponse<Location> response;
-
+            Location location;
             try
             {
-                Location location = dbContext.Locations.Find(id);
+                location = await dbContext.Locations.FindAsync(id);
+
                 if (location == null)
                 {
                     throw new DataNotFoundException("Location corresponding to specified id doesn't exist");
                 }
 
                 dbContext.Locations.Remove(location);
-                dbContext.SaveChanges();
-
-                response = new(200, "Success", true);
-                response.Message = "Successfully deleted location";
-                response.Data = location;
+                await dbContext.SaveChangesAsync();
             }
-
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful deletion of the existing location";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
+            return location;
         }
 
     }

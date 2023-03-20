@@ -7,11 +7,11 @@ namespace Carpool.Services.Interfaces
 {
 	public interface ILocationService
 	{
-        ApiResponse<Location> AddLocation(LocationRequest location);
-        ApiResponse<IEnumerable<Location>> GetLocations();
-        ApiResponse<Location> GetLocation(int id);
-        ApiResponse<Location> UpdateLocation(int id, LocationRequest editedLocation);
-        ApiResponse<Location> DeleteLocation(int id);
+        Task<Location> AddLocation(LocationRequest location);
+        Task<IEnumerable<Location>> GetLocations();
+        Task<Location> GetLocation(int id);
+        Task<Location> UpdateLocation(int id, LocationRequest editedLocation);
+        Task<Location> DeleteLocation(int id);
     }
 }
 

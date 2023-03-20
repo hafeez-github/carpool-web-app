@@ -5,6 +5,7 @@ using Carpool.Models.Authentication;
 using Carpool.Services.Interfaces.Authentication;
 using Carpool.Utilities;
 using Carpool.Utilities.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Carpool.Services.AuthenticationServices
 {
@@ -16,83 +17,68 @@ namespace Carpool.Services.AuthenticationServices
             this.dbContext = dbContext;
         }
 
-        public ApiResponse<User> LogIn(LogIn model)
+        public async Task<User> LogIn(LogIn model)
         {
-            ApiResponse<User> response = new();
-
             try
             {
                 if (!String.IsNullOrEmpty(model.Username))
                 {
-                    User user = dbContext.Users.SingleOrDefault(n => n.Username == model.Username);
+                    User user = await dbContext.Users.SingleOrDefaultAsync(n => n.Username == model.Username);
 
                     if (user == null)
                     {
-                        response = new(400, "Failure", false);
-                        response.Message = "Error! Incorect Username.";
-                        response.Data = null;
+                        throw new Exception("Error! Incorect Username.");
                     }
 
                     else 
                     {
-                        response=VerifyPassword(model, user, response);
+                        return VerifyPassword(model, user);
                     }
                 }
 
                 else if (!String.IsNullOrEmpty(model.Email))
                 {
-                    User user = dbContext.Users.SingleOrDefault(n => n.Email == model.Email);
+                    User user = await dbContext.Users.SingleOrDefaultAsync(n => n.Email == model.Email);
 
                     if (user == null)
                     {
-                        response = new(400, "Failure", false);
-                        response.Message = "Error! Incorect Email.";
-                        response.Data = null;
+                        throw new Exception("Error! Incorect Email.");
                     }
                     else
                     {
-                        response= VerifyPassword(model, user, response);
+                        return VerifyPassword(model, user);
                     }
                 }
 
                 else
                 {
-                    response = new(400, "Failure", false);
-                    response.Message = "Error! Username(or Email) cannot be empty";
-                    response.Data = null;
+                    throw new Exception("Error! Username(or Email) cannot be empty");
                 }
 
             }
 
             catch (Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
 
 
         //helper function
-        private ApiResponse<User> VerifyPassword(LogIn model, User user, ApiResponse<User> response)
+        private User VerifyPassword(LogIn model, User user)
         {
             if (model.Password == user.Password)
             {
-                response = new(200, "Success", true);
-                response.Message = "Successful LogIn";
-                response.Data = user;
+                return user;
             }
 
             else
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! Incorect Password.";
-                response.Data = null;
+                Exception ex = new Exception("Error! Incorect Password.");
+                throw ex;
             }
 
-            return response;
         }
 
     }

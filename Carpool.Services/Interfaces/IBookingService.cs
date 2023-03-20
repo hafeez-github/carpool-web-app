@@ -8,7 +8,6 @@ namespace Carpool.Services.Interfaces
 {
 	public interface IBookingService
 	{
-        ApiResponse<BookingTransaction> ReadBookingDetails(BookingRequest model);
+        Task<BookingTransaction> ReadBookingDetails(BookingRequest model);
     }
 }
-

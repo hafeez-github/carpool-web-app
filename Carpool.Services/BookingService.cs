@@ -18,10 +18,8 @@ namespace Carpool.Services
         }
 
         //Post   
-        public ApiResponse<BookingTransaction> ReadBookingDetails(BookingRequest model)
+        public async Task<BookingTransaction> ReadBookingDetails(BookingRequest model)
         {
-            ApiResponse<BookingTransaction> response = new();
-
             try
             {
                 BookingTransaction bookingTransaction = new()
@@ -35,24 +33,16 @@ namespace Carpool.Services
                     BookedTime=model.BookedTime
                 };
 
-                dbContext.BookingTransactions.Add(bookingTransaction);
-                dbContext.SaveChanges();
-
-                
-
-                response = new(201, "Success", true);
-                response.Message = "User succesfully added";
-                response.Data = bookingTransaction;
+                await dbContext.BookingTransactions.AddAsync(bookingTransaction);
+                await dbContext.SaveChangesAsync();
+                return bookingTransaction;
             }
             
             catch (Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message ;
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Carpool.Services.Interfaces
 {
 	public interface IRideService
 	{
-        ApiResponse<RideTransaction> ReadRideDetails(RideRequest model);
+        Task<RideTransaction> ReadRideDetails(RideRequest model);
     }
 }
 

@@ -18,10 +18,8 @@ namespace Carpool.Services
         }
 
         //Post
-        public ApiResponse<User> AddUser(UserRequest newUser)
+        public async Task<User> AddUser(UserRequest newUser)
         {
-            ApiResponse<User> response;
-
             try
             {
                 User user = new User()
@@ -36,89 +34,69 @@ namespace Carpool.Services
                     IsActive= newUser.IsActive
                 };
 
-                dbContext.Users.Add(user);
-                dbContext.SaveChanges();
+                await dbContext.Users.AddAsync(user);
+                await dbContext.SaveChangesAsync();
 
-                response = new(201, "Success", true);
-                response.Message = "User succesfully added";
-                response.Data = user;
-
+                return user;
             }
-            catch
+            catch(Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! Unsuccessful addition";
-                response.Data = null;
+                throw ex;
             }
-            return response;
+            
         }
 
         //Get All
-        public ApiResponse<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
-            ApiResponse<IEnumerable<User>> response;
-
             try
             {
-                response = new(200, "Success", true);
-                response.Message = "Successfully fetched users";
-                response.Data = dbContext.Users;
-
+                return dbContext.Users;
             }
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = $"Error! Unsuccessful retireval of users;\n{ex.Message}";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
 
         //Get by Id
-        public ApiResponse<User> GetUser(int id)
+        public async Task<User> GetUser(int id)
         {
-            ApiResponse<User> response;
-
             try
             {
-                response = new(200, "Success", true);
-                response.Message = "Successfully fetched user";
-                response.Data = dbContext.Users.Find(id);
-                if (response.Data == null)
+                
+                User user = await dbContext.Users.FindAsync(id);
+                if (user == null)
                 {
                     throw new DataNotFoundException("The required user doesn't exist");
                 }
+                return user;
             }
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsucceful retrieval of user";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
 
         //Update
-        public ApiResponse<User> UpdateUser(int id, UserRequest editedUser)
+        public async Task<User> UpdateUser(int id, UserRequest editedUser)
         {
-            ApiResponse<User> response;
+            
 
             try
             {
-                User user = dbContext.Users.Find(id);
+                User user = await dbContext.Users.FindAsync(id);
+
                 if (user == null)
                 {
                     throw new DataNotFoundException("User corresponding to specified id doesn't exist");
                 }
-
 
                 user.FirstName = editedUser.FirstName;
                 user.LastName = editedUser.LastName;
@@ -129,33 +107,27 @@ namespace Carpool.Services
                 user.UserType = editedUser.UserType;
                 user.IsActive = editedUser.IsActive;
 
-                dbContext.SaveChanges();
+                await dbContext.SaveChangesAsync();
 
-                response = new(200, "Success", true);
-                response.Message = "Successfully updated user";
-                response.Data = user;
+                return user;
+
             }
 
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! "+ ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
             catch(Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful edit of the existing user";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
 
 
         //Delete
-        public ApiResponse<User> DeleteUser(int id)
+        public async Task<User> DeleteUser(int id)
         {
             ApiResponse<User> response;
 
@@ -168,30 +140,22 @@ namespace Carpool.Services
                 }
 
                 dbContext.Users.Remove(user);
-                dbContext.SaveChanges();
+                await dbContext.SaveChangesAsync();
+                return user;
 
-                response = new(200, "Success", true);
-                response.Message = "Successfully deleted user";
-                response.Data = user;
             }
 
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! "+ ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful deletion of the existing user";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
-
 
     }
 }

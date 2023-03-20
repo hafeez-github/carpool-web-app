@@ -16,7 +16,7 @@ namespace Carpool.Services.Authentication
             this.dbContext = dbContext;
         }
 
-        public ApiResponse<User> SignUp(SignUp model)
+        public async Task<User> SignUp(SignUp model)
         {
             ApiResponse<User> response;
             User user = new User()
@@ -77,25 +77,19 @@ namespace Carpool.Services.Authentication
                     //{
                     //    throw new Exception("Username can't be empty");
                     //}
+                    
+                    await dbContext.Users.AddAsync(user);
+                    await dbContext.SaveChangesAsync();
 
-                    response = new(200, "Success", true);
-                    response.Message = "Successful SignUp";
-                    response.Data = user;
-
-                    dbContext.Users.Add(user);
-                    dbContext.SaveChanges();
+                    return user;
                 }
                 
             }
 
             catch (Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
-            //Console.WriteLine(user);
-            return response;
         }
     }
 }
