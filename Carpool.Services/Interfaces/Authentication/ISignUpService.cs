@@ -7,7 +7,7 @@ namespace Carpool.Services.Interfaces.Authentication
 {
 	public interface ISignUpService
 	{
-        ApiResponse<User> SignUp(SignUp model);
+        Task<User> SignUp(SignUp model);
     }
 }
 

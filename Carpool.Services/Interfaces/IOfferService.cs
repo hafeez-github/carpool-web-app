@@ -7,7 +7,7 @@ namespace Carpool.Services.Interfaces
 {
 	public interface IOfferService
 	{
-        ApiResponse<OfferTransaction> ReadOfferDetails(OfferRequest model);
+        Task<OfferTransaction> ReadOfferDetails(OfferRequest model);
     }
 }
 

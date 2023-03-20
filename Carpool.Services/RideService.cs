@@ -17,10 +17,8 @@ namespace Carpool.Services
         }
 
         //Post   
-        public ApiResponse<RideTransaction> ReadRideDetails(RideRequest model)
+        public async Task<RideTransaction> ReadRideDetails(RideRequest model)
         {
-            ApiResponse<RideTransaction> response = new();
-
             try
             {
                 RideTransaction rideTransaction = new()
@@ -33,22 +31,17 @@ namespace Carpool.Services
                     Distance=model.Distance
                 };
 
-                dbContext.RideTransactions.Add(rideTransaction);
-                dbContext.SaveChanges();
+                await dbContext.RideTransactions.AddAsync(rideTransaction);
+                await dbContext.SaveChangesAsync();
 
-                response = new(201, "Success", true);
-                response.Message = "User succesfully added";
-                response.Data = rideTransaction;
+                return rideTransaction;
             }
 
             catch (Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
     }
 }

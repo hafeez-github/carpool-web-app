@@ -17,10 +17,8 @@ namespace Carpool.Services
         }
 
         //Post   
-        public ApiResponse<OfferTransaction> ReadOfferDetails(OfferRequest model)
+        public async Task<OfferTransaction> ReadOfferDetails(OfferRequest model)
         {
-            ApiResponse<OfferTransaction> response = new();
-
             try
             {
                 OfferTransaction offerTransaction = new()
@@ -34,22 +32,18 @@ namespace Carpool.Services
                     OfferedTime = model.OfferedTime
                 };
 
-                dbContext.OfferTransactions.Add(offerTransaction);
-                dbContext.SaveChanges();
+                await dbContext.OfferTransactions.AddAsync(offerTransaction);
+                await dbContext.SaveChangesAsync();
 
-                response = new(201, "Success", true);
-                response.Message = "User succesfully added";
-                response.Data = offerTransaction;
+                return offerTransaction;
             }
 
             catch (Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
+           
         }
     }
 }

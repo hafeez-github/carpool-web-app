@@ -7,11 +7,11 @@ namespace Carpool.Services.Interfaces
 {
 	public interface IUserTypeService
 	{
-        ApiResponse<UserType> AddUserType(UserTypeRequest userType);
-        ApiResponse<IEnumerable<UserType>> GetUserTypes();
-        ApiResponse<UserType> GetUserType(int id);
-        ApiResponse<UserType> UpdateUserType(int id, UserTypeRequest editedUserType);
-        ApiResponse<UserType> DeleteUserType(int id);
+        Task<UserType> AddUserType(UserTypeRequest userType);
+        Task<IEnumerable<UserType>> GetUserTypes();
+        Task<UserType> GetUserType(int id);
+        Task<UserType> UpdateUserType(int id, UserTypeRequest editedUserType);
+        Task<UserType> DeleteUserType(int id);
     }
 }
 

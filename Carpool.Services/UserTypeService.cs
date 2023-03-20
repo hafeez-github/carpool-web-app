@@ -18,10 +18,8 @@ namespace Carpool.Services
         }
 
         //Post
-        public ApiResponse<UserType> AddUserType(UserTypeRequest newUserType)
+        public async Task<UserType> AddUserType(UserTypeRequest newUserType)
         {
-            ApiResponse<UserType> response;
-
             try
             {
                 UserType userType = new UserType()
@@ -29,78 +27,58 @@ namespace Carpool.Services
                     Type = newUserType.Type
                 };
 
-                dbContext.UserTypes.Add(userType);
-                dbContext.SaveChanges();
-
-                response = new(201, "Success", true);
-                response.Message = "UserType succesfully added";
-                response.Data = userType;
-
+                await dbContext.UserTypes.AddAsync(userType);
+                await dbContext.SaveChangesAsync();
+                return userType;
             }
-            catch
+            catch(Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! Unsuccessful addition";
-                response.Data = null;
+                throw ex;
             }
-            return response;
         }
 
         //Get All
-        public ApiResponse<IEnumerable<UserType>> GetUserTypes()
+        public async Task<IEnumerable<UserType>> GetUserTypes()
         {
-            ApiResponse<IEnumerable<UserType>> response;
-
+            
             try
             {
-                response = new(200, "Success", true);
-                response.Message = "Successfully fetched userTypes";
-                response.Data = dbContext.UserTypes;
+                return dbContext.UserTypes;
 
             }
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = $"Error! Unsuccessful retireval of userTypes;\n{ex.Message}";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
 
         //Get by Id
-        public ApiResponse<UserType> GetUserType(int id)
+        public async Task<UserType> GetUserType(int id)
         {
-            ApiResponse<UserType> response;
-
             try
             {
-                response = new(200, "Success", true);
-                response.Message = "Successfully fetched userType";
-                response.Data = dbContext.UserTypes.Find(id);
-                if (response.Data == null)
+                UserType userType=dbContext.UserTypes.Find(id);
+                if (userType == null)
                 {
                     throw new DataNotFoundException("The required userType doesn't exist");
                 }
+                return userType;
             }
+
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsucceful retrieval of userType";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
 
         //Update
-        public ApiResponse<UserType> UpdateUserType(int id, UserTypeRequest editedUserType)
+        public async Task<UserType> UpdateUserType(int id, UserTypeRequest editedUserType)
         {
             ApiResponse<UserType> response;
 
@@ -111,71 +89,55 @@ namespace Carpool.Services
                 {
                     throw new DataNotFoundException("UserType corresponding to specified id doesn't exist");
                 }
-
-
                 userType.Type = editedUserType.Type;
 
-                dbContext.SaveChanges();
-
-                response = new(200, "Success", true);
-                response.Message = "Successfully updated userType";
-                response.Data = userType;
+                await dbContext.SaveChangesAsync();
+                return userType;
             }
 
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful edit of the existing userType";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
 
 
         //Delete
-        public ApiResponse<UserType> DeleteUserType(int id)
+        public async Task<UserType> DeleteUserType(int id)
         {
             ApiResponse<UserType> response;
 
             try
             {
-                UserType userType = dbContext.UserTypes.Find(id);
+                UserType userType = await dbContext.UserTypes.FindAsync(id);
                 if (userType == null)
                 {
                     throw new DataNotFoundException("UserType corresponding to specified id doesn't exist");
                 }
 
                 dbContext.UserTypes.Remove(userType);
-                dbContext.SaveChanges();
-
-                response = new(200, "Success", true);
-                response.Message = "Successfully deleted userType";
-                response.Data = userType;
+                await dbContext.SaveChangesAsync();
+                return userType;
+                
             }
 
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful deletion of the existing userType";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
+            
         }
     }
 }

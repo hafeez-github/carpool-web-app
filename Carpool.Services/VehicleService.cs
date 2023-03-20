@@ -18,10 +18,8 @@ namespace Carpool.Services
         }
 
         //Post
-        public ApiResponse<Vehicle> AddVehicle(VehicleRequest newVehicle)
+        public async Task<Vehicle> AddVehicle(VehicleRequest newVehicle)
         {
-            ApiResponse<Vehicle> response;
-
             try
             {
                 Vehicle vehicle = new Vehicle()
@@ -31,157 +29,118 @@ namespace Carpool.Services
                     OwnerId = newVehicle.OwnerId
                 };
 
-                dbContext.Vehicles.Add(vehicle);
-                dbContext.SaveChanges();
+                await dbContext.Vehicles.AddAsync(vehicle);
+                await dbContext.SaveChangesAsync();
 
-                response = new(201, "Success", true);
-                response.Message = "Vehicle succesfully added";
-                response.Data = vehicle;
-
+                return vehicle;
             }
             catch (Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! Unsuccessful addition.\n"+ex.Message;
-                response.Data = null;
+                throw ex;
             }
-            return response;
         }
 
         //Get All
-        public ApiResponse<IEnumerable<Vehicle>> GetVehicles()
+        public async Task<IEnumerable<Vehicle>> GetVehicles()
         {
-            ApiResponse<IEnumerable<Vehicle>> response;
-
             try
             {
-                response = new(200, "Success", true);
-                response.Message = "Successfully fetched vehicles";
-                response.Data = dbContext.Vehicles;
+                return dbContext.Vehicles;
             }
 
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = $"Error! Unsuccessful retireval of vehicles;\n{ex.Message}";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
 
         //Get by Id
-        public ApiResponse<Vehicle> GetVehicle(int id)
+        public async Task<Vehicle> GetVehicle(int id)
         {
-            ApiResponse<Vehicle> response;
-
             try
             {
-                response = new(200, "Success", true);
-                response.Message = "Successfully fetched vehicle";
-                response.Data = dbContext.Vehicles.Find(id);
-                if (response.Data == null)
+                Vehicle vehicle= await dbContext.Vehicles.FindAsync(id);
+
+                if (vehicle == null)
                 {
                     throw new DataNotFoundException("The required vehicle doesn't exist");
                 }
+                return vehicle;
             }
 
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsucceful retrieval of vehicle";
-                response.Data = null;
+                throw ex;
             }
 
-            return response;
         }
 
         //Update
-        public ApiResponse<Vehicle> UpdateVehicle(int id, VehicleRequest editedVehicle)
+        public async Task<Vehicle> UpdateVehicle(int id, VehicleRequest editedVehicle)
         {
-            ApiResponse<Vehicle> response;
-
             try
             {
-                Vehicle vehicle = dbContext.Vehicles.Find(id);
+                Vehicle vehicle = await dbContext.Vehicles.FindAsync(id);
+
                 if (vehicle == null)
                 {
                     throw new DataNotFoundException("Vehicle corresponding to specified id doesn't exist");
                 }
 
-
                 vehicle.Number = editedVehicle.Number;
                 vehicle.Type = editedVehicle.Type;
                 vehicle.OwnerId = editedVehicle.OwnerId;
 
-                dbContext.SaveChanges();
+                await dbContext.SaveChangesAsync();
+                return vehicle;
 
-                response = new(200, "Success", true);
-                response.Message = "Successfully updated vehicle";
-                response.Data = vehicle;
             }
 
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful edit of the existing vehicle";
-                response.Data = null;
+                throw ex;
             }
-
-            return response;
         }
 
-
         //Delete
-        public ApiResponse<Vehicle> DeleteVehicle(int id)
+        public async Task<Vehicle> DeleteVehicle(int id)
         {
-            ApiResponse<Vehicle> response;
-
             try
             {
-                Vehicle user = dbContext.Vehicles.Find(id);
-                if (user == null)
+                Vehicle vehicle = dbContext.Vehicles.Find(id);
+
+                if (vehicle == null)
                 {
                     throw new DataNotFoundException("Vehicle corresponding to specified id doesn't exist");
                 }
 
-                dbContext.Vehicles.Remove(user);
-                dbContext.SaveChanges();
+                dbContext.Vehicles.Remove(vehicle);
+                await dbContext.SaveChangesAsync();
+                return vehicle;
 
-                response = new(200, "Success", true);
-                response.Message = "Successfully deleted vehicle";
-                response.Data = user;
             }
 
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
+                throw ex;
             }
 
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful deletion of the existing vehicle";
-                response.Data = null;
+                throw ex;
             }
-
-            return response;
+            
         }
     }
 }

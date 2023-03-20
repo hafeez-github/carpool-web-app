@@ -7,11 +7,11 @@ namespace Carpool.Services.Interfaces
 {
 	public interface IVehicleTypeService
 	{
-        ApiResponse<VehicleType> AddVehicleType(VehicleTypeRequest vehicleType);
-        ApiResponse<IEnumerable<VehicleType>> GetVehicleTypes();
-        ApiResponse<VehicleType> GetVehicleType(int id);
-        ApiResponse<VehicleType> UpdateVehicleType(int id, VehicleTypeRequest editedVehicleType);
-        ApiResponse<VehicleType> DeleteVehicleType(int id);
+        Task<VehicleType> AddVehicleType(VehicleTypeRequest vehicleType);
+        Task<IEnumerable<VehicleType>> GetVehicleTypes();
+        Task<VehicleType> GetVehicleType(int id);
+        Task<VehicleType> UpdateVehicleType(int id, VehicleTypeRequest editedVehicleType);
+        Task<VehicleType> DeleteVehicleType(int id);
     }
 }
 
