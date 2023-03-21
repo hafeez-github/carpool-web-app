@@ -14,7 +14,7 @@ import { BookingCardComponent } from './components/booking-card/booking-card.com
     CommonModule
   ],
   exports:[
-    BookingCardComponent
+    BookingCardComponent, OfferCardComponent
   ]
 })
 export class SharedModule { }
