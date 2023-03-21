@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Carpool.API.Exceptions;
 using Carpool.Data;
 using Carpool.Data.Entities;
@@ -18,7 +19,7 @@ namespace Carpool.Services
         }
 
         //Post   
-        public async Task<BookingTransaction> ReadBookingDetails(BookingRequest model)
+        public async Task<List<OfferTransaction>> ReadBookingDetails(BookingRequest model)
         {
             try
             {
@@ -35,7 +36,17 @@ namespace Carpool.Services
 
                 await dbContext.BookingTransactions.AddAsync(bookingTransaction);
                 await dbContext.SaveChangesAsync();
-                return bookingTransaction;
+
+                List<OfferTransaction> matches=dbContext.OfferTransactions.Where(n =>
+
+                (n.From == bookingTransaction.From) &&
+                (n.To == bookingTransaction.To)&&
+                (n.StartTime == bookingTransaction.StartTime)&&
+                (n.EndTime == bookingTransaction.EndTime)
+
+                ).ToList<OfferTransaction>();
+
+                return matches;
             }
             
             catch (Exception ex)
