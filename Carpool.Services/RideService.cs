@@ -34,6 +34,8 @@ namespace Carpool.Services
                 await dbContext.RideTransactions.AddAsync(rideTransaction);
                 await dbContext.SaveChangesAsync();
 
+                
+
                 return rideTransaction;
             }
 
