@@ -33,7 +33,7 @@ namespace Carpool.Services
                     Mobile= newUser.Mobile,
                     IsActive= newUser.IsActive
                 };
-
+             
                 await dbContext.Users.AddAsync(user);
                 await dbContext.SaveChangesAsync();
 
