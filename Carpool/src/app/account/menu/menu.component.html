@@ -8,14 +8,14 @@
                 
                 <span>
                     <span class="fw-bold">hi</span>
-                    <span class="my-4 me-5 fw-bold">{{this.loginResponseData}}</span>
+                    <span class="my-4 me-5 fw-bold"> {{this.loginResponseData.firstName}}</span>
                     <img src="../../../assets/images/logo.png" class="img-fluid my-4 me-5" alt="">
                 </span>
             </div>
             
 
             <br>
-            <div class="text-center"><h1>Hey {{loginResponseData}}!</h1><br></div>
+            <div class="text-center"><h1>Hey {{loginResponseData.firstName}}!</h1><br></div>
             <div class="text-center">
                 <button class="border-0 fw-bold text-white bookButton m-2 rounded-3" routerLink="/acc/book">Book a ride</button>
                 <button class="border-0 fw-bold text-white offerButton m-2 rounded-3" routerLink="/acc/offer">Offer a ride</button>

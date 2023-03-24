@@ -3,7 +3,7 @@
 <div>
     <div class="row vh-100">
 
-        <div class="col-12 border border-secondary bgImgMenu">
+        <div class="col-12 bgImgMenu">
             <!-- <img src="../../../assets/images/logo.png" class="img-fluid my-4 ms-5" alt=""> -->
             <div class="d-flex flex-row justify-content-between">
                 <img src="../../../assets/images/logo.png" class="img-fluid my-4 ms-5" alt="">
@@ -21,36 +21,29 @@
 
                 <div class="col-6">
                     <!-- menu half of page -->
+                    <div class="row">
+                        <div class="col-7 m-auto">
+                            <div class="pb-3">
+                                <app-booking-menu1></app-booking-menu1>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
+
+
+
+
                 <div class="col-6">
                     <!-- cards half of page -->
 
-                    <div class="row border-1">
-                        <div class="col-6 p-0 pe-3">
-                            <app-booking-card></app-booking-card>
-                        </div>
+                    <h2 class="yourMatches mb-4">Your Matches</h2>
 
-                        <div class="col-6 p-0 pe-3">
-                            <app-booking-card></app-booking-card>
+                    <div class="row pe-5">
+                        <!-- *ngFor="let match of matches" -->
+                        <div class="col-6 p-0 pe-3" *ngFor="let match of dataService.bookingResponse">
+                            <app-booking-card [currentMatch]="match"></app-booking-card>
                         </div>
-
-                        <!--
-                        <div class="col-6 p-0 pe-3">
-                            <app-booking-card></app-booking-card>
-                        </div>
-
-                         <div class="col-6 p-0 pe-3">
-                            <app-booking-card></app-booking-card>
-                        </div>
-
-                        <div class="col-6 p-0 pe-3">
-                            <app-booking-card></app-booking-card>
-                        </div>
-
-                        <div class="col-6 p-0 pe-3">
-                            <app-booking-card></app-booking-card>
-                        </div> -->
 
                     </div>
                 </div>

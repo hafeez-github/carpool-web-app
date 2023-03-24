@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
+import { OfferRequest } from 'src/app/shared/models/offerRequest';
 import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
@@ -9,10 +10,14 @@ import { DataService } from 'src/app/shared/services/data.service';
 export class BookRideComponent implements OnInit{
 
   loginResponseData:any;
-  constructor(private dataService:DataService) {
+  matches:OfferRequest[]=[];
+
+  constructor(public dataService:DataService) {
   }
 
   ngOnInit(){
-    this.loginResponseData=this.dataService.loggedinUser;
+    this.loginResponseData=this.dataService.loggedinUser.firstName;
+    this.matches=this.dataService.bookingResponse;
+    console.log(this.matches);
   }
 }

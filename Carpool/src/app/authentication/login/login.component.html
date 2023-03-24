@@ -20,14 +20,14 @@
                     <div class="col-12 p-2">
 
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="email" placeholder="username@email.com" minlength="3" maxlength="20" required [(ngModel)]="login.email" name="email" #email="ngModel">
+                            <input type="email" class="form-control" id="email" placeholder="username@email.com" minlength="3" maxlength="20" required [(ngModel)]="login.email" name="email" #email="ngModel" autocomplete="off">
                             <label for="email">Enter Email Id</label>
                             <small *ngIf="email.touched && email.errors?.['required']" class="warning"> Email can't be empty!</small>
                             
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="password" placeholder="password" minlength="3" maxlength="20" required [(ngModel)]="login.password" name="password" #password="ngModel">
+                            <input type="password" class="form-control" id="password" placeholder="password" minlength="3" maxlength="20" required [(ngModel)]="login.password" name="password" #password="ngModel" autocomplete="off">
                             <label for="password">Enter Password</label>
                             <small *ngIf="password.touched && password.errors?.['required']" class="warning"> Password can't be empty!</small>
                         </div>

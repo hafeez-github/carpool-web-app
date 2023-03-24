@@ -28,9 +28,9 @@ namespace Carpool.Services
                     BookerId=model.BookerId,
                     From=model.From,
                     To=model.To,
-                    StartTime=model.StartTime,
-                    EndTime=model.EndTime,
-                    SeatsRequired=model.SeatsRequired,
+                    Time=model.Time,
+                    Date = model.Date,
+                    SeatsRequired =model.SeatsRequired,
                     BookedTime=model.BookedTime
                 };
 
@@ -41,8 +41,9 @@ namespace Carpool.Services
 
                 (n.From == bookingTransaction.From) &&
                 (n.To == bookingTransaction.To)&&
-                (n.StartTime == bookingTransaction.StartTime)&&
-                (n.EndTime == bookingTransaction.EndTime)
+                (n.Time == bookingTransaction.Time)&&
+                (n.Date == bookingTransaction.Date)
+
 
                 ).ToList<OfferTransaction>();
 

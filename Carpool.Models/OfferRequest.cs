@@ -9,9 +9,9 @@ namespace Carpool.Models
 
         public int To { get; set; }
 
-        public string StartTime { get; set; }
+        public string Time { get; set; }
 
-        public string EndTime { get; set; }
+        public string Date { get; set; }
 
         public int SeatsAvailable { get; set; }
 

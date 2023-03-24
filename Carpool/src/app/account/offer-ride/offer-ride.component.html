@@ -1,9 +1,7 @@
-<p>offer-ride works!</p>
-
 <div>
     <div class="row vh-100">
 
-        <div class="col-12 border border-secondary bgImgMenu">
+        <div class="col-12 bgImgMenu">
             <!-- <img src="../../../assets/images/logo.png" class="img-fluid my-4 ms-5" alt=""> -->
             <div class="d-flex flex-row justify-content-between">
                 <img src="../../../assets/images/logo.png" class="img-fluid my-4 ms-5" alt="">
@@ -15,9 +13,28 @@
                 </span>
             </div>
             
-            <div class="col-6 p-0 pe-3">
-                <app-offer-card></app-offer-card>
-            </div>
+            <div class="row">
+                <!-- Actual body of page -->
+    
+                    <div class="col-6">
+                        <!-- menu half of page -->
+                    </div>
+                    
+                    <div class="col-6">
+                        <!-- cards half of page -->
+    
+                        <div class="row pe-5">
+                            <div class="col-6 p-0 pe-3">
+                                <app-offer-card></app-offer-card>
+                            </div>
+    
+                            <div class="col-6 p-0 pe-3">
+                                <app-offer-card></app-offer-card>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
             
         </div>
       
