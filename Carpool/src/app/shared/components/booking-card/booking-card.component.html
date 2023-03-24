@@ -14,8 +14,8 @@
                 </div>
 
                 <div class="values-row d-flex flex-row justify-content-between">
-                    <div class="mx-2">cincinnati</div>
-                    <div class="mx-2">Minneapolis</div>
+                    <div class="mx-2">{{currentMatch.from}}</div>
+                    <div class="mx-2">{{currentMatch.to}}</div>
                 </div>
 
             </div>
@@ -27,8 +27,8 @@
                 </div>
 
                 <div class="values-row d-flex flex-row justify-content-between">
-                    <div class="mx-2">xx/mm/yyyy</div>
-                    <div class="mx-2">5am-9am</div>
+                    <div class="mx-2">{{currentMatch.date}}</div>
+                    <div class="mx-2">{{currentMatch.time}}</div>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
 
                 <div class="values-row d-flex flex-row justify-content-between">
                     <div class="mx-2">180$</div>
-                    <div class="mx-2">02</div>
+                    <div class="mx-2">{{currentMatch.seatsAvailable}}</div>
                 </div>
             </div>
 

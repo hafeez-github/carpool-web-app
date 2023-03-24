@@ -4,13 +4,32 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { APIResponse } from '../models/api-response';
 import { Signup } from '../models/signup';
+import { Location } from '../models/location';
+import { BookingRequest } from '../models/bookingRequest';
+import { OfferRequest } from '../models/offerRequest';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  loggedinUser:string="";
+  loggedinUser:User={
+    id:1,
+    firstName:'',
+    lastName:'',
+    username:'',
+    userType:3,
+    email:'',
+    password:'',
+    mobile:'',
+    isActive:false
+    
+
+    
+  };
+  locations:string[]=[];
+  bookingResponse:OfferRequest[]=[];
 
   constructor(private http: HttpClient) { }
 
@@ -23,4 +42,13 @@ export class DataService {
     return this.http.post<APIResponse<Login>>('https://localhost:7021/api/authentication/login', user);
   }
   
+  getLocations() {
+    // console.log(user);
+    return this.http.get<APIResponse<Location[]>>('https://localhost:7021/api/Location');
+  }
+
+  bookRide(request:BookingRequest){
+    return this.http.post<APIResponse<OfferRequest[]>>('https://localhost:7021/api/Booking', request);
+  }
+
 }

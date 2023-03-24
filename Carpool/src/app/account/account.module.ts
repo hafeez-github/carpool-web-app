@@ -8,6 +8,8 @@ import { BookRideComponent } from './book-ride/book-ride.component';
 import { MyRidesComponent } from './my-rides/my-rides.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SharedModule } from '../shared/shared.module';
+import { BookingMenu1Component } from './book-ride/booking-menu1/booking-menu1.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,12 +18,14 @@ import { SharedModule } from '../shared/shared.module';
     OfferRideComponent,
     BookRideComponent,
     MyRidesComponent,
-    ProfileComponent
+    ProfileComponent,
+    BookingMenu1Component,
   ],
   imports: [
     CommonModule,
     AccountRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class AccountModule { }

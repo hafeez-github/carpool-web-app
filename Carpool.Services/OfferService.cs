@@ -26,8 +26,8 @@ namespace Carpool.Services
                     OffererId = model.OffererId,
                     From = model.From,
                     To = model.To,
-                    StartTime = model.StartTime,
-                    EndTime = model.EndTime,
+                    Time = model.Time,
+                    Date= model.Date,
                     SeatsAvailable = model.SeatsAvailable,
                     OfferedTime = model.OfferedTime
                 };
