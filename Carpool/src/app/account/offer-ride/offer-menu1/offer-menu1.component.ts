@@ -21,6 +21,7 @@ export class OfferMenu1Component implements OnInit {
     to: 7,
     date: '',
     time: '',
+    stops:'',
     seatsAvailable: 1,
   };
 

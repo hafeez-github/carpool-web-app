@@ -10,7 +10,7 @@
                 
                 <span>
                     <span class="fw-bold">hi</span>
-                    <span class="my-4 me-5 fw-bold">{{this.loginResponseData}}</span>
+                    <span class="my-4 me-5 fw-bold"> {{this.loginResponseData.firstName}}</span>
                     <img src="../../../assets/images/logo.png" class="img-fluid my-4 me-5" alt="">
                 </span>
             </div>
@@ -43,7 +43,7 @@
                         <!-- *ngIf="dataService.bookingResponse.length!=0" else noResults -->
                         <!-- *ngFor="let match of matches" -->
                         <div class="col-6 p-0 pe-3" *ngFor="let match of dataService.bookingResponse">
-                            <app-booking-card [currentMatch]="match"></app-booking-card>
+                            <app-booking-card [currentMatch]="match" (click)="cardClicked()" class="bookingCard"></app-booking-card>
                         </div>
                     </div>
 

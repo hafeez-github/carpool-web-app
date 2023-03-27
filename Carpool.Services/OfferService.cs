@@ -29,6 +29,7 @@ namespace Carpool.Services
                     Time = model.Time,
                     Date= model.Date,
                     SeatsAvailable = model.SeatsAvailable,
+                    Stops=model.Stops,
                     OfferedTime = model.OfferedTime
                 };
 

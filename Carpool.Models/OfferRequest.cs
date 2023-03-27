@@ -13,7 +13,7 @@ namespace Carpool.Models
 
         public string Date { get; set; }
 
-        //public string Stops { get; set; }
+        public string Stops { get; set; }
 
         public int SeatsAvailable { get; set; }
 
