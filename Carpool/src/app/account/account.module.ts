@@ -8,8 +8,10 @@ import { BookRideComponent } from './book-ride/book-ride.component';
 import { MyRidesComponent } from './my-rides/my-rides.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SharedModule } from '../shared/shared.module';
-import { BookingMenu1Component } from './book-ride/booking-menu1/booking-menu1.component';
 import { FormsModule } from '@angular/forms';
+import { OfferMenu1Component } from './offer-ride/offer-menu1/offer-menu1.component';
+import { OfferMenu2Component } from './offer-ride/offer-menu2/offer-menu2.component';
+import { BookingMenu1Component } from './book-ride/booking-menu/booking-menu1.component';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { FormsModule } from '@angular/forms';
     MyRidesComponent,
     ProfileComponent,
     BookingMenu1Component,
+    OfferMenu1Component,
+    OfferMenu2Component,
   ],
   imports: [
     CommonModule,

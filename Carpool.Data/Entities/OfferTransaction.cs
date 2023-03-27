@@ -18,6 +18,8 @@ namespace Carpool.Data.Entities
 
         public string Date { get; set; }
 
+        //public string Stops { get; set; }
+
         public int SeatsAvailable { get; set; }
 
         public string OfferedTime { get; set; }

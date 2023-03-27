@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12 mb-2">
             <!-- heading, tagline -->
-            <h1 class="m-3 ms-4 mb-0 h3">Book a Ride</h1>
+            <h1 class="m-3 ms-4 mb-0 h3">Offer a Ride</h1>
             <small class="ms-4 my-0 text-muted">we get you the matches asap!</small>
         </div>
 
@@ -32,7 +32,7 @@
                     <input list="locationList2" type="text"
                         class="form-control input-box border-0 border-primary border-bottom rounded-0" id="to"
                         placeholder="to" minlength="3" maxlength="20" required name="to"
-                        #to ngModel (change)="mapLocTo(to)">
+                        #to ngModel (change)="mapLocTo(to.value)">
                     <label for="to" class="text-muted">To</label>
                     <datalist id="locationList2">
                         <option *ngFor="let location of locations" value="{{location.name}}">
@@ -42,35 +42,41 @@
                 <div class="form-floating mb-3">
                     <input type="date" class="form-control input-box border-0 border-primary border-bottom rounded-0"
                         id="date" placeholder="date" minlength="3" maxlength="20" required
-                        name="date" #date="ngModel" [(ngModel)]="bookingRequest.date">
+                        name="date" #date="ngModel" [(ngModel)]="offerRequest.date">
                     <label for="date" class="text-muted">Date</label>
                 </div>
 
 
                 <div>
+                    <div class="text-muted ms-2">Time</div>
+
                     <input type="radio" class="btn-check" name="radioGroup" value="5am-9am" id="time1"
-                        [(ngModel)]="bookingRequest.time" #time1="ngModel">
-                    <label class="btn time m-2" for="time1">5am - 9am</label>
+                        [(ngModel)]="offerRequest.time" #time1="ngModel">
+                    <label class="btn time m-2 rounded-4" for="time1">5am - 9am</label>
 
                     <input type="radio" class="btn-check" name="radioGroup" value="9am-12pm" id="time2"
-                        [(ngModel)]="bookingRequest.time" #time2="ngModel">
-                    <label class="btn time m-2" for="time2">9am - 12pm</label>
+                        [(ngModel)]="offerRequest.time" #time2="ngModel">
+                    <label class="btn time m-2 rounded-4" for="time2">9am - 12pm</label>
 
                     <input type="radio" class="btn-check" name="radioGroup" value="12pm-3pm" id="time3"
-                        [(ngModel)]="bookingRequest.time" #time3="ngModel">
-                    <label class="btn time m-2" for="time3">12pm - 3pm</label>
+                        [(ngModel)]="offerRequest.time" #time3="ngModel">
+                    <label class="btn time m-2 rounded-4" for="time3">12pm - 3pm</label>
 
                     <input type="radio" class="btn-check" name="radioGroup" value="3pm-6pm" id="time4"
-                        [(ngModel)]="bookingRequest.time" #time4="ngModel">
-                    <label class="btn time m-2" for="time4">3pm - 6pm</label>
+                        [(ngModel)]="offerRequest.time" #time4="ngModel">
+                    <label class="btn time m-2 rounded-4" for="time4">3pm - 6pm</label>
 
                     <input type="radio" class="btn-check" name="radioGroup" value="6pm-9pm" id="time5"
-                        [(ngModel)]="bookingRequest.time" #time5="ngModel">
-                    <label class="btn time m-2" for="time5">6pm - 9pm</label>
+                        [(ngModel)]="offerRequest.time" #time5="ngModel">
+                    <label class="btn time m-2 rounded-4" for="time5">6pm - 9pm</label>
                 </div>
 
 
-                <button type="submit" class="btn mt-4 m-2 rounded-4 submit-button fw-bold">Submit</button>
+                <!-- <button type="submit" class="btn mt-4 m-2 rounded-4 submit-button fw-bold">Submit</button> -->
+
+                <div class="text-end">
+                    <span class="next me-3 fw-bold btn p-0" (click)="displayMenu2()">Next</span>
+                </div>
 
 
             </form>
