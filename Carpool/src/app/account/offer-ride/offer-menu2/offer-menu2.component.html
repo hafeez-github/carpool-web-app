@@ -1,0 +1,76 @@
+<!-- <p>offer-menu2 works!</p>
+<div>
+    <button class="btn button bg-primary border border-1 border-secondary p-3 m-2 text-white" (click)="addDiv()">Add</button>
+    <div class="parentDiv border border-1 border-secondary overflow-auto">
+        <div *ngFor="let i of array">
+            <h1>{{i}}</h1>
+        </div>
+    </div>
+</div>
+ -->
+
+
+
+<div class="card p-1">
+    <div class="row">
+        <div class="col-12 mb-2">
+            <!-- heading, tagline -->
+            <h1 class="m-3 ms-4 mb-0 h3">Offer a Ride</h1>
+            <small class="ms-4 my-0 text-muted">we get you the matches asap!</small>
+        </div>
+
+        <div class="col">
+            <!-- toggle button -->
+        </div>
+    </div>
+
+    <div class="row p-3">
+
+        <div class="col">
+            <!-- body of menu -->
+            <form id="bookingForm" #bookingForm="ngForm" (ngSubmit)="submitForm(bookingForm)">
+
+                <div class="parentDiv overflow-auto mb-4">
+
+                    <div class="form-floating mb-3" *ngFor="let stop of array; let ind=index">
+                        <input list="locationList1" type="text"
+                            class="form-control input-box border-0 border-primary border-bottom rounded-0" id="from"
+                            placeholder="From" minlength="3" maxlength="20" required name="from" #from ngModel
+                            (change)="mapLocFrom(from.value)" autocomplete="off">
+
+                        <label for="from" class="text-muted">Stop {{ind+1}}</label>
+                        <i class="fa fa-plus btn text-muted addStop" aria-hidden="true" (click)="addStop()"> Add stop</i>
+                        <datalist id="locationList1">
+                            <option *ngFor="let location of locations" value="{{location.name}}">
+                        </datalist>
+                    </div>
+
+                </div>
+
+                
+
+                <div class="d-flex flex-row">
+                    <div>
+                        <div class="text-muted ms-2">Available Seats</div>
+                        <div class="d-flex flex-row">
+                            <span class="seatCount m-2 px-3 py-2 fw-bold">1</span>
+                            <span class="seatCount m-2 px-3 py-2 fw-bold">2</span>
+                            <span class="seatCount m-2 px-3 py-2 fw-bold">3</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="text-muted ms-4">Price</div>
+                        <div class="ms-4 mt-2 pt-1 h4">180$</div>
+                    </div>
+                    
+                </div>
+
+
+                <button type="submit" class="btn mt-4 m-2 rounded-4 submit-button fw-bold">Submit</button>
+            </form>
+
+
+        </div>
+    </div>
+</div>

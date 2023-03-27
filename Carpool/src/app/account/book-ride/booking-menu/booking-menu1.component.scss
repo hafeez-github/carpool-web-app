@@ -38,14 +38,14 @@
     background-color:rgba(147,26,255,255) ;
 }
 
-.time:focus{
-    border: 1px solid rgba(147,26,255,255);
-    color:white;
-    background-color:cornflowerblue;
-}
-
-// .time-active{
+// .time:focus{
 //     border: 1px solid rgba(147,26,255,255);
 //     color:white;
-//     background-color:rgba(147,26,255,255) ;
+//     background-color:cornflowerblue;
 // }
+
+.time:checked{
+    border: 1px solid rgba(147,26,255,255);
+    color:white;
+    background-color:rgba(147,26,255,255) ;
+}

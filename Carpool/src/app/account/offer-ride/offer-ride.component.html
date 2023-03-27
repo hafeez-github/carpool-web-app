@@ -8,7 +8,7 @@
                 
                 <span>
                     <span class="fw-bold">hi</span>
-                    <span class="my-4 me-5 fw-bold">{{this.loginResponseData}}</span>
+                    <span class="my-4 me-5 fw-bold"> {{this.loginResponseData}}</span>
                     <img src="../../../assets/images/logo.png" class="img-fluid my-4 me-5" alt="">
                 </span>
             </div>
@@ -16,24 +16,38 @@
             <div class="row">
                 <!-- Actual body of page -->
     
-                    <div class="col-6">
-                        <!-- menu half of page -->
+                <div class="col-2">
+                    <!-- dummy col -->
+                </div>
+
+
+                    <div class="col-12 pb-0 mx-1" *ngIf="!enableMenu2">
+                        <!-- menu 1 -->
+
+                        <div class="row"> 
+                            <div class="col-4 px-5 m-auto">
+                                <div class="pb-3">
+                                    <app-offer-menu1 (menu1Event)="respondToMenu1Event($event)" (offerObjTransferEvent)="respondToOfferObjTransferEvent($event)"  ></app-offer-menu1>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 pb-0" >
+                        <!-- menu 2 -->
+
+                        <div class="row" *ngIf="enableMenu2">
+                            <div class="col-4 px-5 m-auto">
+                                <div class="pb-3">
+                                    <app-offer-menu2 [offerRequest]="offerRequest"></app-offer-menu2>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     
-                    <div class="col-6">
-                        <!-- cards half of page -->
-    
-                        <div class="row pe-5">
-                            <div class="col-6 p-0 pe-3">
-                                <app-offer-card></app-offer-card>
-                            </div>
-    
-                            <div class="col-6 p-0 pe-3">
-                                <app-offer-card></app-offer-card>
-                            </div>
-    
-                        </div>
-                    </div>
+                    
                 </div>
             
         </div>

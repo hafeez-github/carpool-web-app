@@ -28,7 +28,7 @@ export class DataService {
 
     
   };
-  locations:string[]=[];
+  locations:Location[]=[];
   bookingResponse:OfferRequest[]=[];
 
   constructor(private http: HttpClient) { }
