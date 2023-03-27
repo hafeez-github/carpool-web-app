@@ -19,6 +19,7 @@ export class OfferRideComponent implements OnInit{
     to: 7,
     date: '',
     time: '',
+    stops:'',
     seatsAvailable: 1,
   };
 

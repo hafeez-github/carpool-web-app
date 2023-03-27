@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Location } from 'src/app/shared/models/location';
 import { OfferRequest } from 'src/app/shared/models/offerRequest';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -24,11 +25,13 @@ export class OfferMenu2Component implements OnInit {
     to: 7,
     date: '',
     time: '',
+    stops:'',
     seatsAvailable: 1,
   };
 
   toggleMenu: boolean = false;
-  constructor(private dataService: DataService) {}
+
+  constructor(private dataService: DataService, private router:Router) {}
 
   ngOnInit(): void {
     this.locations = this.dataService.locations;
@@ -38,18 +41,27 @@ export class OfferMenu2Component implements OnInit {
   addStop() {
     this.array.push(this.array[this.array.length - 1] + 1);
   }
-  submitForm(bookingForm: NgForm) {
-    // this.bookingRequest.bookerId=this.dataService.loggedinUser.id;
-    // this.dataService.bookRide(this.bookingRequest).subscribe(
-    //   responseData=>{
-    //     this.dataService.bookingResponse=responseData.data;
-    //     bookingForm.reset();
-    //   }
-    // );
+  submitForm(offerForm: NgForm) {
+    this.offerRequest.offererId=this.dataService.loggedinUser.id;
+    this.dataService.offerRide(this.offerRequest).subscribe(
+      responseData=>{
+        // this.dataService.bookingResponse=responseData.data;
+
+        console.log(responseData);
+        alert("Ride successfully offered!");
+        offerForm.reset();
+        this.router.navigate(['/acc/menu']);
+        
+      }
+    );
   }
 
-  mapLocFrom(loc: string) {
-    // this.offerRequest.from = this.locations.find(location => location.name == loc)!.id;
+  mapLocStops(loc: string) {
+    console.log(loc);
+    let locId=this.locations.find(location => location.name == loc)!.id;
+    console.log(locId);
+    this.offerRequest.stops+= locId+", ";
+    console.log(this.offerRequest.stops);
   }
 
   mapLocTo(loc: any) {
@@ -63,4 +75,11 @@ export class OfferMenu2Component implements OnInit {
     this.toggleMenu = !this.toggleMenu;
     this.menu1Event.emit(this.toggleMenu);
   }
+
+  setSeatOffered(seatCount:number){
+    this.offerRequest.seatsAvailable=seatCount;
+    console.log(seatCount);
+    console.log(this.offerRequest);
+  }
+
 }

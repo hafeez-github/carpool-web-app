@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { OfferRequest } from '../../models/offerRequest';
 import { DataService } from '../../services/data.service';
+import { BookingResponse } from '../../models/bookingResponse';
 
 @Component({
   selector: 'app-booking-card',
@@ -12,7 +13,16 @@ export class BookingCardComponent implements OnInit {
   constructor(private dataService:DataService) {}
 
   @Input()
-  currentMatch:any;
+  currentMatch:BookingResponse={
+    offererId:-1,
+    from:-1,
+    to:-1,
+    time:"",
+    date:"",
+    seatsAvailable:-1,
+    stops:"", 
+    offeredTime:""
+  };
 
   bookingResponse:OfferRequest[]=this.dataService.bookingResponse;
 

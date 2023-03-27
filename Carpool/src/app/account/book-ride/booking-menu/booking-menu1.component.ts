@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BookingRequest } from 'src/app/shared/models/bookingRequest';
 import { Location } from 'src/app/shared/models/location';
 import { User } from 'src/app/shared/models/user';
@@ -32,7 +33,7 @@ export class BookingMenu1Component implements OnInit{
     seatsRequired:1
    };
 
-  constructor(private dataService:DataService) {
+  constructor(private dataService:DataService, private router:Router) {
       this.dataService.getLocations().subscribe(responseData=>{
       this.locations=responseData.data;
       this.dataService.locations=responseData.data;
@@ -48,7 +49,9 @@ export class BookingMenu1Component implements OnInit{
     this.dataService.bookRide(this.bookingRequest).subscribe(
       responseData=>{
         this.dataService.bookingResponse=responseData.data;
-        bookingForm.reset();
+        // bookingForm.reset();
+        // this.router.navigate(['/acc/menu']);
+
       }
     );
 

@@ -8,6 +8,7 @@ import { Location } from '../models/location';
 import { BookingRequest } from '../models/bookingRequest';
 import { OfferRequest } from '../models/offerRequest';
 import { User } from '../models/user';
+import { BookingResponse } from '../models/bookingResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class DataService {
     
   };
   locations:Location[]=[];
-  bookingResponse:OfferRequest[]=[];
+  bookingResponse:BookingResponse[]=[];
 
   constructor(private http: HttpClient) { }
 
@@ -48,7 +49,11 @@ export class DataService {
   }
 
   bookRide(request:BookingRequest){
-    return this.http.post<APIResponse<OfferRequest[]>>('https://localhost:7021/api/Booking', request);
+    return this.http.post<APIResponse<BookingResponse[]>>('https://localhost:7021/api/Booking', request);
+  }
+
+  offerRide(request:OfferRequest){
+    return this.http.post<APIResponse<OfferRequest>>('https://localhost:7021/api/Offer', request);
   }
 
 }

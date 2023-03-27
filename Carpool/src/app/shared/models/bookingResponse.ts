@@ -1,4 +1,4 @@
-export class OfferRequest{
+export class BookingResponse{
 
     offererId:number=-1;
     from:number=-1;
@@ -6,7 +6,7 @@ export class OfferRequest{
     time:string="";
     date:string="";
     seatsAvailable:number=-1;
-    stops:string="";
+    stops:string=""; 
     offeredTime:string="";
 
 }

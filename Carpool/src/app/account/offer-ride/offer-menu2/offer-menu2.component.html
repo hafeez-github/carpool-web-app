@@ -28,7 +28,7 @@
 
         <div class="col">
             <!-- body of menu -->
-            <form id="bookingForm" #bookingForm="ngForm" (ngSubmit)="submitForm(bookingForm)">
+            <form id="offerForm" #offerForm="ngForm" (ngSubmit)="submitForm(offerForm)">
 
                 <div class="parentDiv overflow-auto mb-4">
 
@@ -36,7 +36,7 @@
                         <input list="locationList1" type="text"
                             class="form-control input-box border-0 border-primary border-bottom rounded-0" id="from"
                             placeholder="From" minlength="3" maxlength="20" required name="from" #from ngModel
-                            (change)="mapLocFrom(from.value)" autocomplete="off">
+                            (change)="mapLocStops(from.value)" autocomplete="off">
 
                         <label for="from" class="text-muted">Stop {{ind+1}}</label>
                         <i class="fa fa-plus btn text-muted addStop" aria-hidden="true" (click)="addStop()"> Add stop</i>
@@ -47,15 +47,13 @@
 
                 </div>
 
-                
-
                 <div class="d-flex flex-row">
                     <div>
                         <div class="text-muted ms-2">Available Seats</div>
                         <div class="d-flex flex-row">
-                            <span class="seatCount m-2 px-3 py-2 fw-bold">1</span>
-                            <span class="seatCount m-2 px-3 py-2 fw-bold">2</span>
-                            <span class="seatCount m-2 px-3 py-2 fw-bold">3</span>
+                            <span class="seatCount m-2 px-3 py-2 fw-bold" (click)="setSeatOffered(1)">1</span>
+                            <span class="seatCount m-2 px-3 py-2 fw-bold" (click)="setSeatOffered(2)">2</span>
+                            <span class="seatCount m-2 px-3 py-2 fw-bold" (click)="setSeatOffered(3)">3</span>
                         </div>
                     </div>
 
@@ -65,7 +63,6 @@
                     </div>
                     
                 </div>
-
 
                 <button type="submit" class="btn mt-4 m-2 rounded-4 submit-button fw-bold">Submit</button>
             </form>
