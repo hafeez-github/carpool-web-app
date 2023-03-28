@@ -43,7 +43,7 @@
                         <!-- *ngIf="dataService.bookingResponse.length!=0" else noResults -->
                         <!-- *ngFor="let match of matches" -->
                         <div class="col-6 p-0 pe-3" *ngFor="let match of dataService.bookingResponse">
-                            <app-booking-card [currentMatch]="match" (click)="cardClicked()" class="bookingCard"></app-booking-card>
+                            <app-booking-card [currentMatch]="match" (click)="cardClicked(match)" class="bookingCard"></app-booking-card>
                         </div>
                     </div>
 

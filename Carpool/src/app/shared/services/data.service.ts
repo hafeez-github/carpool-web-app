@@ -9,6 +9,9 @@ import { BookingRequest } from '../models/bookingRequest';
 import { OfferRequest } from '../models/offerRequest';
 import { User } from '../models/user';
 import { BookingResponse } from '../models/bookingResponse';
+import { OfferResponse } from '../models/offerResponse';
+import { RideResponse } from '../models/rideResponse';
+import { RideRequest } from '../models/rideRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +56,11 @@ export class DataService {
   }
 
   offerRide(request:OfferRequest){
-    return this.http.post<APIResponse<OfferRequest>>('https://localhost:7021/api/Offer', request);
+    return this.http.post<APIResponse<OfferResponse>>('https://localhost:7021/api/Offer', request);
+  }
+
+  logRideTransaction(transaction:RideRequest){
+    return this.http.post<APIResponse<RideResponse>>('https://localhost:7021/api/Ride', transaction);
   }
 
 }

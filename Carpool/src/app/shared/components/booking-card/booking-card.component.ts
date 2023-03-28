@@ -14,6 +14,7 @@ export class BookingCardComponent implements OnInit {
 
   @Input()
   currentMatch:BookingResponse={
+    id:-1,
     offererId:-1,
     from:-1,
     to:-1,

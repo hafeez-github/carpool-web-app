@@ -1,4 +1,4 @@
-export class BookingResponse{
+export class OfferResponse{
     id:number=-1;
     offererId:number=-1;
     from:number=-1;
@@ -6,7 +6,7 @@ export class BookingResponse{
     time:string="";
     date:string="";
     seatsAvailable:number=-1;
-    stops:string=""; 
+    stops:string="";
     offeredTime:string="";
 
 }

@@ -17,6 +17,8 @@ export class OfferMenu2Component implements OnInit {
 
   locations: Location[] = [];
 
+  stops:string[]=[];
+
   @Input()
   offerRequest: OfferRequest = {
     offeredTime: '12AM',
@@ -42,12 +44,22 @@ export class OfferMenu2Component implements OnInit {
     this.array.push(this.array[this.array.length - 1] + 1);
   }
   submitForm(offerForm: NgForm) {
+    const date = new Date();
+    const formattedTime = date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: true,
+    });
+    this.offerRequest.offeredTime=formattedTime;
+
     this.offerRequest.offererId=this.dataService.loggedinUser.id;
     this.dataService.offerRide(this.offerRequest).subscribe(
       responseData=>{
         // this.dataService.bookingResponse=responseData.data;
 
-        console.log(responseData);
+        this.stops=responseData.data.stops.split(', ');
+        console.log(this.stops);
         alert("Ride successfully offered!");
         offerForm.reset();
         this.router.navigate(['/acc/menu']);
