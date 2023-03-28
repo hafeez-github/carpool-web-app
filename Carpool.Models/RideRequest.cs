@@ -14,9 +14,9 @@ namespace Carpool.Models
 
         public string TripEnd { get; set; }
 
-        public float Price { get; set; }
+        public int Price { get; set; }
 
-        public float Distance { get; set; }
+        public int Distance { get; set; }
     }
 }
 

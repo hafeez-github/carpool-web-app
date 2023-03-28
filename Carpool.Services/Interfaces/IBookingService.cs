@@ -9,5 +9,8 @@ namespace Carpool.Services.Interfaces
 	public interface IBookingService
 	{
         Task<List<OfferTransaction>> ReadBookingDetails(BookingRequest model);
+        Boolean CheckStop(string StopsAsAString, BookingTransaction bookingTransaction);
     }
+
+    
 }

@@ -36,13 +36,20 @@ namespace Carpool.Services
 
                 await dbContext.BookingTransactions.AddAsync(bookingTransaction);
                 await dbContext.SaveChangesAsync();
+                
+                List<OfferTransaction> matches=dbContext.OfferTransactions.Where(offer =>
+                
+                (offer.From == bookingTransaction.From) &&
+                (
+                    (offer.To == bookingTransaction.To)
 
-                List<OfferTransaction> matches=dbContext.OfferTransactions.Where(n =>
+                    ||
 
-                (n.From == bookingTransaction.From) &&
-                (n.To == bookingTransaction.To)&&
-                (n.Time == bookingTransaction.Time)&&
-                (n.Date == bookingTransaction.Date)
+                    (CheckStop(offer.Stops, bookingTransaction))
+                )
+                &&
+                (offer.Time == bookingTransaction.Time)&&
+                (offer.Date == bookingTransaction.Date)
 
 
                 ).ToList<OfferTransaction>();
@@ -55,6 +62,30 @@ namespace Carpool.Services
                 throw ex;
             }
 
+
+
+        }
+
+        public bool CheckStop(string stopsAsAString, BookingTransaction bookingTransaction)
+        {
+            string[] stopsAsStrings= stopsAsAString.Split(", ");
+
+            int[] offeredStops = { }; //Stops with IDs
+
+            for (int i=0; i< stopsAsStrings.Length;i++)
+            {
+                offeredStops[i] = int.Parse(stopsAsStrings[i]);
+            }
+
+            foreach (int stop in offeredStops)
+            {
+                if (stop == bookingTransaction.To)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

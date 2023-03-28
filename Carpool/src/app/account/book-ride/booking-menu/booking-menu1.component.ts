@@ -9,64 +9,65 @@ import { DataService } from 'src/app/shared/services/data.service';
 @Component({
   selector: 'app-booking-menu1',
   templateUrl: './booking-menu1.component.html',
-  styleUrls: ['./booking-menu1.component.scss']
+  styleUrls: ['./booking-menu1.component.scss'],
 })
-export class BookingMenu1Component implements OnInit{
+export class BookingMenu1Component implements OnInit {
+  times = ['5am - 9am', '9am - 12pm', '12pm - 3pm', '3pm - 6pm', '6pm - 9pm'];
 
-  times=[
-    "5am - 9am",
-    "9am - 12pm",
-    "12pm - 3pm",
-    "3pm - 6pm",
-    "6pm - 9pm"
-  ];
+  locations: Location[] = [];
 
-  locations:Location[]=[];
+  bookingRequest: BookingRequest = {
+    bookedTime: '12AM',
+    bookerId: 1,
+    from: 6,
+    to: 7,
+    date: '',
+    time: '',
+    seatsRequired: 1,
+  };
 
-  bookingRequest:BookingRequest = {
-    bookedTime:"12AM",
-    bookerId:1,
-    from:6,
-    to:7,
-    date:"",
-    time:"",
-    seatsRequired:1
-   };
-
-  constructor(private dataService:DataService, private router:Router) {
-      this.dataService.getLocations().subscribe(responseData=>{
-      this.locations=responseData.data;
-      this.dataService.locations=responseData.data;
+  constructor(private dataService: DataService, private router: Router) {
+    this.dataService.getLocations().subscribe((responseData) => {
+      this.locations = responseData.data;
+      this.dataService.locations = responseData.data;
     });
   }
 
-  ngOnInit(): void {
-      
+  ngOnInit(): void {}
+
+  submitForm(bookingForm: NgForm) {
+    const date = new Date();
+    const formattedTime = date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: true,
+    });
+
+    this.bookingRequest.bookerId = this.dataService.loggedinUser.id;
+    this.bookingRequest.bookedTime = formattedTime;
+    console.log("Booking Request: ",this.bookingRequest);
+
+    this.dataService.bookRide(this.bookingRequest).subscribe((responseData) => {
+      this.dataService.bookingResponse = responseData.data;
+      alert("Booking response received");
+      console.log("this.dataService.bookingResponse: ", this.dataService.bookingResponse);
+      console.log("responseData: ", responseData);
+      // bookingForm.reset();
+      // this.router.navigate(['/acc/menu']);
+    });
   }
 
-  submitForm(bookingForm:NgForm){
-    this.bookingRequest.bookerId=this.dataService.loggedinUser.id;
-    this.dataService.bookRide(this.bookingRequest).subscribe(
-      responseData=>{
-        this.dataService.bookingResponse=responseData.data;
-        // bookingForm.reset();
-        // this.router.navigate(['/acc/menu']);
-
-      }
-    );
-
+  mapLocFrom(loc: string) {
+    this.bookingRequest.from = this.locations.find(
+      (location) => location.name == loc
+    )!.id;
   }
 
-  mapLocFrom(loc:string)
-  {
-    this.bookingRequest.from = this.locations.find(location => location.name == loc)!.id;
+  mapLocTo(loc: any) {
+    let data = loc.value;
+    this.bookingRequest.to = this.locations.find(
+      (location) => location.name == data
+    )!.id;
   }
-
-  mapLocTo(loc:any)
-  {
-    let data=loc.value;
-    this.bookingRequest.to = this.locations.find(location => location.name == data)!.id;
-  }
-  
 }
-
