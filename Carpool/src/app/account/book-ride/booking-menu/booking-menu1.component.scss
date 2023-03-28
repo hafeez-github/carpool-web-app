@@ -1,0 +1,51 @@
+.card{
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.headings{
+    font-size: 0.7rem;
+}
+
+// .time-button{
+//     border: 1px solid rgba(147,26,255,255);
+//     font-size: smaller;
+// }
+
+.time-button:focus{
+    border: 1px solid rgba(147,26,255,255);
+    color:white;
+    background-color:rgba(147,26,255,255) ;
+}
+
+.submit-button{
+    color:white;
+    background-color: rgba(255,173,24,255);
+}
+
+.input-box:focus{
+    // border-bottom-color: rgba(73,144,226,255);
+    box-shadow: none;
+}
+
+.time{
+    border: 1px solid rgba(147,26,255,255);
+    font-size: smaller;
+}
+
+.time:hover{
+    border: 1px solid rgba(147,26,255,255);
+    color:white;
+    background-color:rgba(147,26,255,255) ;
+}
+
+// .time:focus{
+//     border: 1px solid rgba(147,26,255,255);
+//     color:white;
+//     background-color:cornflowerblue;
+// }
+
+.time:checked{
+    border: 1px solid rgba(147,26,255,255);
+    color:white;
+    background-color:rgba(147,26,255,255) ;
+}

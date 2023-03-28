@@ -1,0 +1,124 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/hafeez/My stuff/Technovert Internship/Task 5/task-5-car-pooling-web-api-csharp-hafeez-fsd/Carpool.Data/Carpool.Data.csproj": {}
+  },
+  "projects": {
+    "/Users/hafeez/My stuff/Technovert Internship/Task 5/task-5-car-pooling-web-api-csharp-hafeez-fsd/Carpool.Data/Carpool.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/hafeez/My stuff/Technovert Internship/Task 5/task-5-car-pooling-web-api-csharp-hafeez-fsd/Carpool.Data/Carpool.Data.csproj",
+        "projectName": "Carpool.Data",
+        "projectPath": "/Users/hafeez/My stuff/Technovert Internship/Task 5/task-5-car-pooling-web-api-csharp-hafeez-fsd/Carpool.Data/Carpool.Data.csproj",
+        "packagesPath": "/Users/hafeez/.nuget/packages/",
+        "outputPath": "/Users/hafeez/My stuff/Technovert Internship/Task 5/task-5-car-pooling-web-api-csharp-hafeez-fsd/Carpool.Data/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/hafeez/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/Users/hafeez/My stuff/Technovert Internship/Task 5/task-5-car-pooling-web-api-csharp-hafeez-fsd/Carpool.Models/Carpool.Models.csproj": {
+                "projectPath": "/Users/hafeez/My stuff/Technovert Internship/Task 5/task-5-car-pooling-web-api-csharp-hafeez-fsd/Carpool.Models/Carpool.Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/hafeez/My stuff/Technovert Internship/Task 5/task-5-car-pooling-web-api-csharp-hafeez-fsd/Carpool.Models/Carpool.Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/hafeez/My stuff/Technovert Internship/Task 5/task-5-car-pooling-web-api-csharp-hafeez-fsd/Carpool.Models/Carpool.Models.csproj",
+        "projectName": "Carpool.Models",
+        "projectPath": "/Users/hafeez/My stuff/Technovert Internship/Task 5/task-5-car-pooling-web-api-csharp-hafeez-fsd/Carpool.Models/Carpool.Models.csproj",
+        "packagesPath": "/Users/hafeez/.nuget/packages/",
+        "outputPath": "/Users/hafeez/My stuff/Technovert Internship/Task 5/task-5-car-pooling-web-api-csharp-hafeez-fsd/Carpool.Models/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/hafeez/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
