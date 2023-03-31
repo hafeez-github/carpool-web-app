@@ -43,7 +43,6 @@ namespace Carpool.Services
                     (offer.Time == booking.Time) && (offer.Date == booking.Date)
                 ).ToList<Offer>();
 
-
                 List<Offer> matches=new List<Offer>();
 
                 for (int i=0;i<filteredOffers.Count;i++)
@@ -104,8 +103,13 @@ namespace Carpool.Services
                     }    
                     
                 }
-                
-                return this.mapper.Map<List<OfferModel>>(matches);
+
+                List<OfferModel> offerModels = new List<OfferModel>();
+                foreach (Offer m in matches)
+                {
+                    offerModels.Add(this.mapper.Map<OfferModel>(m));
+                }
+                return offerModels;
             }
             
             catch (Exception ex)
@@ -121,11 +125,15 @@ namespace Carpool.Services
         {
             string[] stopsAsStrings= stopsAsAString.Split(", ");
 
-            int[] offeredStops = { }; //Stops with IDs
+            int[] offeredStops = new int[stopsAsAString.Length]; //Stops with IDs
 
             for (int i=0; i< stopsAsStrings.Length;i++)
             {
-                offeredStops[i] = int.Parse(stopsAsStrings[i]);
+                if (stopsAsStrings[i] == "")
+                {
+                    break;
+                }
+                    offeredStops[i] =int.Parse(stopsAsStrings[i]);
             }
 
             return offeredStops;

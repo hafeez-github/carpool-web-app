@@ -56,7 +56,13 @@ namespace Carpool.Services
             try
             {
                 List<User> users = dbContext.Users.Select(u=>u).ToList();
-                return this.mapper.Map<List<UserModel>>(users);
+                List<UserModel> userModels = new List<UserModel>();
+                foreach (User u in users)
+                {
+                    userModels.Add(this.mapper.Map<UserModel>(u));
+                }
+
+                return userModels;
             }
             catch (Exception ex)
             {

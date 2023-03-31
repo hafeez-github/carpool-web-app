@@ -24,6 +24,8 @@ export class BookRideComponent implements OnInit{
     distance:-1
   };
 
+  
+
   constructor(public dataService:DataService, private router:Router) {
   }
 
@@ -55,8 +57,8 @@ export class BookRideComponent implements OnInit{
 
     this.dataService.logRideTransaction(this.rideRequest).subscribe(responseData=>{
       console.log("ride transaction response: ", responseData);
-
       alert("Ride successfully booked, thankyou!");
+      
       this.router.navigate(['/acc/menu']);
     });
 
