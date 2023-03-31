@@ -7,6 +7,7 @@ using Carpool.Models.DbModels;
 using Carpool.Models.ResponseModels;
 using Carpool.Services.Interfaces.Authentication;
 using Carpool.Utilities;
+using Carpool.Utilities.Classes;
 using Carpool.Utilities.Enums;
 
 namespace Carpool.Services.Authentication
@@ -59,7 +60,9 @@ namespace Carpool.Services.Authentication
 
                     if (!String.IsNullOrEmpty(model.Password))
                     {
-                        user.Password = model.Password;
+                        user.Password=PasswordEncryption.EncryptPasswordBase64(model.Password);
+
+                        //user.Password = model.Password;
                         
                     }
                     else
