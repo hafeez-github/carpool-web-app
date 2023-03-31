@@ -20,7 +20,7 @@ namespace Carpool.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResponse<LocationModel>> Post(LocationRequest location)
+        public async Task<IActionResult> AddLocation(LocationRequest location)
         {
             ApiResponse<LocationModel> response=new ApiResponse<LocationModel>();
 
@@ -29,6 +29,7 @@ namespace Carpool.API.Controllers
                 response = new(201, "Success", true);
                 response.Message = "Location succesfully added";
                 response.Data = await this.locationService.AddLocation(location);
+                return Ok(response);
             }
 
             catch(Exception ex)
@@ -36,14 +37,15 @@ namespace Carpool.API.Controllers
                 response = new(400, "Failure", false);
                 response.Message = "Error! Unsuccessful addition" + ex.Message;
                 response.Data = null;
+                return BadRequest(response);
             }
 
-            return response;
+            
         }
 
 
         [HttpGet]
-        public async Task<ApiResponse<IEnumerable<LocationModel>>> Get()
+        public async Task<IActionResult> Get()
         {
             ApiResponse<IEnumerable<LocationModel>> response=new ApiResponse<IEnumerable<LocationModel>>();
 
@@ -52,19 +54,23 @@ namespace Carpool.API.Controllers
                 response = new (200, "Success", true);
                 response.Message = "Successfully fetched locations";
                 response.Data = await this.locationService.GetLocations();
+
+                return Ok(response);
             }
             catch (Exception ex)
             {
                 response = new (404, "Failure", false);
                 response.Message = $"Error! Unsuccessful retireval of locations;\n{ex.Message}";
                 response.Data = null;
+
+                return BadRequest(response);
+
             }
 
-            return response;
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ApiResponse<LocationModel>> Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
             ApiResponse<LocationModel> response=new ApiResponse<LocationModel>();
             try
@@ -72,38 +78,46 @@ namespace Carpool.API.Controllers
                 response = new(200, "Success", true);
                 response.Message = "Successfully fetched location";
                 response.Data = await this.locationService.GetLocation(id);
+
+                return Ok(response);
             }
             catch (DataNotFoundException ex)
             {
                 response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
+
+                return BadRequest(response);
             }
             catch (Exception ex)
             {
                 response = new(404, "Failure", false);
                 response.Message = "Error! Unsucceful retrieval of location";
                 response.Data = null;
+
+                return NotFound(response);
             }
-            return response;
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ApiResponse<LocationModel>> Put([FromRoute] int id, [FromBody] LocationRequest editedLocation)
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] LocationRequest editedLocation)
         {
-            
             ApiResponse<LocationModel> response=new ApiResponse<LocationModel>();
             try
             {
                 response = new(200, "Success", true);
                 response.Message = "Successfully updated location";
                 response.Data = await this.locationService.UpdateLocation(id, editedLocation);
+
+                return Ok(response);
             }
             catch (DataNotFoundException ex)
             {
                 response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
+
+                return BadRequest(response);
             }
 
             catch (Exception ex)
@@ -111,13 +125,15 @@ namespace Carpool.API.Controllers
                 response = new(404, "Failure", false);
                 response.Message = "Error! Unsuccessful edit of the existing location";
                 response.Data = null;
+
+                return NotFound(response);
             }
 
-            return response;
+            
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ApiResponse<LocationModel>> Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
             ApiResponse<LocationModel> response=new ApiResponse<LocationModel>();
             try
@@ -125,12 +141,16 @@ namespace Carpool.API.Controllers
                 response = new(200, "Success", true);
                 response.Message = "Successfully deleted location";
                 response.Data = await this.locationService.DeleteLocation(id);
+
+                return Ok(response);
             }
             catch (DataNotFoundException ex)
             {
                 response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
+
+                return BadRequest(response);
             }
 
             catch (Exception ex)
@@ -138,9 +158,11 @@ namespace Carpool.API.Controllers
                 response = new(404, "Failure", false);
                 response.Message = "Error! Unsuccessful deletion of the existing location";
                 response.Data = null;
+
+                return NotFound(response);
             }
 
-            return response;
+            
         }
     }
 }

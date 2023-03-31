@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Carpool.API.Exceptions;
 using Carpool.Data;
 using Carpool.Models;
@@ -48,7 +49,13 @@ namespace Carpool.Services
             try
             {
                 List<Vehicle> vehicles = this.dbContext.Vehicles.Select(v=>v).ToList();
-                return this.mapper.Map<List<VehicleModel>>(vehicles);
+                List<VehicleModel> vehicleModels = new List<VehicleModel>();
+                foreach (Vehicle v in vehicles)
+                {
+                    vehicleModels.Add(this.mapper.Map<VehicleModel>(v));
+                }
+
+                return vehicleModels;
             }
 
             catch (Exception ex)

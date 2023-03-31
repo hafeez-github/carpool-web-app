@@ -21,7 +21,7 @@ namespace Carpool.API.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<ApiResponse<UserModel>> LogIn(LogIn model)
+        public async Task<IActionResult> LogIn(LogIn model)
         {
             ApiResponse<UserModel> response=new ApiResponse<UserModel>();
 
@@ -30,19 +30,22 @@ namespace Carpool.API.Controllers
                 response = new(200, "Success", true);
                 response.Message = "Succesful Login";
                 response.Data = await this.logInService.LogIn(model);
+
+                return Ok(response);
             }
             catch (Exception ex)
             {
                 response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
+
+                return BadRequest(response);
             }
 
-            return response;
         }
 
         [HttpPost("[action]")]
-        public async Task<ApiResponse<UserModel>> SignUp(SignUp model)
+        public async Task<IActionResult> SignUp(SignUp model)
         {
             ApiResponse<UserModel> response=new ApiResponse<UserModel>();
             try
@@ -50,15 +53,17 @@ namespace Carpool.API.Controllers
                 response = new(200, "Success", true);
                 response.Message = "Successful SignUp";
                 response.Data = await this.signUpService.SignUp(model);
+                return Ok(response);
             }
             catch(Exception ex)
             {
                 response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
+                return BadRequest(response);
             }
 
-            return response;
+            
         }
     }
 }

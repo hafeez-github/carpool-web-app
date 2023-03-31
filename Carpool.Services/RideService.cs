@@ -36,8 +36,6 @@ namespace Carpool.Services
                 await dbContext.Rides.AddAsync(ride);
                 await dbContext.SaveChangesAsync();
 
-                
-
                 return this.mapper.Map<RideModel>(ride);
             }
 

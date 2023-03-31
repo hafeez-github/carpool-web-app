@@ -54,7 +54,14 @@ namespace Carpool.Services
             try
             {
                 List<Location> locations = dbContext.Locations.Select(loc=>loc).ToList();
-                return this.mapper.Map<List<LocationModel>>(locations);
+
+                List<LocationModel> locationModels = new List<LocationModel>();
+                foreach (Location l in locations)
+                {
+                    locationModels.Add(this.mapper.Map<LocationModel>(l));
+                }
+
+                return locationModels;
             }
             catch (Exception ex)
             {
