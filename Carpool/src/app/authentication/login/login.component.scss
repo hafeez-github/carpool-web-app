@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@1,900&display=swap');
+
+.gray-font-color{
+    color: rgba(53,63,85,255);
+}
+
+.orange-font-color{
+    color: rgba(255,173,24,255);
+}
+
+.violet-font-color{
+    color: rgba(147,26,255,255);
+}
+
+.heading-font-style{
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 5em;
+}
+
+.bg-img-cover{
+    background-image: url('../../../assets/images/cover.png');
+    background-repeat: no-repeat;
+    background-size:90% 50%;
+    background-position: top 100% left 50%;
+    
+}
+
+.tag-line{
+    letter-spacing: 3px;
+}
+
+.bg-img-login{
+    background-image: url('../../../assets/images/authentication.png');
+    background-repeat: no-repeat;
+    background-size:100% 90%;
+    background-position: top 100% left 50%;
+    background-blend-mode: luminosity;
+}
+
+.bg-color-tint{
+    background-color:rgba(147,26,255,255);
+}
+
+.submit-button{
+    background-color: rgba(255,173,24,255);
+}
+
+.login-header{
+    background-color:rgba(147,26,255,255) ;
+}
+
+.warning{
+    color: rgb(232, 74, 74);
+}

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Authentication\" />
+    <None Remove="ResponseModels\" />
+    <None Remove="RequestModels\" />
+    <None Remove="ResponseModels\OfferModel" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Authentication\" />
+    <Folder Include="ResponseModels\" />
+    <Folder Include="RequestModels\" />
+    <Folder Include="RequestModels\BookingRequest.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Folder Include="RequestModels\LocationRequest.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Folder Include="RequestModels\OfferRequest.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Folder Include="RequestModels\RideRequest.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Folder Include="RequestModels\UserRequest.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Folder Include="RequestModels\VehicleRequest.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Carpool.Utilities\Carpool.Utilities.csproj" />
+  </ItemGroup>
+</Project>

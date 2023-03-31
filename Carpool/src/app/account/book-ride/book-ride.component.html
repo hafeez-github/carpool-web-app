@@ -1,0 +1,63 @@
+<!-- <p>book-ride works!</p> -->
+
+<div>
+    <div class="row vh-100">
+
+        <div class="col-12 bg-img-menu">
+            <!-- <img src="../../../assets/images/logo.png" class="img-fluid my-4 ms-5" alt=""> -->
+            <div class="d-flex flex-row justify-content-between">
+                <img src="../../../assets/images/logo.png" class="img-fluid my-4 ms-5" alt="">
+                
+                <span>
+                    <span class="fw-bold">hi</span>
+                    <span class="my-4 me-5 fw-bold"> {{this.loginResponseData.firstName}}</span>
+                    <img src="../../../assets/images/logo.png" class="img-fluid my-4 me-5" alt="">
+                </span>
+            </div>
+
+            
+            <div class="row">
+            <!-- Actual body of page -->
+
+                <div class="col-6">
+                    <!-- menu half of page -->
+                    <div class="row">
+                        <div class="col-7 m-auto">
+                            <div class="pb-3">
+                                <app-booking-menu1></app-booking-menu1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+
+
+
+                <div class="col-6">
+                    <!-- cards half of page -->
+
+                    <h2 class="your-matches mb-4">Your Matches</h2>
+
+                    <div class="row pe-5" *ngIf="dataService.bookingResponse.length!=0  else noResults">
+                        <!-- *ngIf="dataService.bookingResponse.length!=0" else noResults -->
+                        <!-- *ngFor="let match of matches" -->
+                        <div class="col-6 p-0 pe-3" *ngFor="let match of dataService.bookingResponse">
+                            <app-booking-card [currentMatch]="match" (click)="cardClicked(match)" class="booking-card"></app-booking-card>
+                        </div>
+                    </div>
+
+                    <ng-template #noResults>
+                        <h2 class="text-muted ms-3">
+                            No Results!
+                        </h2>
+                    </ng-template>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

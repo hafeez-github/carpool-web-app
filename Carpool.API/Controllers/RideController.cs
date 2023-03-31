@@ -1,0 +1,42 @@
+using Carpool.Models;
+using Carpool.Models.DbModels;
+using Carpool.Models.ResponseModels;
+using Carpool.Services.Interfaces;
+using Carpool.Utilities;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Carpool.API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class RideController : ControllerBase
+    {
+        private IRideService rideService;
+
+        public RideController(IRideService rideService)
+        {
+            this.rideService = rideService;
+        }
+
+        [HttpPost]
+        public async Task<ApiResponse<RideModel>> Post(RideRequest ride)
+        {
+            ApiResponse<RideModel> response=new ApiResponse<RideModel>();
+            try
+            {
+                response = new(201, "Success", true);
+                response.Message = "Ride sucessfully added.";
+                response.Data = await this.rideService.AddRideDetails(ride);
+            }
+            catch (Exception ex)
+            {
+                response = new(400, "Failure", false);
+                response.Message = "Error! " + ex.Message;
+                response.Data = null;
+            }
+
+            return response;
+        }
+
+    }
+}
