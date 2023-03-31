@@ -6,6 +6,7 @@ using Carpool.Models.DbModels;
 using Carpool.Models.ResponseModels;
 using Carpool.Services.Interfaces.Authentication;
 using Carpool.Utilities;
+using Carpool.Utilities.Classes;
 using Carpool.Utilities.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -73,7 +74,7 @@ namespace Carpool.Services.AuthenticationServices
         //helper function
         private User VerifyPassword(LogIn model, User user)
         {
-            if (model.Password == user.Password)
+            if (PasswordEncryption.EncryptPasswordBase64(model.Password) == user.Password)
             {
                 return user;
             }
