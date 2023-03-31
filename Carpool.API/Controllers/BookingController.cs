@@ -27,7 +27,7 @@ namespace Carpool.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResponse<List<OfferModel>>> Post(BookingRequest offer)
+        public async Task<IActionResult> Post(BookingRequest offer)
         {
             ApiResponse<List<OfferModel>> response=new ApiResponse<List<OfferModel>>();
             try
@@ -35,14 +35,16 @@ namespace Carpool.API.Controllers
                 response = new(201, "Success", true);
                 response.Message = "Ride succesfully booked";
                 response.Data = await this.bookingService.AddBookingDetails(offer);
+                return Ok();
             }
             catch (Exception ex)
             {
                 response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
+                return BadRequest(response);
             }
-            return response;
+            
         }
     }
 }

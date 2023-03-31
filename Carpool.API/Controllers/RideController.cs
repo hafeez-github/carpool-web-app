@@ -19,7 +19,7 @@ namespace Carpool.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResponse<RideModel>> Post(RideRequest ride)
+        public async Task<IActionResult> Post(RideRequest ride)
         {
             ApiResponse<RideModel> response=new ApiResponse<RideModel>();
             try
@@ -27,15 +27,19 @@ namespace Carpool.API.Controllers
                 response = new(201, "Success", true);
                 response.Message = "Ride sucessfully added.";
                 response.Data = await this.rideService.AddRideDetails(ride);
+
+                return Ok(response);
+
             }
             catch (Exception ex)
             {
                 response = new(400, "Failure", false);
                 response.Message = "Error! " + ex.Message;
                 response.Data = null;
+
+                return BadRequest(response);
             }
 
-            return response;
         }
 
     }

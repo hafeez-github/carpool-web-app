@@ -51,8 +51,13 @@ export class BookingMenu1Component implements OnInit {
     this.dataService.bookRide(this.bookingRequest).subscribe((responseData) => {
       this.dataService.bookingResponse = responseData.data;
       alert("Booking response received");
+
+      // if(this.dataService.bookingResponse.length!=0){
+      //   this.showResults=true;
+      // }
       console.log("responseData: ", responseData);
       console.log("this.dataService.bookingResponse: ", this.dataService.bookingResponse);
+
       // bookingForm.reset();
       // this.router.navigate(['/acc/menu']);
     });
