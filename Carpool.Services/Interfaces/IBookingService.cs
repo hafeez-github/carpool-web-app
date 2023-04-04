@@ -6,7 +6,6 @@ namespace Carpool.Services.Interfaces
 {
 	public interface IBookingService
 	{
-        Task<List<OfferModel>> AddBookingDetails(BookingRequest model);
-        int[] ConvertStringsToIDs(string stopsAsAString);
+        Task<BookingModel> AddBookingDetails(BookingRequest model);
     }
 }

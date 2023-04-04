@@ -1,7 +1,6 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BookingResponse } from 'src/app/shared/models/bookingResponse';
-import { OfferRequest } from 'src/app/shared/models/offerRequest';
+import { OfferResponse } from 'src/app/shared/models/offerResponse';
 import { RideRequest } from 'src/app/shared/models/rideRequest';
 import { DataService } from 'src/app/shared/services/data.service';
 
@@ -13,9 +12,8 @@ import { DataService } from 'src/app/shared/services/data.service';
 export class BookRideComponent implements OnInit{
 
   loginResponseData:any;
-  matches:BookingResponse[]=[];
+  matches:OfferResponse[]=[];
   rideRequest:RideRequest={
-    // id:-1,
     offerId:-1,
     bookingId:-1,
     tripStart:"",
@@ -24,22 +22,16 @@ export class BookRideComponent implements OnInit{
     distance:-1
   };
 
-  
-
   constructor(public dataService:DataService, private router:Router) {
   }
 
   ngOnInit(){
     this.loginResponseData=this.dataService.loggedinUser;
-    this.matches=this.dataService.bookingResponse;
-    console.log(this.matches);
+    this.matches=this.dataService.matches;
   }
 
-  cardClicked(currentOfferMatch:BookingResponse)
+  cardClicked(currentOfferMatch:OfferResponse)
   {
-    console.log("current Match: ", currentOfferMatch);
-    console.log("LoggedIn User: ", this.dataService.loggedinUser);
-
     const date = new Date();
     const formattedTime = date.toLocaleTimeString('en-US', {
       hour: 'numeric',
@@ -48,7 +40,7 @@ export class BookRideComponent implements OnInit{
       hour12: true
     });
 
-    this.rideRequest.bookingId=this.dataService.loggedinUser.id;
+    this.rideRequest.bookingId=this.dataService.bookingResponse.id;
     this.rideRequest.offerId=currentOfferMatch.id;
     this.rideRequest.tripStart=formattedTime;
     this.rideRequest.tripEnd=formattedTime;
@@ -56,9 +48,7 @@ export class BookRideComponent implements OnInit{
     this.rideRequest.distance=140;
 
     this.dataService.logRideTransaction(this.rideRequest).subscribe(responseData=>{
-      console.log("ride transaction response: ", responseData);
       alert("Ride successfully booked, thankyou!");
-      
       this.router.navigate(['/acc/menu']);
     });
 

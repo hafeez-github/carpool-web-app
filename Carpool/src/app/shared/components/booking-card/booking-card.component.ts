@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { OfferRequest } from '../../models/offerRequest';
 import { DataService } from '../../services/data.service';
 import { BookingResponse } from '../../models/bookingResponse';
+import { OfferResponse } from '../../models/offerResponse';
 
 @Component({
   selector: 'app-booking-card',
@@ -9,11 +10,13 @@ import { BookingResponse } from '../../models/bookingResponse';
   styleUrls: ['./booking-card.component.scss']
 })
 export class BookingCardComponent implements OnInit {
+
   matchesList:OfferRequest[]=[];
+
   constructor(private dataService:DataService) {}
 
   @Input()
-  currentMatch:BookingResponse={
+  currentMatch:OfferResponse={
     id:-1,
     offererId:-1,
     from:-1,
@@ -21,14 +24,15 @@ export class BookingCardComponent implements OnInit {
     time:"",
     date:"",
     seatsAvailable:-1,
-    stops:"", 
+    stops:"",
     offeredTime:""
   };
 
-  bookingResponse:OfferRequest[]=this.dataService.bookingResponse;
+  bookingResponse:BookingResponse=this.dataService.bookingResponse;
 
   ngOnInit(){
-    this.matchesList=this.dataService.bookingResponse;
+    this.matchesList=this.dataService.matches;
   }
 
 }
+

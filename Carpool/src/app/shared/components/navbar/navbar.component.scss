@@ -1,0 +1,24 @@
+.profile-logo:hover{
+    cursor: pointer;
+}
+
+.navbar-menu:hover{
+   cursor: pointer;
+}
+
+.navbar-menu{
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: none;
+}
+
+
+.navbar-item{
+    background-color: white;
+    color:gray;
+    font-size: 1rem;
+}
+
+.navbar-item:hover{
+    background-color: rgba(119,82,252,255); //purple
+    color: white;
+}
