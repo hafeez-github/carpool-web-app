@@ -7,6 +7,8 @@ using Carpool.Services.Interfaces.Authentication;
 using Carpool.API.AutoMappings;
 using Microsoft.EntityFrameworkCore;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -30,7 +32,7 @@ builder.Services.AddScoped<IVehicleService, VehicleService>();
 
 builder.Services.AddCors(option =>
 {
-    option.AddPolicy(name:"MyPolicy", policy =>
+    option.AddPolicy(name: "MyPolicy", policy =>
     {
         policy.WithOrigins("http://localhost:4200")
         .AllowAnyHeader()

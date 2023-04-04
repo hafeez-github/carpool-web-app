@@ -1,12 +1,10 @@
 export class BookingResponse{
     id:number=-1;
-    offererId:number=-1;
+    bookerId:number=0;
     from:number=-1;
     to:number=-1;
     time:string="";
     date:string="";
-    seatsAvailable:number=-1;
-    stops:string=""; 
-    offeredTime:string="";
-
+    seatsRequired:number=-1;
+    bookedTime:string="";
 }

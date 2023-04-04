@@ -21,7 +21,7 @@ namespace Carpool.Services
         }
 
         //Post   
-        public async Task<List<OfferModel>> AddBookingDetails(BookingRequest model)
+        public async Task<BookingModel> AddBookingDetails(BookingRequest model)
         {
             try
             {
@@ -39,77 +39,7 @@ namespace Carpool.Services
                 await dbContext.Bookings.AddAsync(booking);
                 await dbContext.SaveChangesAsync();
 
-                List<Offer> filteredOffers = dbContext.Offers.Where(offer =>
-                    (offer.Time == booking.Time) && (offer.Date == booking.Date)
-                ).ToList<Offer>();
-
-                List<Offer> matches=new List<Offer>();
-
-                for (int i=0;i<filteredOffers.Count;i++)
-                {
-                    if (booking.From == filteredOffers[i].From)
-                    {
-                        if (booking.To == filteredOffers[i].To)
-                        {
-                            matches.Add(filteredOffers[i]);
-                        }
-
-                        else
-                        {
-                            int[] offeredStopsAsIDs = ConvertStringsToIDs(filteredOffers[i].Stops);
-
-                            for (int j = 0; j < offeredStopsAsIDs.Length; j++)
-                            {
-                                if (booking.To == offeredStopsAsIDs[j])
-                                {
-                                    matches.Add(filteredOffers[i]);
-                                }
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        int[] offeredStopsAsIDs = ConvertStringsToIDs(filteredOffers[i].Stops);
-                        int index = -1;
-
-                        for (int j = 0; j < offeredStopsAsIDs.Length; j++)
-                        {
-                            if (booking.From == offeredStopsAsIDs[j])
-                            {
-                                index = j;
-
-                                if (booking.To == filteredOffers[i].To)
-                                {
-                                    matches.Add(filteredOffers[i]);
-                                    break;
-                                }
-
-                            }
-                        }
-
-                        //There is a match for 'For' in stops and now it is to Find 'To' in Stops
-                        if (index != -1)
-                        {
-                            for (int j = index + 1; j < offeredStopsAsIDs.Length; j++)
-                            {
-                                if (booking.To == offeredStopsAsIDs[j])
-                                {
-                                    matches.Add(filteredOffers[i]);
-                                }
-                            }
-                        }
-
-                    }    
-                    
-                }
-
-                List<OfferModel> offerModels = new List<OfferModel>();
-                foreach (Offer m in matches)
-                {
-                    offerModels.Add(this.mapper.Map<OfferModel>(m));
-                }
-                return offerModels;
+                return this.mapper.Map<BookingModel>(booking);
             }
             
             catch (Exception ex)
@@ -121,23 +51,7 @@ namespace Carpool.Services
 
         }
 
-        public int[] ConvertStringsToIDs(string stopsAsAString)
-        {
-            string[] stopsAsStrings= stopsAsAString.Split(", ");
-
-            int[] offeredStops = new int[stopsAsAString.Length]; //Stops with IDs
-
-            for (int i=0; i< stopsAsStrings.Length;i++)
-            {
-                if (stopsAsStrings[i] == "")
-                {
-                    break;
-                }
-                    offeredStops[i] =int.Parse(stopsAsStrings[i]);
-            }
-
-            return offeredStops;
-        }
+        
     }
 }
 
