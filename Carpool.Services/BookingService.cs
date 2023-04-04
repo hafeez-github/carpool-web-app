@@ -51,7 +51,22 @@ namespace Carpool.Services
 
         }
 
-        
+        public async Task<List<BookingModel>> FetchBookings(UserModel user)
+        {
+            List<BookingModel> bookings = new List<BookingModel>();
+
+            List<Booking> results = this.dbContext.Bookings.Where(booking => booking.BookerId == user.Id).ToList<Booking>();
+
+            foreach (Booking result in results)
+            {
+                bookings.Add(this.mapper.Map<BookingModel>(result));
+            }
+
+            return bookings;
+        }
+
+
+
     }
 }
 

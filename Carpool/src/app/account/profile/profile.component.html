@@ -1,1 +1,77 @@
-<p>profile works!</p>
+<div class="row vh-100">
+
+    <div class="col-12 bg-img-menu">
+        <app-navbar></app-navbar>
+
+        <div class="col-12">
+            
+            <form class="mx-5 p-2" id="profile" #profile="ngForm" (ngSubmit)="submitForm(profile)">
+                <div class="row">
+                    <div class="col-6 p-2 mx-auto">
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" placeholder="username@email.com" minlength="3" maxlength="20" required [(ngModel)]="loggedinUser.email" name="email" #email="ngModel" autocomplete="off">
+                            <label for="email">Email Id</label>
+                            <small *ngIf="email.touched && email.errors?.['required']" class="warning"> Email can't be empty!</small>
+                            
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" placeholder="password" minlength="3" maxlength="20" required [(ngModel)]="loggedinUser.password" name="password" #password="ngModel" autocomplete="off">
+                            <label for="password">Password</label>
+                            <small *ngIf="password.touched && password.errors?.['required']" class="warning"> Password can't be empty!</small>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="first-name" placeholder="FirstName" minlength="3" maxlength="20" required [(ngModel)]="loggedinUser.firstName" name="first-name" #firstName="ngModel" autocomplete="off">
+                            <label for="first-name">First Name</label>
+                            <small *ngIf="firstName.touched && firstName.errors?.['required']" class="warning"> First Name can't be empty!</small>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="last-name" placeholder="LastName" minlength="3" maxlength="20" required [(ngModel)]="loggedinUser.lastName" name="last-name" #lastName="ngModel" autocomplete="off">
+                            <label for="last-name">Last Name</label>
+                            <small *ngIf="lastName.touched && lastName.errors?.['required']" class="warning"> Last Name can't be empty!</small>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="username" placeholder="Username" minlength="3" maxlength="20" required [(ngModel)]="loggedinUser.username" name="username" #username="ngModel" autocomplete="off">
+                            <label for="username">Username</label>
+                            <small *ngIf="username.touched && username.errors?.['required']" class="warning"> Username can't be empty!</small>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="mobile" placeholder="Mobile" minlength="3" maxlength="20" required [(ngModel)]="loggedinUser.mobile" name="mobile" #mobile="ngModel" autocomplete="off">
+                            <label for="mobile">Mobile</label>
+                            <small *ngIf="mobile.touched && mobile.errors?.['required']" class="warning"> Mobile can't be empty!</small>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="type" placeholder="Type" minlength="3" maxlength="20" required [(ngModel)]="loggedinUser.type" name="mobile" #type="ngModel" autocomplete="off">
+                            <label for="type">Type</label>
+                            <small *ngIf="type.touched && type.errors?.['required']" class="warning"> Type can't be empty!</small>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="isActive" placeholder="isActive" minlength="3" maxlength="20" required [(ngModel)]="loggedinUser.isActive" name="isActive" #isActive="ngModel" autocomplete="off">
+                            <label for="isActive">Are you an active user?</label>
+                            <small *ngIf="isActive.touched && isActive.errors?.['required']" class="warning"> This field can't be empty!</small>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button class="btn m-2 px-4 p-2 rounded-5 border-0 submit-button"><span class="text-white fw-bold">Submit</span></button>
+                </div>
+
+            </form>
+
+
+
+
+
+        </div>
+    </div>
+    
+</div>

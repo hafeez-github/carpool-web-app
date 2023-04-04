@@ -1,4 +1,4 @@
-.parentDiv {
+.parent-div {
   height: 150px;
 }
 
@@ -52,7 +52,7 @@
   color: rgba(147, 26, 255, 255);
 }
 
-.addStop:active {
+.add-stop:active {
   margin-top: 2px;
   color: darkgray;
   padding: 2px;
@@ -63,21 +63,30 @@
   background-color: rgba(255, 173, 24, 255);
 }
 
-.seatCount {
+.seat-count {
   border-radius: 100%;
   color: gray;
   border: 1px solid rgb(131, 130, 130);
 }
 
-.seatCount:hover {
+.seat-count:hover {
   color: white;
   background-color: rgba(147, 26, 255, 255);
   border: 1px solid white;
   cursor: pointer;
 }
 
-.seatCount:focus {
+.seat-count:focus {
   color: white;
   background-color: rgba(147, 26, 255, 255);
   border: 1px solid white;
+}
+
+.price-input{
+width:100px;
+box-shadow: none;
+}
+
+.price-input:focus{
+  outline: none;
 }

@@ -1,14 +1,36 @@
-<p>my-rides works!</p>
+<div class="row vh-100">
 
-<div>
-    <div class="row vh-100">
-
-        <div class="col-12 border border-secondary bg-img-menu">
-            <app-navbar></app-navbar>
-            
-
-            
+    <div class="col-12 bg-img-menu">
+        <app-navbar></app-navbar>
+        
+        <div class="col-12">
+            <!-- Main body   -->
+            <div class="row">
+                
+                <div class="col-6 text-center">
+                    <p class="offeredRides mx-auto my-2">Offered Rides</p>
+                    <div class="offerCards">
+                        <!-- <h1>{{myOffers.length}}</h1> -->
+                        <div class="mx-auto col-7 my-3" *ngFor="let offer of myOffers" >
+                            <app-booking-card [currentMatch]="offer"></app-booking-card>
+                        </div>
+                        
+                    </div>
+                </div>
+    
+                <div class="col-6 text-center">
+                    <p class="bookedRides mx-auto my-2">Booked Rides</p>
+                    <div class="bookedCards ">
+                        <!-- <h1>{{myBookings.length}}</h1> -->
+                        <div class="mx-auto col-7 my-3" *ngFor="let booking of myBookings" >
+                            <app-offer-card [currentMatch]="booking"></app-offer-card>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+    
         </div>
-      
+    
     </div>
+    
 </div>

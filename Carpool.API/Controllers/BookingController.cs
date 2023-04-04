@@ -46,5 +46,28 @@ namespace Carpool.API.Controllers
             }
             
         }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> FetchBookings(UserModel model)
+        {
+            ApiResponse<List<BookingModel>> response = new ApiResponse<List<BookingModel>>();
+
+            try
+            {
+                response = new(200, "Success", true);
+                response.Message = "Bookings succesfully fetched";
+                response.Data = await this.bookingService.FetchBookings(model);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response = new(400, "Failure", false);
+                response.Message = "Error! " + ex.Message;
+                response.Data = null;
+
+                return BadRequest(response);
+            }
+        }
     }
 }

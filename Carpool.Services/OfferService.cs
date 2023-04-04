@@ -145,6 +145,21 @@ namespace Carpool.Services
             return offeredStops;
         }
 
+
+        public async Task<List<OfferModel>> FetchOffers(UserModel user)
+        {
+            List<OfferModel> offers = new List<OfferModel>();
+
+            List<Offer> results=this.dbContext.Offers.Where(offer=>offer.OffererId==user.Id).ToList<Offer>();
+
+            foreach (Offer result in results)
+            {
+                offers.Add(this.mapper.Map<OfferModel>(result));
+            }
+
+            return offers;
+        }
+
     }
 }
 
