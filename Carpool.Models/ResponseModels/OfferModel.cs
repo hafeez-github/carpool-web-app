@@ -1,4 +1,6 @@
 ﻿using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 namespace Carpool.Models.ResponseModels
 {
 	public class OfferModel

@@ -33,7 +33,18 @@ export class DataService {
     
   };
   locations:Location[]=[];
-  bookingResponse:BookingResponse[]=[];
+  bookingResponse:BookingResponse={
+    id:-1,
+    bookerId:0,
+    from:-1,
+    to:-1,
+    time:"",
+    date:"",
+    seatsRequired:-1,
+    bookedTime:""
+  };
+
+  matches:OfferResponse[]=[];
 
   constructor(private http: HttpClient) { }
 
@@ -52,7 +63,13 @@ export class DataService {
   }
 
   bookRide(request:BookingRequest){
-    return this.http.post<APIResponse<BookingResponse[]>>('https://localhost:7021/api/Booking', request);
+    return this.http.post<APIResponse<BookingResponse>>('https://localhost:7021/api/Booking', request);
+  }
+
+  findMatches(booking:BookingResponse){
+    return this.http.post<APIResponse<OfferResponse[]>>('https://localhost:7021/api/Offer/FindMatches', booking);
+    
+
   }
 
   offerRide(request:OfferRequest){

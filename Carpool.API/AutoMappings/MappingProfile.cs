@@ -14,6 +14,7 @@ namespace Carpool.API.AutoMappings
             CreateMap<Ride, RideModel>().ReverseMap();
             CreateMap<User, UserModel>().ReverseMap();
             CreateMap<Vehicle, VehicleModel>().ReverseMap();
+            CreateMap<Booking, BookingModel>().ReverseMap();
 
             //CreateMap<List<Location>, List<LocationModel>>().ReverseMap();
             //CreateMap<List<Offer>, List<OfferModel>>().ReverseMap();
