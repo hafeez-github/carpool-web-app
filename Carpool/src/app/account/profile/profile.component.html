@@ -13,7 +13,6 @@
                             <input type="email" class="form-control" id="email" placeholder="username@email.com" minlength="3" maxlength="20" required [(ngModel)]="loggedinUser.email" name="email" #email="ngModel" autocomplete="off">
                             <label for="email">Email Id</label>
                             <small *ngIf="email.touched && email.errors?.['required']" class="warning"> Email can't be empty!</small>
-                            
                         </div>
 
                         <div class="form-floating mb-3">
