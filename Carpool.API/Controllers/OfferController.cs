@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Carpool.Models;
 using Carpool.Models.DbModels;
 using Carpool.Models.ResponseModels;
@@ -55,6 +56,30 @@ namespace Carpool.API.Controllers
                 response = new(200, "Success", true);
                 response.Message = "User succesfully added";
                 response.Data = await this.offerService.FindMatches(model);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response = new(400, "Failure", false);
+                response.Message = "Error! " + ex.Message;
+                response.Data = null;
+
+                return BadRequest(response);
+            }
+        }
+
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> FetchOffers(UserModel model)
+        {
+            ApiResponse<List<OfferModel>> response = new ApiResponse<List<OfferModel>>();
+
+            try
+            {
+                response = new(200, "Success", true);
+                response.Message = "Offers succesfully fetched";
+                response.Data = await this.offerService.FetchOffers(model);
 
                 return Ok(response);
             }

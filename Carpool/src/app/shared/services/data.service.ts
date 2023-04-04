@@ -28,10 +28,8 @@ export class DataService {
     password:'',
     mobile:'',
     isActive:false
-    
-
-    
   };
+  
   locations:Location[]=[];
   bookingResponse:BookingResponse={
     id:-1,
@@ -46,6 +44,8 @@ export class DataService {
 
   matches:OfferResponse[]=[];
 
+
+
   constructor(private http: HttpClient) { }
 
   signupUser(user: Signup) {
@@ -53,12 +53,18 @@ export class DataService {
   }
 
   loginUser(user: Login) {
-    // console.log(user);
     return this.http.post<APIResponse<Login>>('https://localhost:7021/api/authentication/login', user);
+  }
+
+  fetchOffers(user: User) {
+    return this.http.post<APIResponse<OfferResponse[]>>('https://localhost:7021/api/Offer/FetchOffers', user);
+  }
+
+  fetchBookings(user: User) {
+    return this.http.post<APIResponse<BookingResponse[]>>('https://localhost:7021/api/Booking/FetchBookings', user);
   }
   
   getLocations() {
-    // console.log(user);
     return this.http.get<APIResponse<Location[]>>('https://localhost:7021/api/Location');
   }
 
@@ -68,8 +74,6 @@ export class DataService {
 
   findMatches(booking:BookingResponse){
     return this.http.post<APIResponse<OfferResponse[]>>('https://localhost:7021/api/Offer/FindMatches', booking);
-    
-
   }
 
   offerRide(request:OfferRequest){

@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'acc/profile',
     component:ProfileComponent
-  },
+  }
 
 ];
 

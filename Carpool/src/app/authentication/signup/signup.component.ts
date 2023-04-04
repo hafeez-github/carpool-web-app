@@ -42,6 +42,8 @@ export class SignupComponent {
     this.signup.confirmPassword='';
     signupForm.reset();
 
+    console.log(this.responseData);
+    
     if(this.responseData!=null){
       this.router.navigate(['/auth/login']);
     }
