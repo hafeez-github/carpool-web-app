@@ -10,7 +10,7 @@ namespace Carpool.Services.Interfaces
 		Task<UserModel> AddUser(UserRequest user);
         Task<IEnumerable<UserModel>> GetUsers();
         Task<UserModel> GetUser(int id);
-        Task<UserModel> UpdateUser(int id, UserRequest editedUser);
+        Task<UserModel> UpdateUser(UserModel editedUser);
         Task<UserModel> DeleteUser(int id);
 
     }

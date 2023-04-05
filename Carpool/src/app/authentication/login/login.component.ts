@@ -30,7 +30,7 @@ export class LoginComponent {
 
     this.dataService.loginUser(user).subscribe(
       responseData=>{
-        console.log(responseData);
+        console.log("logged in user", responseData);
         this.handleResponse(responseData);
         this.login.email='';
         this.login.password='';  
@@ -49,7 +49,11 @@ export class LoginComponent {
   handleResponse(responseData:any){
     this.responseData=responseData;
     this.dataService.loggedinUser=responseData.data;
-    localStorage.setItem(responseData.data.email, JSON.stringify(responseData));
+    localStorage.setItem('loggedinUser', JSON.stringify(responseData.data));
+    localStorage.setItem('id', this.responseData.data.id );
+    localStorage.setItem('email', this.responseData.data.email );
+    localStorage.setItem('firstName', this.responseData.data.firstName );
+    localStorage.setItem('lastName', this.responseData.data.lastName );
   }
 
 }

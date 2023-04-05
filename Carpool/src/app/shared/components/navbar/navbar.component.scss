@@ -1,3 +1,8 @@
+.profile-logo{
+    width: 60px;
+    height: 60px;
+}
+
 .profile-logo:hover{
     cursor: pointer;
 }
@@ -21,4 +26,13 @@
 .navbar-item:hover{
     background-color: rgba(119,82,252,255); //purple
     color: white;
+}
+
+
+.profile{
+    cursor: pointer;
+}
+
+.profile:hover{
+    cursor: pointer;
 }

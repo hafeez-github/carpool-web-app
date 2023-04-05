@@ -96,17 +96,18 @@ namespace Carpool.Services
         }
 
         //Update
-        public async Task<UserModel> UpdateUser(int id, UserRequest editedUser)
+        public async Task<UserModel> UpdateUser(UserModel editedUser)
         {
             try
             {
-                User user = await dbContext.Users.FindAsync(id);
+                User user = await dbContext.Users.FindAsync(editedUser.Id);
 
                 if (user == null)
                 {
-                    throw new DataNotFoundException("User corresponding to specified id doesn't exist");
+                    throw new DataNotFoundException("User corresponding to specified ID doesn't exist");
                 }
 
+                user.Id = editedUser.Id;
                 user.FirstName = editedUser.FirstName;
                 user.LastName = editedUser.LastName;
                 user.Username = editedUser.Username;
@@ -116,9 +117,13 @@ namespace Carpool.Services
                 user.Type = editedUser.Type;
                 user.IsActive = editedUser.IsActive;
 
+                //user =this.mapper.Map<User>(editedUser);
+
                 await dbContext.SaveChangesAsync();
 
-                return this.mapper.Map<UserModel>(user);
+                UserModel result = this.mapper.Map<UserModel>(user);
+
+                return result;
 
             }
 
