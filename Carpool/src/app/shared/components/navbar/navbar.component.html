@@ -1,5 +1,5 @@
 <div class="d-flex flex-row justify-content-between">
-    <img src="../../../assets/images/logo.png" class="img-fluid my-4 ms-5" alt="">
+    <img src="../../../assets/images/logo.png" class="img-fluid my-4 ms-5 profile" alt="" routerLink="/acc/menu">
     
     <span class="dropdown">
         <!-- <span class="my-4 me-5 fw-bold"> {{this.loginResponseData.firstName}}</span> -->
@@ -9,7 +9,7 @@
         <div class="dropdown-menu ms-3 navbar-menu rounded-0 m-0 p-0 pb-0 text-center">
             <h5 class="profile dropdown-item navbar-item p-2" routerLink="/acc/profile">Profile</h5>
             <h5 class="profile dropdown-item navbar-item p-2" routerLink="/acc/myrides">My Rides</h5>
-            <h5 class="profile dropdown-item navbar-item p-2" routerLink="/auth/login" >Logout</h5>    
+            <h5 class="profile dropdown-item navbar-item p-2" (click)="logout()" routerLink="/auth/login" >Logout</h5>    
         </div>
     </span>
 

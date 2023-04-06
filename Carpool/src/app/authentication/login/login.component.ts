@@ -56,4 +56,8 @@ export class LoginComponent {
     localStorage.setItem('lastName', this.responseData.data.lastName );
   }
 
+  fetchDetails(){
+    // this.dataService.
+  }
+
 }

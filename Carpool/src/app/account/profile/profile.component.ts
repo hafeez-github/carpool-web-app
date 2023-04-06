@@ -25,6 +25,9 @@ export class ProfileComponent {
   };
 
   constructor(private dataService:DataService) {
+  }
+
+  ngOnInit(){
     var temp=localStorage.getItem('loggedinUser');
     if(temp!=null)
     {

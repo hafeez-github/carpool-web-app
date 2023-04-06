@@ -8,22 +8,15 @@ import { DataService } from '../../services/data.service';
 })
 export class NavbarComponent {
 
-  // loginResponseData:any;
   firstName=localStorage.getItem("firstName");
 
   constructor(private dataService: DataService) {
   }
 
   ngOnInit(){
-    // console.log(localStorage.getItem(this.dataService.loggedinUser.email));
-    // this.loginResponseData=this.dataService.loggedinUser;
-    
-    // var local=localStorage.getItem(this.dataService.loggedinUser.email);
-    // let result;
-    // if(local!=null){
-    //   result=JSON.parse(local);
-    //   this.loginResponseData=result.data;
-    // }
+  }
 
+  logout(){
+    localStorage.clear();
   }
 }
