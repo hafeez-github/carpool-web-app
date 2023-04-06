@@ -66,7 +66,6 @@ export class OfferMenu1Component implements OnInit {
   }
 
   sendOfferObject(){
-    console.log(this.offerRequest);
     this.offerObjTransferEvent.emit(this.offerRequest);
   }
 }

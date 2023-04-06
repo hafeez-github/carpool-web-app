@@ -99,15 +99,15 @@ namespace Carpool.API.Controllers
             
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] UserRequest editedUser)
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser([FromBody] UserModel editedUser)
         {
             ApiResponse<UserModel> response=new ApiResponse<UserModel>();
             try
             {
                 response = new(200, "Success", true);
                 response.Message = "Successfully updated user";
-                response.Data = await this.userService.UpdateUser(id, editedUser);
+                response.Data = await this.userService.UpdateUser(editedUser);
 
                 return Ok(response);
 

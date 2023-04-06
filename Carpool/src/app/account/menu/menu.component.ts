@@ -6,14 +6,10 @@ import { DataService } from 'src/app/shared/services/data.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
 
-  loginResponseData:any;
+  firstName=localStorage.getItem('firstName');
   constructor(private dataService:DataService) {
   }
 
-  ngOnInit(){
-    this.loginResponseData=this.dataService.loggedinUser;
-  }
-  
 }

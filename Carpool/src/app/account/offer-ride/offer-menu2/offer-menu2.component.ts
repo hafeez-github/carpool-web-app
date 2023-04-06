@@ -37,7 +37,6 @@ export class OfferMenu2Component implements OnInit {
 
   ngOnInit(): void {
     this.locations = this.dataService.locations;
-    console.log(this.offerRequest);
   }
 
   addStop() {
@@ -59,7 +58,6 @@ export class OfferMenu2Component implements OnInit {
         // this.dataService.bookingResponse=responseData.data;
 
         this.stops=responseData.data.stops.split(', ');
-        console.log(this.stops);
         alert("Ride successfully offered!");
         offerForm.reset();
         this.router.navigate(['/acc/menu']);
@@ -69,11 +67,8 @@ export class OfferMenu2Component implements OnInit {
   }
 
   mapLocStops(loc: string) {
-    console.log(loc);
     let locId=this.locations.find(location => location.name == loc)!.id;
-    console.log(locId);
     this.offerRequest.stops+= locId+", ";
-    console.log(this.offerRequest.stops);
   }
 
   mapLocTo(loc: any) {
@@ -90,8 +85,6 @@ export class OfferMenu2Component implements OnInit {
 
   setSeatOffered(seatCount:number){
     this.offerRequest.seatsAvailable=seatCount;
-    console.log(seatCount);
-    console.log(this.offerRequest);
   }
 
 }
