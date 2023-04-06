@@ -29,7 +29,6 @@ export class BookingMenu1Component implements OnInit {
     this.dataService.getLocations().subscribe((responseData) => {
       this.locations = responseData.data;
       this.dataService.locations = responseData.data;
-      alert("Locations received");
     });
   }
 

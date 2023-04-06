@@ -38,6 +38,5 @@ export class OfferRideComponent implements OnInit{
   respondToOfferObjTransferEvent(eventData:OfferRequest)
   {
     this.offerRequest=eventData;
-    console.log(this.offerRequest);
   }
 }

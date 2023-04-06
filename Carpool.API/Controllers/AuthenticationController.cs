@@ -23,7 +23,7 @@ namespace Carpool.API.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> LogIn(LogIn model)
         {
-            ApiResponse<UserModel> response=new ApiResponse<UserModel>();
+            ApiResponse<string> response=new ApiResponse<string>();
 
             try
             {

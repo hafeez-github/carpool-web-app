@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { OfferMenu1Component } from './offer-ride/offer-menu1/offer-menu1.component';
 import { OfferMenu2Component } from './offer-ride/offer-menu2/offer-menu2.component';
 import { BookingMenu1Component } from './book-ride/booking-menu/booking-menu1.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from '../shared/services/interceptor.service';
 
 
 @NgModule({
@@ -30,6 +32,9 @@ import { BookingMenu1Component } from './book-ride/booking-menu/booking-menu1.co
     AccountRoutingModule,
     SharedModule,
     FormsModule
+  ],
+  providers:[
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ]
 })
 export class AccountModule { }

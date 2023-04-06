@@ -8,15 +8,15 @@ import { DataService } from '../../services/data.service';
 })
 export class NavbarComponent {
 
-  loginResponseData:any;
+  firstName=localStorage.getItem("firstName");
+
   constructor(private dataService: DataService) {
   }
 
   ngOnInit(){
-    this.loginResponseData=this.dataService.loggedinUser;
   }
 
-  dropMenu(){
-    
+  logout(){
+    localStorage.clear();
   }
 }

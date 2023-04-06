@@ -7,9 +7,19 @@
 
 
 .submit-button{
-    background-color: rgba(255,173,24,255);
+    background-color: rgba(147,26,255,255);
+    cursor:pointer;
+}
+
+
+.edit-button{
+    background-color: rgba(255,173,24,255); //orange
 }
 
 .warning{
     color: rgb(232, 74, 74);
+}
+
+input:focus{
+    box-shadow: none;
 }

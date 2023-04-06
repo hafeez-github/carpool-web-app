@@ -9,7 +9,9 @@ namespace Carpool.Services.Interfaces.Authentication
 {
 	public interface ILogInService
 	{
-        Task<UserModel> LogIn(LogIn model);
+        Task<string> LogIn(LogIn model);
+        string CreateJWT(User user);
+        string VerifyPassword(LogIn model, User user);
     }
 }
 

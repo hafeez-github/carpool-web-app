@@ -53,7 +53,7 @@ export class DataService {
   }
 
   loginUser(user: Login) {
-    return this.http.post<APIResponse<Login>>('https://localhost:7021/api/authentication/login', user);
+    return this.http.post<APIResponse<string>>('https://localhost:7021/api/authentication/login', user);
   }
 
   fetchOffers(user: User) {
@@ -82,6 +82,10 @@ export class DataService {
 
   logRideTransaction(transaction:RideRequest){
     return this.http.post<APIResponse<RideResponse>>('https://localhost:7021/api/Ride', transaction);
+  }
+
+  updateUser(user:User){
+    return this.http.put<APIResponse<User>>('https://localhost:7021/api/User', user);
   }
 
 }
