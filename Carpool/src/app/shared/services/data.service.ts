@@ -53,7 +53,7 @@ export class DataService {
   }
 
   loginUser(user: Login) {
-    return this.http.post<APIResponse<User>>('https://localhost:7021/api/authentication/login', user);
+    return this.http.post<APIResponse<string>>('https://localhost:7021/api/authentication/login', user);
   }
 
   fetchOffers(user: User) {

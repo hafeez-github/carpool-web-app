@@ -26,7 +26,7 @@ namespace Carpool.Services.AuthenticationServices
             this.mapper = mapper;
         }
 
-        public async Task<UserModel> LogIn(LogIn model)
+        public async Task<string> LogIn(LogIn model)
         {
             try
             {
@@ -41,8 +41,8 @@ namespace Carpool.Services.AuthenticationServices
 
                     else 
                     {
-                        User user1 = VerifyPassword(model, user);
-                        return this.mapper.Map<UserModel>(user1);
+                        return VerifyPassword(model, user);
+                        //return this.mapper.Map<UserModel>(user1);
                     }
                 }
 
@@ -56,7 +56,8 @@ namespace Carpool.Services.AuthenticationServices
                     }
                     else
                     {
-                        return this.mapper.Map<UserModel>(VerifyPassword(model, user));
+                        return VerifyPassword(model, user);
+                        //return this.mapper.Map<UserModel>(VerifyPassword(model, user));
                     }
                 }
 
@@ -76,11 +77,12 @@ namespace Carpool.Services.AuthenticationServices
 
 
         //helper function
-        private User VerifyPassword(LogIn model, User user)
+        public string VerifyPassword(LogIn model, User user)
         {
             if (PasswordEncryption.EncryptPasswordBase64(model.Password) == user.Password)
             {
-                return user;
+                
+                return CreateJWT(user);
             }
 
             else
@@ -91,14 +93,26 @@ namespace Carpool.Services.AuthenticationServices
 
         }
 
-        private string CreateJWT(User user)
+        public string CreateJWT(User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("veryverysecret.....");
-            var identity = new ClaimsIdentity(new Claim[]
+
+            List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes. Name, $"{user.FirstName} {user.LastName}"),
-            });
+                new Claim("firstName", user.FirstName),
+                new Claim("lastName", user.LastName),
+                new Claim("email", user.Email),
+                new Claim("mobile", user.Mobile),
+                new Claim("password", user.Password),
+                new Claim("username", user.Username),
+                new Claim("isActive", user.IsActive.ToString()),
+                new Claim("id", user.Id.ToString()),
+                new Claim("type", user.Type.ToString())
+            };
+
+            var identity = new ClaimsIdentity(claims);
+
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
             var tokenDescriptor = new SecurityTokenDescriptor
             {

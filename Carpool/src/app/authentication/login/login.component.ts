@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/shared/models/login';
 import { DataService } from 'src/app/shared/services/data.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,19 @@ export class LoginComponent {
     password:'',
   };
 
-  responseData:any;
+  decodedToken:any;
+
+  user:User={
+    id:1,
+    firstName:'',
+    lastName:'',
+    username:'',
+    type:1,
+    email:'',
+    password:'',
+    mobile:'',
+    isActive:false
+  };
 
   constructor(private dataService:DataService, private router:Router) {
     
@@ -30,13 +44,12 @@ export class LoginComponent {
 
     this.dataService.loginUser(user).subscribe(
       responseData=>{
-        console.log("logged in user", responseData);
         this.handleResponse(responseData);
         this.login.email='';
         this.login.password='';  
         loginForm.form.reset();
 
-        if(this.responseData.data!=null){
+        if(this.decodedToken!=null){
           this.router.navigate(['/acc/menu']);
         }
         else{
@@ -47,17 +60,45 @@ export class LoginComponent {
   }
 
   handleResponse(responseData:any){
-    this.responseData=responseData;
-    this.dataService.loggedinUser=responseData.data;
-    localStorage.setItem('loggedinUser', JSON.stringify(responseData.data));
-    localStorage.setItem('id', this.responseData.data.id );
-    localStorage.setItem('email', this.responseData.data.email );
-    localStorage.setItem('firstName', this.responseData.data.firstName );
-    localStorage.setItem('lastName', this.responseData.data.lastName );
+    this.decodedToken=this.getDecodedAccessToken(responseData.data);
+    
+    this.user.id=parseInt(this.decodedToken.id);
+    this.user.email=this.decodedToken.email;
+    this.user.firstName=this.decodedToken.firstName;
+    this.user.lastName=this.decodedToken.lastName;
+    this.user.password=this.decodedToken.password;
+    this.user.mobile=this.decodedToken.mobile;
+    this.user.username=this.decodedToken.username;
+    this.user.isActive=(this.decodedToken.isActive)=="True";
+    this.user.type=this.checkUserType(this.decodedToken.type);
+
+    this.dataService.loggedinUser=this.user;
+    localStorage.setItem('loggedinUser', JSON.stringify(this.user));
+    localStorage.setItem('id', this.user.id.toString());
+    localStorage.setItem('email', this.user.email );
+    localStorage.setItem('firstName', this.user.firstName );
+    localStorage.setItem('lastName', this.user.lastName );
   }
 
-  fetchDetails(){
-    // this.dataService.
+  getDecodedAccessToken(token: string): any {
+    try {
+      let helper= new JwtHelperService();
+      return helper.decodeToken(token);
+    } 
+    catch(Error) {
+      return null;
+    }
+  }
+
+  checkUserType(type:string){
+    if(type=="AppUser")
+    {
+      return 1;
+    }
+    else if(type=="DbAdmin"){
+      return 2;
+    }
+    else return 3;
   }
 
 }
