@@ -73,6 +73,8 @@ export class LoginComponent {
     this.user.type=this.checkUserType(this.decodedToken.type);
 
     this.dataService.loggedinUser=this.user;
+    
+    localStorage.setItem('token', responseData);
     localStorage.setItem('loggedinUser', JSON.stringify(this.user));
     localStorage.setItem('id', this.user.id.toString());
     localStorage.setItem('email', this.user.email );
