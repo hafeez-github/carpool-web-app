@@ -57,13 +57,6 @@ namespace Carpool.Services
 
             List<Booking> results = this.dbContext.Bookings.Where(booking => booking.BookerId == user.Id).ToList<Booking>();
 
-            //foreach (Booking result in results)
-            //{
-            //    bookings.Add(this.mapper.Map<BookingModel>(result));
-            //}
-
-            //return bookings;
-
             foreach (Booking result in results)
             {
                 BookingModel currentBooking = this.mapper.Map<BookingModel>(result);
