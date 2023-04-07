@@ -8,5 +8,8 @@ export class OfferResponse{
     seatsAvailable:number=-1;
     stops:string="";
     offeredTime:string="";
+    offerer:string="";
+    fromLocation:string="";
+    toLocation:string=""
 
 }

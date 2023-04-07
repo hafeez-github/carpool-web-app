@@ -3,10 +3,12 @@ using Carpool.Models.DbModels;
 using Carpool.Models.ResponseModels;
 using Carpool.Services.Interfaces.Authentication;
 using Carpool.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Carpool.API.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthenticationController : ControllerBase
@@ -20,6 +22,7 @@ namespace Carpool.API.Controllers
             this.signUpService = signUpService;
         }
 
+        
         [HttpPost("[action]")]
         public async Task<IActionResult> LogIn(LogIn model)
         {

@@ -57,12 +57,27 @@ namespace Carpool.Services
 
             List<Booking> results = this.dbContext.Bookings.Where(booking => booking.BookerId == user.Id).ToList<Booking>();
 
+            //foreach (Booking result in results)
+            //{
+            //    bookings.Add(this.mapper.Map<BookingModel>(result));
+            //}
+
+            //return bookings;
+
             foreach (Booking result in results)
             {
-                bookings.Add(this.mapper.Map<BookingModel>(result));
+                BookingModel currentBooking = this.mapper.Map<BookingModel>(result);
+
+                currentBooking.Booker = this.dbContext.Users.Where(user => currentBooking.BookerId == user.Id).Select(col => col.FirstName).First();
+                currentBooking.ToLocation = this.dbContext.Locations.Where(loc => currentBooking.To == loc.Id).Select(col => col.Name).First();
+                currentBooking.FromLocation = this.dbContext.Locations.Where(loc => currentBooking.From == loc.Id).Select(col => col.Name).First();
+                bookings.Add(currentBooking);
             }
 
             return bookings;
+
+
+
         }
 
 

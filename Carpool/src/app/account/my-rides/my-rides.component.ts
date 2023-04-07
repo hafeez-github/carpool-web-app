@@ -40,7 +40,8 @@ export class MyRidesComponent implements OnInit{
 
     // this.dataService.fetchBookings(this.dataService.loggedinUser).subscribe(responseData=>this.myBookings=responseData.data);
     // this.dataService.fetchOffers(this.dataService.loggedinUser).subscribe(responseData=>this.myOffers=responseData.data);
-    this.dataService.fetchBookings(user).subscribe(responseData=>this.myBookings=responseData.data);
+    
     this.dataService.fetchOffers(user).subscribe(responseData=>this.myOffers=responseData.data);
+    this.dataService.fetchBookings(user).subscribe(responseData=>this.myBookings=responseData.data);
   }
 }

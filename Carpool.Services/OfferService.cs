@@ -154,7 +154,12 @@ namespace Carpool.Services
 
             foreach (Offer result in results)
             {
-                offers.Add(this.mapper.Map<OfferModel>(result));
+                OfferModel currentOffer=this.mapper.Map<OfferModel>(result);
+
+                currentOffer.Offerer = this.dbContext.Users.Where(user => currentOffer.OffererId == user.Id).Select(col => col.FirstName).First();
+                currentOffer.FromLocation = this.dbContext.Locations.Where(loc => currentOffer.From == loc.Id).Select(col => col.Name).First();
+                currentOffer.ToLocation = this.dbContext.Locations.Where(loc => currentOffer.To == loc.Id).Select(col => col.Name).First();
+                offers.Add(currentOffer);
             }
 
             return offers;

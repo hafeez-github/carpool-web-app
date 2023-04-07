@@ -74,7 +74,7 @@ export class LoginComponent {
 
     this.dataService.loggedinUser=this.user;
     
-    localStorage.setItem('token', responseData);
+    localStorage.setItem('token', responseData.data);
     localStorage.setItem('loggedinUser', JSON.stringify(this.user));
     localStorage.setItem('id', this.user.id.toString());
     localStorage.setItem('email', this.user.email );

@@ -39,10 +39,14 @@ export class DataService {
     time:"",
     date:"",
     seatsRequired:-1,
-    bookedTime:""
+    bookedTime:"",
+    booker:"",
+    fromLocation:"",
+    toLocation:""
   };
 
   matches:OfferResponse[]=[];
+  users:User[]=[];
 
 
 
