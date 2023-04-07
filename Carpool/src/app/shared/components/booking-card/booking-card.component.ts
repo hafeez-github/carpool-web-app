@@ -25,7 +25,10 @@ export class BookingCardComponent implements OnInit {
     date:"",
     seatsAvailable:-1,
     stops:"",
-    offeredTime:""
+    offeredTime:"",
+    offerer:"",
+    fromLocation:"",
+    toLocation:""
   };
 
   bookingResponse:BookingResponse=this.dataService.bookingResponse;
