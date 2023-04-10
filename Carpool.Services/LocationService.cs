@@ -54,7 +54,7 @@ namespace Carpool.Services
             try
             {
                 List<Location> locations = dbContext.Locations.Select(loc=>loc).ToList();
-
+                
                 List<LocationModel> locationModels = new List<LocationModel>();
                 foreach (Location l in locations)
                 {

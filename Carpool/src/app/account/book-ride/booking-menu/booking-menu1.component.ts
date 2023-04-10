@@ -32,7 +32,9 @@ export class BookingMenu1Component implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dataService.matches=[];
+  }
 
   submitForm(bookingForm: NgForm) {
     const date = new Date();
@@ -45,10 +47,16 @@ export class BookingMenu1Component implements OnInit {
 
     this.bookingRequest.bookerId = this.dataService.loggedinUser.id;
     this.bookingRequest.bookedTime = formattedTime;
-    this.dataService.bookRide(this.bookingRequest).subscribe((responseData) => {
+    this.dataService.bookRide(this.bookingRequest).subscribe(responseData => {
+      responseData.data.booker="";
+      responseData.data.toLocation="";
+      responseData.data.fromLocation="";
+      // console.log("booking-response: ", responseData.data);
       this.dataService.bookingResponse = responseData.data;
+      alert("booking done!"); 
+      // console.log(responseData.data);
       this.dataService.findMatches(responseData.data).subscribe(response=>this.dataService.matches=response.data);
-
+      alert("matches after booking, received!");
     });
   }
 
