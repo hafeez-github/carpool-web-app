@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BookingResponse } from '../../models/bookingResponse';
 
 @Component({
@@ -6,7 +6,7 @@ import { BookingResponse } from '../../models/bookingResponse';
   templateUrl: './offer-card.component.html',
   styleUrls: ['./offer-card.component.scss']
 })
-export class OfferCardComponent {
+export class OfferCardComponent implements OnInit{
   @Input()
   currentMatch:BookingResponse={
     id:-1,
@@ -16,6 +16,13 @@ export class OfferCardComponent {
     time:"",
     date:"",
     seatsRequired:-1,
-    bookedTime:""
+    bookedTime:"",
+    booker:"",
+    fromLocation:"",
+    toLocation:""
   };
+
+  ngOnInit(): void {
+      
+  }
 }

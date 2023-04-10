@@ -22,6 +22,13 @@ namespace Carpool.Models.ResponseModels
         public int SeatsRequired { get; set; }
 
         public string BookedTime { get; set; }
+
+        public string Booker { get; set; }
+
+        public string FromLocation { get; set; }
+
+        public string ToLocation { get; set; }
+        
     }
 }
 

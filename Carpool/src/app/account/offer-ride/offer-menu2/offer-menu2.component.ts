@@ -50,13 +50,16 @@ export class OfferMenu2Component implements OnInit {
       second: 'numeric',
       hour12: true,
     });
-    this.offerRequest.offeredTime=formattedTime;
 
-    this.offerRequest.offererId=this.dataService.loggedinUser.id;
+    this.offerRequest.offeredTime=formattedTime;
+    let temp=localStorage.getItem("id");
+
+    if(temp){
+      this.offerRequest.offererId=parseInt(temp);
+    }
+    
     this.dataService.offerRide(this.offerRequest).subscribe(
       responseData=>{
-        // this.dataService.bookingResponse=responseData.data;
-
         this.stops=responseData.data.stops.split(', ');
         alert("Ride successfully offered!");
         offerForm.reset();
