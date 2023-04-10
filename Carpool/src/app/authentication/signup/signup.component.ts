@@ -34,20 +34,23 @@ export class SignupComponent {
     this.dataService.signupUser(newUser).subscribe(
       responseData=>{
         this.handleResponse(responseData);
+        this.signup.email='';
+        this.signup.password='';
+        this.signup.confirmPassword='';
+        signupForm.reset();
+    
+        if(this.responseData!=null){
+          alert("Signup successful!");
+          this.router.navigate(['/auth/login']);
+        }
+        else{
+          alert("No response data!");
+        }
       }
+      
     );
 
-    this.signup.email=''; 
-    this.signup.password='';
-    this.signup.confirmPassword='';
-    signupForm.reset();
-
-    if(this.responseData!=null){
-      this.router.navigate(['/auth/login']);
-    }
-    else{
-      alert("No response data!");
-    }
+ 
     
   }
 

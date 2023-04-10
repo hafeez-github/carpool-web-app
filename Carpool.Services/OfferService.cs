@@ -122,7 +122,13 @@ namespace Carpool.Services
             List<OfferModel> offerModels = new List<OfferModel>();
             foreach (Offer m in matches)
             {
-                offerModels.Add(this.mapper.Map<OfferModel>(m));
+                var match = this.mapper.Map<OfferModel>(m);
+                match.Offerer = this.dbContext.Users.Where(user => match.OffererId == user.Id).Select(col => col.FirstName).First();
+                match.FromLocation = this.dbContext.Locations.Where(loc => match.From == loc.Id).Select(col => col.Name).First();
+                match.ToLocation = this.dbContext.Locations.Where(loc => match.To == loc.Id).Select(col => col.Name).First();
+
+                offerModels.Add(match);
+                
             }
             return offerModels;
         }

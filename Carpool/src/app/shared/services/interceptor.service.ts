@@ -9,7 +9,6 @@ export class InterceptorService implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     // Add authorization header with token if available
     const token = localStorage.getItem('token');
-    console.log("token in local storage:", token);
     if (token) {
       request = request.clone({
         setHeaders: { Authorization: `Bearer ${token}` }
