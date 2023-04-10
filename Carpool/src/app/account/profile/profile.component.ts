@@ -6,43 +6,41 @@ import { DataService } from 'src/app/shared/services/data.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-
-  isDisableEdit:boolean=true;
+  isDisableEdit: boolean = true;
   // loggedinUser:User=this.dataService.loggedinUser;
-  loggedinUser:User={
-      id:1,
-      firstName:'',
-      lastName:'',
-      username:'',
-      type:1,
-      email:'',
-      password:'',
-      mobile:'',
-      isActive:false
+  loggedinUser: User = {
+    id: 1,
+    firstName: '',
+    lastName: '',
+    username: '',
+    type: 1,
+    email: '',
+    password: '',
+    mobile: '',
+    isActive: false,
   };
 
-  constructor(private dataService:DataService) {
-  }
+  constructor(private dataService: DataService) {}
 
-  ngOnInit(){
-    var temp=localStorage.getItem('loggedinUser');
-    if(temp!=null)
-    {
-      this.loggedinUser=JSON.parse(temp);
+  ngOnInit() {
+    var temp = localStorage.getItem('loggedinUser');
+    if (temp != null) {
+      this.loggedinUser = JSON.parse(temp);
+      console.log(this.loggedinUser);
     }
   }
-  
-  submitForm(loginForm:NgForm){
-    this.dataService.updateUser(this.loggedinUser).subscribe(responseData=>
-      {
-        alert('User updated');
-        this.dataService.loggedinUser=this.loggedinUser;
-        this.isDisableEdit=false;
-      }
-    );
-  }
 
+  submitForm(loginForm: NgForm) {
+    if (this.isDisableEdit) {
+      this.dataService
+        .updateUser(this.loggedinUser)
+        .subscribe((responseData) => {
+          this.dataService.loggedinUser = this.loggedinUser;
+          alert('User updated');
+        });
+    }
+  }
 }
