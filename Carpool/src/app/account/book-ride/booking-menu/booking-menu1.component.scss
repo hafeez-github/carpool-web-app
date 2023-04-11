@@ -34,14 +34,14 @@
     background-color:rgba(147,26,255,255) ;
 }
 
-// .time:focus{
-//     border: 1px solid rgba(147,26,255,255);
-//     color:white;
-//     background-color:cornflowerblue;
-// }
-
-.time:checked{
+.time:checked+label{
     border: 1px solid rgba(147,26,255,255);
     color:white;
     background-color:rgba(147,26,255,255) ;
 }
+
+// .time:checked{
+//     border: 1px solid rgba(147,26,255,255);
+//     color:white;
+//     background-color:rgba(147,26,255,255) ;
+// }
