@@ -90,4 +90,8 @@ export class OfferMenu2Component implements OnInit {
     this.offerRequest.seatsAvailable=seatCount;
   }
 
+  setPrice(price:string){
+    // this.offerRequest.
+  }
+
 }
