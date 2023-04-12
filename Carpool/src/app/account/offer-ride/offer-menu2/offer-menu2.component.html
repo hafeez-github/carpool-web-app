@@ -39,17 +39,23 @@
                     <div>
                         <div class="text-muted ms-2">Available Seats</div>
                         <div class="d-flex flex-row">
-                            <span class="seat-count m-2 px-3 py-2 fw-bold" (click)="setSeatOffered(1)">1</span>
-                            <span class="seat-count m-2 px-3 py-2 fw-bold" (click)="setSeatOffered(2)">2</span>
-                            <span class="seat-count m-2 px-3 py-2 fw-bold" (click)="setSeatOffered(3)">3</span>
+                            <input type="radio" class="btn-check time" name="radioGroup" value="1" id="seats-1">
+                            <label class="seat-count m-2 px-3 py-2 fw-bold" for="seats-1" (click)="setSeatOffered(1)">1</label>
+
+                            <input type="radio" class="btn-check time" name="radioGroup" value="1" id="seats-2">
+                            <label class="seat-count m-2 px-3 py-2 fw-bold" for="seats-2" (click)="setSeatOffered(2)">2</label>
+
+                            <input type="radio" class="btn-check time" name="radioGroup" value="1" id="seats-3">
+                            <label class="seat-count m-2 px-3 py-2 fw-bold" for="seats-3" (click)="setSeatOffered(3)">3</label>
                         </div>
                     </div>
 
                     <div>
-                        <div class="text-muted ms-4">Price</div>
+                        <!-- <div class="text-muted ms-4">Price</div>
                         <div class="ms-4 mt-2 pt-1 h4">
-                            <input type="number" class="price-input">
-                        </div>
+                            <input type="number" class="price-input" (keyup)="setPrice(price.value)" #price>
+                            
+                        </div> -->
                     </div>
                     
                 </div>

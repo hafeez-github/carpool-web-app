@@ -24,6 +24,12 @@
     background-position: top 100% left 50%;
 }
 
+@media only screen and (max-width: 767px) {
+    .bg-img-cover{
+        display: none;
+    }
+  }
+
 .tag-line{
     letter-spacing: 3px;
 }
@@ -50,4 +56,8 @@
 
 .warning{
     color: rgb(232, 74, 74);
+}
+
+.pointer{
+    cursor: pointer;
 }
