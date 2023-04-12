@@ -61,11 +61,11 @@ export class DataService {
   }
 
   fetchOffers(user: User) {
-    return this.http.post<APIResponse<OfferResponse[]>>('https://localhost:7021/api/Offer/FetchOffers', user);
+    return this.http.post<APIResponse<OfferResponse[]>>('https://localhost:7021/api/Offer/GetOffers', user);
   }
 
   fetchBookings(user: User) {
-    return this.http.post<APIResponse<BookingResponse[]>>('https://localhost:7021/api/Booking/FetchBookings', user);
+    return this.http.post<APIResponse<BookingResponse[]>>('https://localhost:7021/api/Booking/GetBookings', user);
   }
   
   getLocations() {
