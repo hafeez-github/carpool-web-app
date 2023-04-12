@@ -56,7 +56,7 @@ namespace Carpool.API.Controllers
             {
                 response = new(200, "Success", true);
                 response.Message = "Bookings succesfully fetched";
-                response.Data = await this.bookingService.FetchBookings(model);
+                response.Data = await this.bookingService.GetBookings(model);
 
                 return Ok(response);
             }

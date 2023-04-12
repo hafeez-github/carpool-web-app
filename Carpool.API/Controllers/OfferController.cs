@@ -79,7 +79,7 @@ namespace Carpool.API.Controllers
             {
                 response = new(200, "Success", true);
                 response.Message = "Offers succesfully fetched";
-                response.Data = await this.offerService.FetchOffers(model);
+                response.Data = await this.offerService.GetOffers(model);
 
                 return Ok(response);
             }

@@ -32,5 +32,7 @@ namespace Carpool.Models.ResponseModels
         public string FromLocation { get; set; }
 
         public string ToLocation { get; set; }
+
+        public DateTime OfferedDateTime { get; set; } = DateTime.UtcNow;
     }
 }

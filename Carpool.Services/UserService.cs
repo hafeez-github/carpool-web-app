@@ -26,17 +26,7 @@ namespace Carpool.Services
         {
             try
             {
-                User user = new User()
-                {
-                    FirstName = newUser.FirstName,
-                    LastName = newUser.LastName,
-                    Username = newUser.Username,
-                    Email = newUser.Email,
-                    Password = newUser.Password,
-                    Type= newUser.Type,
-                    Mobile= newUser.Mobile,
-                    IsActive= newUser.IsActive
-                };
+                User user = this.mapper.Map<User>(newUser);
              
                 await dbContext.Users.AddAsync(user);
                 await dbContext.SaveChangesAsync();

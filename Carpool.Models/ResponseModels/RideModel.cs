@@ -20,6 +20,10 @@ namespace Carpool.Models.ResponseModels
         public float Price { get; set; }
 
         public float Distance { get; set; }
+
+        public DateTime TripStartDateTime { get; set; } = DateTime.UtcNow;
+
+        public DateTime TripEndDateTime { get; set; } = DateTime.UtcNow;
     }
 }
 

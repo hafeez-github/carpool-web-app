@@ -17,6 +17,8 @@ namespace Carpool.Models.RequestModels
 
         public string BookedTime { get; set; }
 
+        public DateTime BookedDateTime { get; set; } = DateTime.UtcNow;
+
         public BookingRequest()
 		{
 		}

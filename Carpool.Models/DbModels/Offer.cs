@@ -31,6 +31,8 @@ namespace Carpool.Models.DbModels
 
         [Required(ErrorMessage = "OfferedTime required")]
         public string OfferedTime { get; set; }
+
+        public DateTime OfferedDateTime { get; set; } = DateTime.UtcNow;
     }
 }
 

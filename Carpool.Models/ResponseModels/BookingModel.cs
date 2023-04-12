@@ -28,7 +28,9 @@ namespace Carpool.Models.ResponseModels
         public string FromLocation { get; set; }
 
         public string ToLocation { get; set; }
-        
+
+        public DateTime BookedDateTime { get; set; } = DateTime.UtcNow;
+
     }
 }
 

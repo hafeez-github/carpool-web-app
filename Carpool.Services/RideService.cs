@@ -18,21 +18,11 @@ namespace Carpool.Services
             this.mapper = mapper;
         }
 
-        //Post   
         public async Task<RideModel> AddRideDetails(RideRequest model)
         {
             try
             {
-                Ride ride = new()
-                {
-                    BookingId = model.BookingId,
-                    OfferId = model.OfferId,
-                    TripStart = model.TripStart,
-                    TripEnd=model.TripEnd,
-                    Price=model.Price,
-                    Distance=model.Distance
-                };
-
+                Ride ride = this.mapper.Map<Ride>(model);
                 await dbContext.Rides.AddAsync(ride);
                 await dbContext.SaveChangesAsync();
 

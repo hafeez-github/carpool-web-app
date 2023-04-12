@@ -25,17 +25,7 @@ namespace Carpool.Services
         {
             try
             {
-                Location location = new Location()
-                {
-                    Name = newLocation.Name,
-                    City = newLocation.City,
-                    Country = newLocation.Country,
-                    PINCode = newLocation.PINCode,
-                    State = newLocation.State,
-                    Latitude = newLocation.Latitude,
-                    Longitude = newLocation.Longitude,
-                };
-
+                Location location = this.mapper.Map<Location>(newLocation);
                 await dbContext.Locations.AddAsync(location);
                 await dbContext.SaveChangesAsync();
 
