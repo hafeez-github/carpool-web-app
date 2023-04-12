@@ -30,6 +30,8 @@ namespace Carpool.Models.DbModels
         public int SeatsRequired { get; set; }
 
         public string BookedTime { get; set; }
+
+        //public DateTime BookingAt { get; set; } = DateTime.UtcNow;
     }
 }
 
