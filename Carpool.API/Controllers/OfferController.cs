@@ -71,7 +71,7 @@ namespace Carpool.API.Controllers
 
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> FetchOffers(UserModel model)
+        public async Task<IActionResult> GetOffers(UserModel model)
         {
             ApiResponse<List<OfferModel>> response = new ApiResponse<List<OfferModel>>();
 

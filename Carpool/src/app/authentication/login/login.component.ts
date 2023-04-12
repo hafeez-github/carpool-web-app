@@ -20,17 +20,18 @@ export class LoginComponent {
 
   decodedToken:any;
 
-  user:User={
-    id:1,
-    firstName:'',
-    lastName:'',
-    username:'',
-    type:1,
-    email:'',
-    password:'',
-    mobile:'',
-    isActive:false
-  };
+  user:User=new User();
+  // {
+  //   id:1,
+  //   firstName:'',
+  //   lastName:'',
+  //   username:'',
+  //   type:1,
+  //   email:'',
+  //   password:'',
+  //   mobile:'',
+  //   isActive:false
+  // };
 
   constructor(private dataService:DataService, private router:Router) {
     

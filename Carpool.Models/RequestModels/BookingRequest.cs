@@ -9,7 +9,7 @@ namespace Carpool.Models.RequestModels
 
         public int To { get; set; }
 
-        public string Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.UtcNow.Date;
 
         public string Time { get; set; }
 

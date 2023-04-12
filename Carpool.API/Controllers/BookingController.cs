@@ -48,7 +48,7 @@ namespace Carpool.API.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> FetchBookings(UserModel model)
+        public async Task<IActionResult> GetBookings(UserModel model)
         {
             ApiResponse<List<BookingModel>> response = new ApiResponse<List<BookingModel>>();
 

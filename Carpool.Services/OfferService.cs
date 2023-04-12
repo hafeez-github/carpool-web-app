@@ -42,7 +42,7 @@ namespace Carpool.Services
         {
 
             List<Offer> filteredOffers = dbContext.Offers.Where(offer =>
-                    (offer.Time == booking.Time) && (offer.Date == booking.Date)
+                    (offer.Time == booking.Time) && (offer.Date.Date == booking.Date.Date)
                 ).ToList<Offer>();
 
             List<Offer> matches = new List<Offer>();

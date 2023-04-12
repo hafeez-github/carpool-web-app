@@ -15,15 +15,16 @@ export class BookingMenu1Component implements OnInit {
 
   locations: Location[] = [];
 
-  bookingRequest: BookingRequest = {
-    bookedTime: '12AM',
-    bookerId: 1,
-    from: 6,
-    to: 7,
-    date: '',
-    time: '',
-    seatsRequired: 1,
-  };
+  bookingRequest: BookingRequest = new BookingRequest();
+  // {
+  //   bookedTime: '12AM',
+  //   bookerId: 1,
+  //   from: 6,
+  //   to: 7,
+  //   date: '',
+  //   time: '',
+  //   seatsRequired: 1,
+  // };
 
   constructor(private dataService: DataService, private router: Router) {
     this.dataService.getLocations().subscribe((responseData) => {

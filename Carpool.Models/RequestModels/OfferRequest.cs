@@ -11,7 +11,7 @@ namespace Carpool.Models
 
         public string Time { get; set; }
 
-        public string Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.UtcNow.Date;
 
         public string Stops { get; set; }
 

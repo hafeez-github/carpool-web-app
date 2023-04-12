@@ -25,7 +25,7 @@ namespace Carpool.Models.DbModels
         public string Time { get; set; }
 
         [Required(ErrorMessage = "Date required")]
-        public string Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.UtcNow.Date;
 
         public int SeatsRequired { get; set; }
 
