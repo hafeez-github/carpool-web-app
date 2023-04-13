@@ -13,13 +13,11 @@ import { OfferResponse } from '../models/offerResponse';
 import { RideResponse } from '../models/rideResponse';
 import { RideRequest } from '../models/rideRequest';
 import { environment } from 'src/environments/environment';
-import { ConfigService } from '../config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  baseUrl = ConfigService.getBaseUrl();
 
   loggedinUser:User={
     id:1,
@@ -52,12 +50,10 @@ export class DataService {
 
   fetchOffers(user: User) {
     return this.http.post<APIResponse<OfferResponse[]>>(`${this.apiURL}/Offer/GetOffers`, user);
-    // return this.http.post<APIResponse<OfferResponse[]>>('https://localhost:7021/api/Offer/GetOffers', user);
   }
 
   fetchBookings(user: User) {
     return this.http.post<APIResponse<BookingResponse[]>>(`${this.apiURL}/Booking/GetBookings`, user);
-    // return this.http.post<APIResponse<BookingResponse[]>>('https://localhost:7021/api/Booking/GetBookings', user);
   }
   
   getLocations() {
