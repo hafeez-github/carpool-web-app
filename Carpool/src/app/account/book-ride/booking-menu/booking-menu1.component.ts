@@ -70,4 +70,8 @@ export class BookingMenu1Component implements OnInit {
       (location) => location.name == data
     )!.id;
   }
+
+  toggle(){
+    this.router.navigate(["/acc/offer"]);  
+  }
 }

@@ -92,4 +92,7 @@ export class OfferMenu2Component implements OnInit {
     // this.offerRequest.
   }
 
+  toggle(){
+    this.router.navigate(["/acc/book"]);  
+  }
 }
