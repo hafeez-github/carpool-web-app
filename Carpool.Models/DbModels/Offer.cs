@@ -23,7 +23,7 @@ namespace Carpool.Models.DbModels
 
         public string Time { get; set; }
 
-        public string Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.UtcNow.Date;
 
         public string Stops { get; set; }
 
@@ -31,6 +31,8 @@ namespace Carpool.Models.DbModels
 
         [Required(ErrorMessage = "OfferedTime required")]
         public string OfferedTime { get; set; }
+
+        public DateTime OfferedDateTime { get; set; } = DateTime.UtcNow;
     }
 }
 

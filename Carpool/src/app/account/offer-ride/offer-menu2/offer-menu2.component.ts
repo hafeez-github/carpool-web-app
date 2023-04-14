@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Location } from 'src/app/shared/models/location';
 import { OfferRequest } from 'src/app/shared/models/offerRequest';
 import { DataService } from 'src/app/shared/services/data.service';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-offer-menu2',
@@ -33,7 +34,7 @@ export class OfferMenu2Component implements OnInit {
 
   toggleMenu: boolean = false;
 
-  constructor(private dataService: DataService, private router:Router) {}
+  constructor(private dataService: DataService, private userService:UserService, private router:Router) {}
 
   ngOnInit(): void {
     this.locations = this.dataService.locations;
@@ -52,11 +53,8 @@ export class OfferMenu2Component implements OnInit {
     });
 
     this.offerRequest.offeredTime=formattedTime;
-    let temp=localStorage.getItem("id");
 
-    if(temp){
-      this.offerRequest.offererId=parseInt(temp);
-    }
+    this.offerRequest.offererId=this.userService.getFromLocalStorage('user').id;
     
     this.dataService.offerRide(this.offerRequest).subscribe(
       responseData=>{
@@ -94,4 +92,7 @@ export class OfferMenu2Component implements OnInit {
     // this.offerRequest.
   }
 
+  toggle(){
+    this.router.navigate(["/acc/book"]);  
+  }
 }

@@ -7,6 +7,6 @@ namespace Carpool.Services.Interfaces
 	public interface IBookingService
 	{
         Task<BookingModel> AddBookingDetails(BookingRequest model);
-        Task<List<BookingModel>> FetchBookings(UserModel user);
+        Task<List<BookingModel>> GetBookings(UserModel user);
     }
 }

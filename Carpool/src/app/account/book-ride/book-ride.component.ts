@@ -7,48 +7,51 @@ import { DataService } from 'src/app/shared/services/data.service';
 @Component({
   selector: 'app-book-ride',
   templateUrl: './book-ride.component.html',
-  styleUrls: ['./book-ride.component.scss'],
+  styleUrls: ['./book-ride.component.scss']
 })
-export class BookRideComponent implements OnInit {
-  loginResponseData: any;
-  matches: OfferResponse[] = [];
-  rideRequest: RideRequest = {
-    offerId: -1,
-    bookingId: -1,
-    tripStart: '',
-    tripEnd: '',
-    price: -1,
-    distance: -1,
+export class BookRideComponent implements OnInit{
+
+  loginResponseData:any;
+  matches:OfferResponse[]=[];
+  rideRequest:RideRequest={
+    offerId:-1,
+    bookingId:-1,
+    tripStart:"",
+    tripEnd:"",
+    price:-1,
+    distance:-1
   };
 
-  constructor(public dataService: DataService, private router: Router) {}
-
-  ngOnInit() {
-    this.loginResponseData = this.dataService.loggedinUser;
-    this.matches = this.dataService.matches;
+  constructor(public dataService:DataService, private router:Router) {
   }
 
-  cardClicked(currentOfferMatch: OfferResponse) {
+  ngOnInit(){
+    this.loginResponseData=this.dataService.loggedinUser;
+    this.matches=this.dataService.matches;
+  }
+
+  cardClicked(currentOfferMatch:OfferResponse)
+  {
     const date = new Date();
     const formattedTime = date.toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: 'numeric',
       second: 'numeric',
-      hour12: true,
+      hour12: true
     });
 
-    this.rideRequest.bookingId = this.dataService.bookingResponse.id;
-    this.rideRequest.offerId = currentOfferMatch.id;
-    this.rideRequest.tripStart = formattedTime;
-    this.rideRequest.tripEnd = formattedTime;
-    this.rideRequest.price = 180;
-    this.rideRequest.distance = 140;
+    this.rideRequest.bookingId=this.dataService.bookingResponse.id;
+    this.rideRequest.offerId=currentOfferMatch.id;
+    this.rideRequest.tripStart=formattedTime;
+    this.rideRequest.tripEnd=formattedTime;
+    this.rideRequest.price=180;
+    this.rideRequest.distance=140;
 
-    this.dataService
-      .logRideTransaction(this.rideRequest)
-      .subscribe((responseData) => {
-        alert('Ride successfully booked, thankyou!');
-        this.router.navigate(['/acc/menu']);
-      });
+    this.dataService.logRideTransaction(this.rideRequest).subscribe(responseData=>{
+      alert("Ride successfully booked, thankyou!");
+      this.router.navigate(['/acc/menu']);
+    });
+
+    
   }
 }

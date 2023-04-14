@@ -17,7 +17,7 @@ namespace Carpool.Models.ResponseModels
 
         public string Time { get; set; }
 
-        public string Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.UtcNow.Date;
 
         public int SeatsRequired { get; set; }
 
@@ -28,7 +28,9 @@ namespace Carpool.Models.ResponseModels
         public string FromLocation { get; set; }
 
         public string ToLocation { get; set; }
-        
+
+        public DateTime BookedDateTime { get; set; } = DateTime.UtcNow;
+
     }
 }
 

@@ -25,13 +25,7 @@ namespace Carpool.Services
         {
             try
             {
-                Vehicle vehicle = new Vehicle()
-                {
-                    Number = newVehicle.Number,
-                    Type = newVehicle.Type,
-                    OwnerId = newVehicle.OwnerId
-                };
-
+                Vehicle vehicle=this.mapper.Map<Vehicle>(newVehicle);
                 await dbContext.Vehicles.AddAsync(vehicle);
                 await dbContext.SaveChangesAsync();
 

@@ -16,4 +16,7 @@
     <Folder Include="Enums\" />
     <Folder Include="Classes\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+  </ItemGroup>
 </Project>

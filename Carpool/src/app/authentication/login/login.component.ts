@@ -5,6 +5,7 @@ import { Login } from 'src/app/shared/models/login';
 import { DataService } from 'src/app/shared/services/data.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from 'src/app/shared/models/user';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ export class LoginComponent {
     isActive:false
   };
 
-  constructor(private dataService:DataService, private router:Router) {
+  constructor(private dataService:DataService, private userService:UserService, private router:Router) {
     
   }
 
@@ -60,7 +61,8 @@ export class LoginComponent {
   }
 
   handleResponse(responseData:any){
-    this.decodedToken=this.getDecodedAccessToken(responseData.data);
+    this.userService.storeInLocalStorage('token', responseData.data);
+    this.decodedToken=this.userService.getDecodedToken(responseData.data);
     
     this.user.id=parseInt(this.decodedToken.id);
     this.user.email=this.decodedToken.email;
@@ -74,23 +76,10 @@ export class LoginComponent {
 
     this.dataService.loggedinUser=this.user;
     
-    localStorage.setItem('token', responseData.data);
-    localStorage.setItem('loggedinUser', JSON.stringify(this.user));
-    localStorage.setItem('id', this.user.id.toString());
-    localStorage.setItem('email', this.user.email );
-    localStorage.setItem('firstName', this.user.firstName );
-    localStorage.setItem('lastName', this.user.lastName );
+    this.userService.storeInLocalStorage('token', responseData.data);
+    this.userService.storeInLocalStorage('user', this.user);
   }
 
-  getDecodedAccessToken(token: string): any {
-    try {
-      let helper= new JwtHelperService();
-      return helper.decodeToken(token);
-    } 
-    catch(Error) {
-      return null;
-    }
-  }
 
   checkUserType(type:string){
     if(type=="AppUser")

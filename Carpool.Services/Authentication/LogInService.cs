@@ -14,6 +14,7 @@ using Carpool.Utilities.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
+
 namespace Carpool.Services.AuthenticationServices
 {
 	public class LogInService:ILogInService
@@ -30,23 +31,7 @@ namespace Carpool.Services.AuthenticationServices
         {
             try
             {
-                if (!String.IsNullOrEmpty(model.Username))
-                {
-                    User user = await dbContext.Users.SingleOrDefaultAsync(n => n.Username == model.Username);
-
-                    if (user == null)
-                    {
-                        throw new Exception("Error! Incorect Username.");
-                    }
-
-                    else 
-                    {
-                        return VerifyPassword(model, user);
-                        //return this.mapper.Map<UserModel>(user1);
-                    }
-                }
-
-                else if (!String.IsNullOrEmpty(model.Email))
+                if (!String.IsNullOrEmpty(model.Email))
                 {
                     User user = await dbContext.Users.FirstOrDefaultAsync(n => n.Email == model.Email);
 
@@ -79,7 +64,8 @@ namespace Carpool.Services.AuthenticationServices
         //helper function
         public string VerifyPassword(LogIn model, User user)
         {
-            if (PasswordEncryption.EncryptPasswordBase64(model.Password) == user.Password)
+            //PasswordEncryption.EncryptPasswordBase64(model.Password) == user.Password
+            if (Carpool.Utilities.Classes.PasswordEncryption.CheckPassword(model.Password, user.Password))
             {
                 
                 return CreateJWT(user);
