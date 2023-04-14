@@ -19,23 +19,11 @@ namespace Carpool.Services
             this.mapper = mapper;
         }
 
-        //Post   
         public async Task<OfferModel> AddOfferDetails(OfferRequest model)
         {
             try
             {
-                Offer offer = new()
-                {
-                    OffererId = model.OffererId,
-                    From = model.From,
-                    To = model.To,
-                    Time = model.Time,
-                    Date= model.Date,
-                    SeatsAvailable = model.SeatsAvailable,
-                    Stops=model.Stops,
-                    OfferedTime = model.OfferedTime
-                };
-
+                Offer offer = this.mapper.Map<Offer>(model);
                 await dbContext.Offers.AddAsync(offer);
                 await dbContext.SaveChangesAsync();
 
@@ -50,12 +38,11 @@ namespace Carpool.Services
            
         }
 
-        //Get
         public async Task<List<OfferModel>> FindMatches(BookingModel booking)
         {
 
             List<Offer> filteredOffers = dbContext.Offers.Where(offer =>
-                    (offer.Time == booking.Time) && (offer.Date == booking.Date)
+                    (offer.Time == booking.Time) && (offer.Date.Date == booking.Date.Date)
                 ).ToList<Offer>();
 
             List<Offer> matches = new List<Offer>();
@@ -151,8 +138,7 @@ namespace Carpool.Services
             return offeredStops;
         }
 
-
-        public async Task<List<OfferModel>> FetchOffers(UserModel user)
+        public async Task<List<OfferModel>> GetOffers(UserModel user)
         {
             List<OfferModel> offers = new List<OfferModel>();
 

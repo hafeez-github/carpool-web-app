@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Location } from 'src/app/shared/models/location';
 import { OfferRequest } from 'src/app/shared/models/offerRequest';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -27,7 +28,7 @@ export class OfferMenu1Component implements OnInit {
 
   toggleMenu: boolean = false;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private router:Router) {
     this.dataService.getLocations().subscribe((responseData) => {
       this.locations = responseData.data;
       this.dataService.locations = responseData.data;
@@ -39,13 +40,7 @@ export class OfferMenu1Component implements OnInit {
   }
 
   submitForm(bookingForm: NgForm) {
-    // this.bookingRequest.bookerId=this.dataService.loggedinUser.id;
-    // this.dataService.bookRide(this.bookingRequest).subscribe(
-    //   responseData=>{
-    //     this.dataService.bookingResponse=responseData.data;
-    //     bookingForm.reset();
-    //   }
-    // );
+
   }
 
   mapLocFrom(loc: string) {
@@ -68,4 +63,10 @@ export class OfferMenu1Component implements OnInit {
   sendOfferObject(){
     this.offerObjTransferEvent.emit(this.offerRequest);
   }
+
+  toggle(){
+    this.router.navigate(["/acc/book"]);  
+  }
+
 }
+

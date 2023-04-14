@@ -10,7 +10,7 @@ namespace Carpool.Services.Interfaces
         Task<OfferModel> AddOfferDetails(OfferRequest model);
         Task<List<OfferModel>> FindMatches(BookingModel booking);
         int[] ConvertStringsToIDs(string stopsAsAString);
-        Task<List<OfferModel>> FetchOffers(UserModel user);
+        Task<List<OfferModel>> GetOffers(UserModel user);
         
     }
 }

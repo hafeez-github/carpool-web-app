@@ -17,6 +17,10 @@ namespace Carpool.Models
         public int Price { get; set; }
 
         public int Distance { get; set; }
+
+        public DateTime TripStartDateTime { get; set; } = DateTime.UtcNow;
+
+        public DateTime TripEndDateTime { get; set; } = DateTime.UtcNow;
     }
 }
 

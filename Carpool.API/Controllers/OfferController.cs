@@ -5,10 +5,12 @@ using Carpool.Models.DbModels;
 using Carpool.Models.ResponseModels;
 using Carpool.Services.Interfaces;
 using Carpool.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Carpool.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OfferController : ControllerBase
@@ -71,7 +73,7 @@ namespace Carpool.API.Controllers
 
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> FetchOffers(UserModel model)
+        public async Task<IActionResult> GetOffers(UserModel model)
         {
             ApiResponse<List<OfferModel>> response = new ApiResponse<List<OfferModel>>();
 
@@ -79,7 +81,7 @@ namespace Carpool.API.Controllers
             {
                 response = new(200, "Success", true);
                 response.Message = "Offers succesfully fetched";
-                response.Data = await this.offerService.FetchOffers(model);
+                response.Data = await this.offerService.GetOffers(model);
 
                 return Ok(response);
             }

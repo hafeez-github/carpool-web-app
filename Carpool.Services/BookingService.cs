@@ -17,25 +17,13 @@ namespace Carpool.Services
 		{
             this.dbContext = dbContext;
             this.mapper = mapper;
-
         }
 
-        //Post   
         public async Task<BookingModel> AddBookingDetails(BookingRequest model)
         {
             try
             {
-                Booking booking = new()
-                {
-                    BookerId = model.BookerId,
-                    From = model.From,
-                    To = model.To,
-                    Time = model.Time,
-                    Date = model.Date,
-                    SeatsRequired = model.SeatsRequired,
-                    BookedTime = model.BookedTime
-                };
-
+                Booking booking = this.mapper.Map<Booking>(model);
                 await dbContext.Bookings.AddAsync(booking);
                 await dbContext.SaveChangesAsync();
 
@@ -46,12 +34,9 @@ namespace Carpool.Services
             {
                 throw;
             }
-
-
-
         }
 
-        public async Task<List<BookingModel>> FetchBookings(UserModel user)
+        public async Task<List<BookingModel>> GetBookings(UserModel user)
         {
             List<BookingModel> bookings = new List<BookingModel>();
 
@@ -68,8 +53,6 @@ namespace Carpool.Services
             }
 
             return bookings;
-
-
 
         }
 

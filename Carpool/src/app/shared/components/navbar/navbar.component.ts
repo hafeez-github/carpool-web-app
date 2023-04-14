@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../services/data.service';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,15 +9,15 @@ import { DataService } from '../../services/data.service';
 })
 export class NavbarComponent {
 
-  firstName=localStorage.getItem("firstName");
+  firstName=this.userService.getFromLocalStorage('user').firstName;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private userService: UserService) {
   }
 
   ngOnInit(){
   }
 
   logout(){
-    localStorage.clear();
+    this.userService.clearLocalStorage();
   }
 }

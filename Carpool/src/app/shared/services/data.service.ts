@@ -12,6 +12,7 @@ import { BookingResponse } from '../models/bookingResponse';
 import { OfferResponse } from '../models/offerResponse';
 import { RideResponse } from '../models/rideResponse';
 import { RideRequest } from '../models/rideRequest';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -31,33 +32,20 @@ export class DataService {
   };
   
   locations:Location[]=[];
-  bookingResponse:BookingResponse={
-    id:-1,
-    bookerId:0,
-    from:-1,
-    to:-1,
-    time:"",
-    date:"",
-    seatsRequired:-1,
-    bookedTime:"",
-    booker:"",
-    fromLocation:"",
-    toLocation:""
-  };
+  bookingResponse:BookingResponse = new BookingResponse();
 
   matches:OfferResponse[]=[];
   users:User[]=[];
-
-
+  apiURL:string = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
   signupUser(user: Signup) {
-    return this.http.post<APIResponse<Login>>('https://localhost:7021/api/authentication/signup', user);
+    return this.http.post<APIResponse<Login>>(`${this.apiURL}/authentication/signup`, user);
   }
 
   loginUser(user: Login) {
-    return this.http.post<APIResponse<string>>('https://localhost:7021/api/authentication/login', user);
+    return this.http.post<APIResponse<string>>(`${this.apiURL}/authentication/login`, user);
   }
 
   fetchOffers(user: User) {
@@ -69,27 +57,27 @@ export class DataService {
   }
   
   getLocations() {
-    return this.http.get<APIResponse<Location[]>>('https://localhost:7021/api/Location');
+    return this.http.get<APIResponse<Location[]>>(`${this.apiURL}/Location`);
   }
 
   bookRide(request:BookingRequest){
-    return this.http.post<APIResponse<BookingResponse>>('https://localhost:7021/api/Booking', request);
+    return this.http.post<APIResponse<BookingResponse>>(`${this.apiURL}/Booking`, request);
   }
 
   findMatches(booking:BookingResponse){
-    return this.http.post<APIResponse<OfferResponse[]>>('https://localhost:7021/api/Offer/FindMatches', booking);
+    return this.http.post<APIResponse<OfferResponse[]>>(`${this.apiURL}/Offer/FindMatches`, booking);
   }
 
   offerRide(request:OfferRequest){
-    return this.http.post<APIResponse<OfferResponse>>('https://localhost:7021/api/Offer', request);
+    return this.http.post<APIResponse<OfferResponse>>(`${this.apiURL}/Offer`, request);
   }
 
   logRideTransaction(transaction:RideRequest){
-    return this.http.post<APIResponse<RideResponse>>('https://localhost:7021/api/Ride', transaction);
+    return this.http.post<APIResponse<RideResponse>>(`${this.apiURL}/Ride`, transaction);
   }
 
   updateUser(user:User){
-    return this.http.put<APIResponse<User>>('https://localhost:7021/api/User', user);
+    return this.http.put<APIResponse<User>>(`${this.apiURL}/User`, user);
   }
 
 }

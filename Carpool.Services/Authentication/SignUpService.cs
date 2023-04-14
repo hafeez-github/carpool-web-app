@@ -60,32 +60,12 @@ namespace Carpool.Services.Authentication
 
                     if (!String.IsNullOrEmpty(model.Password))
                     {
-                        user.Password=PasswordEncryption.EncryptPasswordBase64(model.Password);
-
-                        //user.Password = model.Password;
-                        
+                        user.Password=PasswordEncryption.EncryptPassword(model.Password);
                     }
                     else
                     {
                         throw new Exception("Password can't be empty");
                     }
-
-                    //if (!String.IsNullOrEmpty(model.Username))
-                    //{
-                    //    var result=dbContext.Users.Where(n => n.Username == model.Username).ToList();
-                    //    if (result.Count==0)
-                    //    {
-                    //        user.Username = model.Username;
-                    //    }
-                    //    else
-                    //    {
-                    //        throw new Exception("Username already exists. Try another one.");
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    throw new Exception("Username can't be empty");
-                    //}
                     
                     await dbContext.Users.AddAsync(user);
                     await dbContext.SaveChangesAsync();
