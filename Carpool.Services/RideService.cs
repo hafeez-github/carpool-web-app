@@ -22,6 +22,8 @@ namespace Carpool.Services
         {
             try
             {
+                model.TripStartDateTime = DateTime.UtcNow;
+                model.TripEndDateTime = DateTime.UtcNow;
                 Ride ride = this.mapper.Map<Ride>(model);
                 await dbContext.Rides.AddAsync(ride);
                 await dbContext.SaveChangesAsync();

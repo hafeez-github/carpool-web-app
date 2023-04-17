@@ -18,10 +18,6 @@ namespace Carpool.Models.DbModels
         [Required(ErrorMessage = "OfferId required")]
         public int OfferId { get; set; }
 
-        public string TripStart { get; set; }
-
-        public string TripEnd { get; set; }
-
         public float Price { get; set; }
 
         public float Distance { get; set; }

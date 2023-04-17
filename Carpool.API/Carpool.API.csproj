@@ -27,13 +27,10 @@
     <Folder Include="AutoMappings\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Carpool.Data\Carpool.Data.csproj">
+    <ProjectReference Include="..\Carpool.Models\Carpool.Models.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
     <ProjectReference Include="..\Carpool.Services\Carpool.Services.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
-    <ProjectReference Include="..\Carpool.Models\Carpool.Models.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>

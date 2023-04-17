@@ -10,10 +10,6 @@ namespace Carpool.Models
 
         public int OfferId { get; set; }
 
-        public string TripStart { get; set; }
-
-        public string TripEnd { get; set; }
-
         public int Price { get; set; }
 
         public int Distance { get; set; }

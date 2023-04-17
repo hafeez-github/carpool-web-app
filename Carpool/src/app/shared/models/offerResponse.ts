@@ -7,7 +7,7 @@ export class OfferResponse{
     date:string="";
     seatsAvailable:number=-1;
     stops:string="";
-    offeredTime:string="";
+    offeredDateTime:string="";
     offerer:string="";
     fromLocation:string="";
     toLocation:string=""

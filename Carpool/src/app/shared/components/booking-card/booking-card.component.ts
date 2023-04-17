@@ -25,7 +25,7 @@ export class BookingCardComponent implements OnInit {
     date:"",
     seatsAvailable:-1,
     stops:"",
-    offeredTime:"",
+    offeredDateTime:"",
     offerer:"",
     fromLocation:"",
     toLocation:""

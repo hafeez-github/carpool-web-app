@@ -11,14 +11,11 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class ProfileComponent {
   isDisableEdit: boolean = true;
-  // loggedinUser:User=this.dataService.loggedinUser;
   loggedinUser: User =new User();
-
 
   constructor(private dataService: DataService, private userService:UserService) {}
 
   ngOnInit() {
-
     this.loggedinUser=this.userService.getFromLocalStorage('user');
   }
 

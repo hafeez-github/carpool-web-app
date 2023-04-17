@@ -17,8 +17,6 @@ namespace Carpool.Models
 
         public int SeatsAvailable { get; set; }
 
-        public string OfferedTime { get; set; }
-
         public DateTime OfferedDateTime { get; set; } = DateTime.UtcNow;
 
         public OfferRequest()

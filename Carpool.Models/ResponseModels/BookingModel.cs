@@ -17,11 +17,9 @@ namespace Carpool.Models.ResponseModels
 
         public string Time { get; set; }
 
-        public DateTime Date { get; set; } = DateTime.UtcNow.Date;
+        public DateTime Date { get; set; }
 
         public int SeatsRequired { get; set; }
-
-        public string BookedTime { get; set; }
 
         public string Booker { get; set; }
 
@@ -29,7 +27,7 @@ namespace Carpool.Models.ResponseModels
 
         public string ToLocation { get; set; }
 
-        public DateTime BookedDateTime { get; set; } = DateTime.UtcNow;
+        public DateTime BookedDateTime { get; set; }
 
     }
 }

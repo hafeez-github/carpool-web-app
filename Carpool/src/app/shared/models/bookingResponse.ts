@@ -6,7 +6,7 @@ export class BookingResponse{
     time:string="";
     date:string="";
     seatsRequired:number=-1;
-    bookedTime:string="";
+    bookedDateTime:string="";
     booker:string="";
     fromLocation:string="";
     toLocation:string=""

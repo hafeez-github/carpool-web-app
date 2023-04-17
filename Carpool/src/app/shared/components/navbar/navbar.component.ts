@@ -20,7 +20,7 @@ export class NavbarComponent{
 
   logout(){
     this.userService.clearLocalStorage();
-    this.toastr.show("Logged out successfully");
+    this.toastr.success("Logged out successfully");
   }
 
 }

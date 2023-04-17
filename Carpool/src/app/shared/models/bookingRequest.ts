@@ -6,6 +6,6 @@ export class BookingRequest{
     time:string="";
     date:string="";
     seatsRequired:number=-1;
-    bookedTime:string="";
+    bookedDateTime?:string="";
 
 }

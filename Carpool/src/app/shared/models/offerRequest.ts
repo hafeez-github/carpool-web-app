@@ -7,6 +7,5 @@ export class OfferRequest{
     date:string="";
     seatsAvailable:number=-1;
     stops:string="";
-    offeredTime:string="";
 
 }

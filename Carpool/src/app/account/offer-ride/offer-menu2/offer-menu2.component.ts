@@ -23,7 +23,6 @@ export class OfferMenu2Component implements OnInit {
 
   @Input()
   offerRequest: OfferRequest = {
-    offeredTime: '12AM',
     offererId: 1,
     from: 6,
     to: 7,
@@ -45,15 +44,6 @@ export class OfferMenu2Component implements OnInit {
     this.array.push(this.array[this.array.length - 1] + 1);
   }
   submitForm(offerForm: NgForm) {
-    const date = new Date();
-    const formattedTime = date.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      hour12: true,
-    });
-
-    this.offerRequest.offeredTime=formattedTime;
 
     this.offerRequest.offererId=this.userService.getFromLocalStorage('user').id;
     
@@ -74,8 +64,6 @@ export class OfferMenu2Component implements OnInit {
   }
 
   mapLocTo(loc: any) {
-    // let data=loc.value;
-    // this.offerRequest.to = this.locations.find(location => location.name == data)!.id;
   }
 
   @Output() menu1Event: EventEmitter<boolean> = new EventEmitter();
@@ -90,7 +78,6 @@ export class OfferMenu2Component implements OnInit {
   }
 
   setPrice(price:string){
-    // this.offerRequest.
   }
 
   toggle(){

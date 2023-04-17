@@ -16,7 +16,7 @@ export class OfferCardComponent implements OnInit{
     time:"",
     date:"",
     seatsRequired:-1,
-    bookedTime:"",
+    bookedDateTime:"",
     booker:"",
     fromLocation:"",
     toLocation:""
