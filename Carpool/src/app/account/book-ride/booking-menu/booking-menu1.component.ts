@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BookingRequest } from 'src/app/shared/models/bookingRequest';
 import { Location } from 'src/app/shared/models/location';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -17,7 +18,6 @@ export class BookingMenu1Component implements OnInit {
 
   bookingRequest: BookingRequest=
   {
-    bookedTime: '12AM',
     bookerId: 1,
     from: 6,
     to: 7,
@@ -26,7 +26,7 @@ export class BookingMenu1Component implements OnInit {
     seatsRequired: 1,
   };
 
-  constructor(private dataService: DataService, private router: Router) {
+  constructor(private dataService: DataService, private router: Router, private toastr:ToastrService) {
     this.dataService.getLocations().subscribe((responseData) => {
       this.locations = responseData.data;
       this.dataService.locations = responseData.data;
@@ -38,22 +38,13 @@ export class BookingMenu1Component implements OnInit {
   }
 
   submitForm(bookingForm: NgForm) {
-    const date = new Date();
-    const formattedTime = date.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      hour12: true,
-    });
-
     this.bookingRequest.bookerId = this.dataService.loggedinUser.id;
-    this.bookingRequest.bookedTime = formattedTime;
     this.dataService.bookRide(this.bookingRequest).subscribe(responseData => {
       responseData.data.booker="";
       responseData.data.toLocation="";
       responseData.data.fromLocation="";
       this.dataService.bookingResponse = responseData.data;
-      alert("booking done!"); 
+      this.toastr.success("booking done!");
       this.dataService.findMatches(responseData.data).subscribe(response=>this.dataService.matches=response.data);
     });
   }

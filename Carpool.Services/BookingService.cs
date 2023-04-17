@@ -23,6 +23,7 @@ namespace Carpool.Services
         {
             try
             {
+                model.BookedDateTime = DateTime.UtcNow;
                 Booking booking = this.mapper.Map<Booking>(model);
                 await dbContext.Bookings.AddAsync(booking);
                 await dbContext.SaveChangesAsync();

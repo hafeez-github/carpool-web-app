@@ -25,8 +25,6 @@ namespace Carpool.Models.ResponseModels
 
         public int SeatsAvailable { get; set; }
 
-        public string OfferedTime { get; set; }
-
         public string Offerer { get; set; }
 
         public string FromLocation { get; set; }

@@ -9,15 +9,13 @@ namespace Carpool.Models.RequestModels
 
         public int To { get; set; }
 
-        public DateTime Date { get; set; } = DateTime.UtcNow.Date;
+        public DateTime Date { get; set; }
 
         public string Time { get; set; }
 
         public int SeatsRequired { get; set; }
 
-        public string BookedTime { get; set; }
-
-        public DateTime BookedDateTime { get; set; } = DateTime.UtcNow;
+        public DateTime BookedDateTime { get; set; }
 
         public BookingRequest()
 		{

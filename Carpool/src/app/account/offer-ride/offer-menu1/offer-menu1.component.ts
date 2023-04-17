@@ -16,7 +16,6 @@ export class OfferMenu1Component implements OnInit {
   locations: Location[] = [];
 
   offerRequest: OfferRequest = {
-    offeredTime: '12AM',
     offererId: 1,
     from: 6,
     to: 7,

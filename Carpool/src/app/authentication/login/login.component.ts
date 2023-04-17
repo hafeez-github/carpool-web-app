@@ -53,6 +53,7 @@ export class LoginComponent {
         loginForm.form.reset();
 
         if(this.decodedToken!=null){
+          this.toastr.success('Succesful Login!');
           this.router.navigate(['/acc/menu']);
         }
         else{
@@ -94,8 +95,4 @@ export class LoginComponent {
     else return 3;
   }
 
-  onSubmit(){
-    this.toastr.success('Succesful Login!');
-
-  }
 }

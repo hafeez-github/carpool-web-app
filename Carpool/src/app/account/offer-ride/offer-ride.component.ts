@@ -13,7 +13,6 @@ export class OfferRideComponent implements OnInit{
   enableMenu2:boolean=false;
   
   offerRequest: OfferRequest = {
-    offeredTime: '12AM',
     offererId: 1,
     from: 6,
     to: 7,

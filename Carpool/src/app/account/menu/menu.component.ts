@@ -15,10 +15,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(){
-
     this.firstName=this.userService.getFromLocalStorage('user').firstName;
-    // this.toastr.success("Logged in!");
-
   }
   
 

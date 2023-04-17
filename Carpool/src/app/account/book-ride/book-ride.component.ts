@@ -17,8 +17,8 @@ export class BookRideComponent implements OnInit{
   rideRequest:RideRequest={
     offerId:-1,
     bookingId:-1,
-    tripStart:"",
-    tripEnd:"",
+    tripStartDateTime:"",
+    tripEndDateTime:"",
     price:-1,
     distance:-1
   };
@@ -43,8 +43,6 @@ export class BookRideComponent implements OnInit{
 
     this.rideRequest.bookingId=this.dataService.bookingResponse.id;
     this.rideRequest.offerId=currentOfferMatch.id;
-    this.rideRequest.tripStart=formattedTime;
-    this.rideRequest.tripEnd=formattedTime;
     this.rideRequest.price=180;
     this.rideRequest.distance=140;
 

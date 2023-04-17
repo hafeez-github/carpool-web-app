@@ -24,14 +24,12 @@ namespace Carpool.Models.DbModels
         [Required(ErrorMessage = "Time required")]
         public string Time { get; set; }
 
-        [Required(ErrorMessage = "Date required")]
-        public DateTime Date { get; set; } = DateTime.UtcNow.Date;
+        //[Required(ErrorMessage = "Date required")]
+        public DateTime Date { get; set; }
 
         public int SeatsRequired { get; set; }
 
-        public string BookedTime { get; set; }
-
-        public DateTime BookedDateTime { get; set; } = DateTime.UtcNow;
+        public DateTime BookedDateTime { get; set; }
 
         //public DateTime BookingAt { get; set; } = DateTime.UtcNow;
     }
