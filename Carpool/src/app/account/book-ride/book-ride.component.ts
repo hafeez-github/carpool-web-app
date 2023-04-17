@@ -11,14 +11,12 @@ import { DataService } from 'src/app/shared/services/data.service';
   styleUrls: ['./book-ride.component.scss']
 })
 export class BookRideComponent implements OnInit{
-// COMMENT
+
   loginResponseData:any;
   matches:OfferResponse[]=[];
   rideRequest:RideRequest={
     offerId:-1,
     bookingId:-1,
-    tripStartDateTime:"",
-    tripEndDateTime:"",
     price:-1,
     distance:-1
   };
