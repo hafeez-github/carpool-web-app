@@ -6,6 +6,8 @@ import { DataService } from 'src/app/shared/services/data.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from 'src/app/shared/models/user';
 import { UserService } from 'src/app/shared/user.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-login',
@@ -33,7 +35,7 @@ export class LoginComponent {
     isActive:false
   };
 
-  constructor(private dataService:DataService, private userService:UserService, private router:Router) {
+  constructor(private dataService:DataService, private userService:UserService, private router:Router, private toastr:ToastrService) {
     
   }
 
@@ -92,4 +94,8 @@ export class LoginComponent {
     else return 3;
   }
 
+  onSubmit(){
+    this.toastr.success('Succesful Login!');
+
+  }
 }
