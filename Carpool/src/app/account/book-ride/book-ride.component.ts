@@ -11,7 +11,7 @@ import { DataService } from 'src/app/shared/services/data.service';
   styleUrls: ['./book-ride.component.scss']
 })
 export class BookRideComponent implements OnInit{
-
+// COMMENT
   loginResponseData:any;
   matches:OfferResponse[]=[];
   rideRequest:RideRequest={
@@ -51,6 +51,5 @@ export class BookRideComponent implements OnInit{
       this.router.navigate(['/acc/menu']);
     });
 
-    
   }
 }
