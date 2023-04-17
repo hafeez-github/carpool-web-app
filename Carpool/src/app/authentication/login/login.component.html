@@ -9,42 +9,50 @@
                 <h1 class="gray-font-color heading-font-style">TURN <span class="orange-font-color">MILES</span></h1>
                 <h1 class="gray-font-color heading-font-style">INTO <span class="violet-font-color">MONEY</span></h1>
             </div>
-            <h4 class="gray-font-color ms-5 tagLine fw-bold">RIDES ON TAP</h4>
+            <h4 class="gray-font-color ms-5 tag-line fw-bold">RIDES ON TAP</h4>
         </div>
-  
-        <div class="col-4 bg-img-login bg-color-tint">
-            <form class="my-3 mx-5 p-2" id="loginForm" #loginForm="ngForm" (ngSubmit)="submitForm(loginForm)">
+
+        <div class="col-sm-12 col-md-4 bg-img-login bg-color-tint">
+            <form class="my-3 mx-5 p-2" id="login-form" #loginForm="ngForm" (ngSubmit)="submitForm(loginForm)">
                 <br>
                 <h1 class="fw-bold text-white text-center login-header p-3">Log In</h1>
                 <div class="row mt-5">
                     <div class="col-12 p-2">
 
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="email" placeholder="username@email.com" minlength="3" maxlength="20" required [(ngModel)]="login.email" name="email" #email="ngModel" autocomplete="off">
+                            <input type="email" class="form-control" id="email" placeholder="username@email.com"
+                                minlength="3" maxlength="20" required [(ngModel)]="login.email" name="email"
+                                #email="ngModel" autocomplete="off">
                             <label for="email">Enter Email Id</label>
-                            <small *ngIf="email.touched && email.errors?.['required']" class="warning"> Email can't be empty!</small>
-                            
+                            <small *ngIf="email.touched && email.errors?.['required']" class="warning"> Email can't be
+                                empty!</small>
+
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="password" placeholder="password" minlength="3" maxlength="20" required [(ngModel)]="login.password" name="password" #password="ngModel" autocomplete="off">
+                            <input type="password" class="form-control" id="password" placeholder="password"
+                                minlength="3" maxlength="20" required [(ngModel)]="login.password" name="password"
+                                #password="ngModel" autocomplete="off">
                             <label for="password">Enter Password</label>
-                            <small *ngIf="password.touched && password.errors?.['required']" class="warning"> Password can't be empty!</small>
+                            <small *ngIf="password.touched && password.errors?.['required']" class="warning"> Password
+                                can't be empty!</small>
                         </div>
 
                     </div>
                 </div>
-                
+
                 <div class="text-center">
-                    <button type="submit" class="btn m-2 px-4 p-2 rounded-5 border-0 submit-button"><span class="text-white fw-bold">Submit</span></button>
+                    <button type="submit" class="btn m-2 px-4 p-2 rounded-5 border-0 submit-button"
+                        [disabled]="(!loginForm.form.valid)" (click)="onSubmit()"><span class="text-white fw-bold">Submit</span></button>
                 </div>
 
                 <br>
                 <div class="text-center text-white">
-                    <small>Not a member yet?  </small> <span class="fw-bold text-decoration-underline" routerLink="/auth/signup">SIGN UP</span>
+                    <small>Not a member yet? </small> <span class="fw-bold text-decoration-underline pointer"
+                        routerLink="/auth/signup">SIGN UP</span>
                 </div>
-            </form>    
+            </form>
         </div>
-      
+
     </div>
 </div>

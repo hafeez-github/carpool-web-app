@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Signup } from 'src/app/shared/models/signup';
 import { DataService } from 'src/app/shared/services/data.service';
 
@@ -11,7 +12,7 @@ import { DataService } from 'src/app/shared/services/data.service';
 })
 export class SignupComponent {
 
-  constructor(private dataService:DataService, private router:Router ) {}
+  constructor(private dataService:DataService, private router:Router, private toastr:ToastrService ) {}
 
   signup={
     email:'',
@@ -40,17 +41,16 @@ export class SignupComponent {
         signupForm.reset();
     
         if(this.responseData!=null){
-          alert("Signup successful!");
+          // alert("Signup successful!");
+          this.toastr.success("Signup successful");
           this.router.navigate(['/auth/login']);
         }
         else{
-          alert("No response data!");
+          this.toastr.error("Something has gone wrong! Try again!");
         }
       }
       
     );
-
- 
     
   }
 

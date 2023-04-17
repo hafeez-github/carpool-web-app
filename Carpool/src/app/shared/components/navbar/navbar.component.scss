@@ -29,10 +29,16 @@
 }
 
 
-.profile{
+.pointer{
     cursor: pointer;
 }
 
-.profile:hover{
+.pointer:hover{
     cursor: pointer;
 }
+
+@media only screen and (max-width: 560px) {
+    .username {
+      display: none;
+    }
+  }

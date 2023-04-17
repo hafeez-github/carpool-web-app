@@ -23,6 +23,12 @@
     background-size:90% 50%;
     background-position: top 100% left 50%;
 }
+@media only screen and (max-width: 767px) {
+    .bg-img-cover{
+        display: none;
+    }
+}
+
 
 .tag-line{
     letter-spacing: 3px;
@@ -42,4 +48,8 @@
 
 .submit-button{
     background-color: rgba(147,26,255,255);
+}
+
+.pointer{
+    cursor: pointer;
 }

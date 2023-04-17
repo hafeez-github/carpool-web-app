@@ -10,16 +10,11 @@
   font-size: 0.7rem;
 }
 
-// .time-button{
-//     border: 1px solid rgba(147,26,255,255);
-//     font-size: smaller;
+// .time-button:focus {
+//   border: 1px solid rgba(147, 26, 255, 255);
+//   color: white;
+//   background-color: rgba(147, 26, 255, 255);
 // }
-
-.time-button:focus {
-  border: 1px solid rgba(147, 26, 255, 255);
-  color: white;
-  background-color: rgba(147, 26, 255, 255);
-}
 
 .submit-button {
   color: white;
@@ -42,10 +37,10 @@
   background-color: rgba(147, 26, 255, 255);
 }
 
-.time:focus {
+.time:checked+label {
   border: 1px solid rgba(147, 26, 255, 255);
   color: white;
-  background-color: cornflowerblue;
+  background-color: rgba(147, 26, 255, 255);
 }
 
 .next {
@@ -89,4 +84,11 @@ box-shadow: none;
 
 .price-input:focus{
   outline: none;
+}
+
+.form-check-input{
+  background-color: rgba(255,173,24,255);
+  height: 1.5rem;
+  width: 3rem;
+  border: none;
 }

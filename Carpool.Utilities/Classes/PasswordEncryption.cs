@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Security.Cryptography;
+using System.Text;
+
 namespace Carpool.Utilities.Classes
 {
 	public class PasswordEncryption
@@ -7,16 +10,31 @@ namespace Carpool.Utilities.Classes
 		{
 		}
 
-        public static string EncryptPasswordBase64(string text)
+        public static string EncryptPassword(string plainText)
         {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(text);
-            return System.Convert.ToBase64String(plainTextBytes);
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(plainText));
+
+                // Convert byte array to a string
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
 
-        public static string DecryptPasswordBase64(string base64EncodedData)
+        public static Boolean CheckPassword(string password, string encodedPassword)
         {
-            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+            string hashOfInput = EncryptPassword(password);
+
+            // Create a StringComparer an compare the hashes.
+            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+            return comparer.Compare(hashOfInput, encodedPassword) == 0;
         }
     }
 }

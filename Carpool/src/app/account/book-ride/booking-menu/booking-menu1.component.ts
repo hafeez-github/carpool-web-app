@@ -15,7 +15,8 @@ export class BookingMenu1Component implements OnInit {
 
   locations: Location[] = [];
 
-  bookingRequest: BookingRequest = {
+  bookingRequest: BookingRequest=
+  {
     bookedTime: '12AM',
     bookerId: 1,
     from: 6,
@@ -51,12 +52,9 @@ export class BookingMenu1Component implements OnInit {
       responseData.data.booker="";
       responseData.data.toLocation="";
       responseData.data.fromLocation="";
-      // console.log("booking-response: ", responseData.data);
       this.dataService.bookingResponse = responseData.data;
       alert("booking done!"); 
-      // console.log(responseData.data);
       this.dataService.findMatches(responseData.data).subscribe(response=>this.dataService.matches=response.data);
-      alert("matches after booking, received!");
     });
   }
 
@@ -71,5 +69,9 @@ export class BookingMenu1Component implements OnInit {
     this.bookingRequest.to = this.locations.find(
       (location) => location.name == data
     )!.id;
+  }
+
+  toggle(){
+    this.router.navigate(["/acc/offer"]);  
   }
 }

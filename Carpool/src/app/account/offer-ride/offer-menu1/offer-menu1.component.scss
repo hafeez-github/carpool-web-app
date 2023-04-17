@@ -32,18 +32,29 @@
     font-size: smaller;
 }
 
+
+.time:checked+label{
+    border: 1px solid rgba(147,26,255,255);
+    color:white;
+    background-color:rgba(147,26,255,255) ;
+}
+
+
+
 .time:hover{
     border: 1px solid rgba(147,26,255,255);
     color:white;
     background-color:rgba(147,26,255,255) ;
 }
 
-.time:focus{
-    border: 1px solid rgba(147,26,255,255);
-    color:white;
-    background-color:cornflowerblue;
-}
 
 .next{
     color:rgba(147,26,255,255);
+}
+
+.form-check-input{
+    background-color: rgba(255,173,24,255);
+    height: 1.5rem;
+    width: 3rem;
+    border: none;
 }

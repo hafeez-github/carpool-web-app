@@ -6,10 +6,6 @@
     font-size: 0.7rem;
 }
 
-// .time-button{
-//     border: 1px solid rgba(147,26,255,255);
-//     font-size: smaller;
-// }
 
 .time-button:focus{
     border: 1px solid rgba(147,26,255,255);
@@ -38,14 +34,23 @@
     background-color:rgba(147,26,255,255) ;
 }
 
-// .time:focus{
-//     border: 1px solid rgba(147,26,255,255);
-//     color:white;
-//     background-color:cornflowerblue;
-// }
-
-.time:checked{
+.time:checked+label{
     border: 1px solid rgba(147,26,255,255);
     color:white;
     background-color:rgba(147,26,255,255) ;
 }
+
+
+
+.form-check-input{
+    background-color: rgba(147,26,255,255);
+    height: 1.5rem;
+    width: 3rem;
+    border: none;
+}
+
+// .time:checked{
+//     border: 1px solid rgba(147,26,255,255);
+//     color:white;
+//     background-color:rgba(147,26,255,255) ;
+// }

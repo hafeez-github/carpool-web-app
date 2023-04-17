@@ -10,11 +10,13 @@ using Carpool.Models.ResponseModels;
 using Carpool.Services;
 using Carpool.Services.Interfaces;
 using Carpool.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Carpool.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BookingController : ControllerBase
@@ -48,7 +50,7 @@ namespace Carpool.API.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> FetchBookings(UserModel model)
+        public async Task<IActionResult> GetBookings(UserModel model)
         {
             ApiResponse<List<BookingModel>> response = new ApiResponse<List<BookingModel>>();
 
@@ -56,7 +58,7 @@ namespace Carpool.API.Controllers
             {
                 response = new(200, "Success", true);
                 response.Message = "Bookings succesfully fetched";
-                response.Data = await this.bookingService.FetchBookings(model);
+                response.Data = await this.bookingService.GetBookings(model);
 
                 return Ok(response);
             }
