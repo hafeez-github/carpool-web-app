@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { OfferResponse } from 'src/app/shared/models/offerResponse';
 import { RideRequest } from 'src/app/shared/models/rideRequest';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -22,7 +23,7 @@ export class BookRideComponent implements OnInit{
     distance:-1
   };
 
-  constructor(public dataService:DataService, private router:Router) {
+  constructor(public dataService:DataService, private router:Router, private toastr:ToastrService) {
   }
 
   ngOnInit(){
@@ -48,7 +49,7 @@ export class BookRideComponent implements OnInit{
     this.rideRequest.distance=140;
 
     this.dataService.logRideTransaction(this.rideRequest).subscribe(responseData=>{
-      alert("Ride successfully booked, thankyou!");
+      this.toastr.success("Ride successfully booked", "thankyou!");
       this.router.navigate(['/acc/menu']);
     });
 

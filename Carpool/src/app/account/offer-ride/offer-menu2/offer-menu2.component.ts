@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Location } from 'src/app/shared/models/location';
 import { OfferRequest } from 'src/app/shared/models/offerRequest';
 import { DataService } from 'src/app/shared/services/data.service';
@@ -34,7 +35,7 @@ export class OfferMenu2Component implements OnInit {
 
   toggleMenu: boolean = false;
 
-  constructor(private dataService: DataService, private userService:UserService, private router:Router) {}
+  constructor(private dataService: DataService, private userService:UserService, private router:Router, private toastr:ToastrService) {}
 
   ngOnInit(): void {
     this.locations = this.dataService.locations;
@@ -59,7 +60,7 @@ export class OfferMenu2Component implements OnInit {
     this.dataService.offerRide(this.offerRequest).subscribe(
       responseData=>{
         this.stops=responseData.data.stops.split(', ');
-        alert("Ride successfully offered!");
+        this.toastr.success("Ride successfully offered!");
         offerForm.reset();
         this.router.navigate(['/acc/menu']);
         

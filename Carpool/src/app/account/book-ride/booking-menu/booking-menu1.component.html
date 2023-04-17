@@ -84,9 +84,6 @@
                         [(ngModel)]="bookingRequest.time" #time="ngModel" required>
                     <label class="btn rounded-4 m-2 time" for="time5">6pm - 9pm</label>
 
-                    <div>
-                        <small class="text-danger" *ngIf="time.touched || time.invalid">Time is mandatory to be selected</small>
-                    </div>
 
 
                 </div>
