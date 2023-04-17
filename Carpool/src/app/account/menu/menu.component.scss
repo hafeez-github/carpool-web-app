@@ -7,17 +7,38 @@
 
 .book-button{
     background-color: rgba(147,26,255,255); //violet
-    padding:3%;
-    font-size: 1.5rem;
+    padding:18% 20%;
+    font-size: 1.4rem;
 }
 
-// @media screen {
-    
-// }
 
 .offer-button{
     background-color: rgba(255,173,24,255); //orange
-    padding:3%;
-    font-size: 1.5rem;
+    padding:18% 20%;
+    font-size: 1.4rem;
 }
+
+@media only screen and (max-width: 475px) {
+    .bg-img-menu{
+        background-image: url('../../../assets/images/menu.png');
+        background-repeat: no-repeat;
+        background-size:90% 60%;
+        background-position: top 100% left 50%;
+    }
+
+
+    .book-button{
+        background-color: rgba(147,26,255,255); //violet
+        padding:6% 7%;
+        font-size: 1.4rem;
+    }
+    
+    
+    .offer-button{
+        background-color: rgba(255,173,24,255); //orange
+        padding:6% 7%;
+        font-size: 1.4rem;
+    }
+  }
+
 

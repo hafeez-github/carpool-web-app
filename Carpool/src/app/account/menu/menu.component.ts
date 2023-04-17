@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/shared/models/user';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from 'src/app/shared/services/data.service';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -11,11 +11,14 @@ import { UserService } from 'src/app/shared/user.service';
 export class MenuComponent implements OnInit {
 
   firstName:string='';
-  constructor(private dataService:DataService, private userService:UserService) {
+  constructor(private dataService:DataService, private userService:UserService, private toastr:ToastrService) {
   }
 
   ngOnInit(){
+
     this.firstName=this.userService.getFromLocalStorage('user').firstName;
+    // this.toastr.success("Logged in!");
+
   }
   
 
