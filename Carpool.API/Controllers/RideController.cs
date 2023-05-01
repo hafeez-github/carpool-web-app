@@ -1,10 +1,11 @@
-using Carpool.Models;
-using Carpool.Models.DbModels;
-using Carpool.Models.ResponseModels;
-using Carpool.Services.Interfaces;
+using AutoMapper;
+using Carpool.API.ViewModels.RequestModels;
+using Carpool.API.ViewModels.ResponseModels;
+using Carpool.Services.Contracts;
 using Carpool.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using services=Carpool.Models.ServiceModels;
 
 namespace Carpool.API.Controllers
 {
@@ -14,32 +15,32 @@ namespace Carpool.API.Controllers
     public class RideController : ControllerBase
     {
         private IRideService rideService;
+        private readonly IMapper mapper;
 
-        public RideController(IRideService rideService)
+
+        public RideController(IRideService rideService, IMapper mapper)
         {
             this.rideService = rideService;
+            this.mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(RideRequest ride)
+        public async Task<IActionResult> Post(RideRequest model)
         {
-            ApiResponse<RideModel> response=new ApiResponse<RideModel>();
+            ApiResponse<RideResponse> response=new ApiResponse<RideResponse>();
+            services.Ride ride = this.mapper.Map<services.Ride>(model);
             try
             {
                 response = new(201, "Success", true);
                 response.Message = "Ride sucessfully added.";
-                response.Data = await this.rideService.AddRideDetails(ride);
+                response.Data = this.mapper.Map<RideResponse>(await this.rideService.AddRideDetails(ride));
 
                 return Ok(response);
 
             }
             catch (Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
-
-                return BadRequest(response);
+                throw;
             }
 
         }

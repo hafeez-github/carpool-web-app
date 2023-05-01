@@ -1,10 +1,8 @@
-﻿using System.Data;
-using AutoMapper;
+﻿using AutoMapper;
 using Carpool.Data;
-using Carpool.Models.DbModels;
-using Carpool.Models.RequestModels;
-using Carpool.Models.ResponseModels;
-using Carpool.Services.Interfaces;
+using Carpool.Services.Contracts;
+using Carpool.Models.ServiceModels;
+using db = Carpool.Data.DbModels;
 
 namespace Carpool.Services
 {
@@ -19,16 +17,16 @@ namespace Carpool.Services
             this.mapper = mapper;
         }
 
-        public async Task<BookingModel> AddBookingDetails(BookingRequest model)
+        public async Task<Booking> AddBookingDetails(Booking model)
         {
             try
             {
                 model.BookedDateTime = DateTime.UtcNow;
-                Booking booking = this.mapper.Map<Booking>(model);
+                db.Booking booking = this.mapper.Map<db.Booking>(model);
                 await dbContext.Bookings.AddAsync(booking);
                 await dbContext.SaveChangesAsync();
 
-                return this.mapper.Map<BookingModel>(booking);
+                return this.mapper.Map<Booking>(booking);
             }
             
             catch (Exception ex)
@@ -37,15 +35,15 @@ namespace Carpool.Services
             }
         }
 
-        public async Task<List<BookingModel>> GetBookings(UserModel user)
+        public async Task<List<Booking>> GetBookings(User user)
         {
-            List<BookingModel> bookings = new List<BookingModel>();
+            List<Booking> bookings = new List<Booking>();
 
-            List<Booking> results = this.dbContext.Bookings.Where(booking => booking.BookerId == user.Id).ToList<Booking>();
+            List<db.Booking> results = this.dbContext.Bookings.Where(booking => booking.BookerId == user.Id).ToList<db.Booking>();
 
-            foreach (Booking result in results)
+            foreach (db.Booking result in results)
             {
-                BookingModel currentBooking = this.mapper.Map<BookingModel>(result);
+                Booking currentBooking = this.mapper.Map<Booking>(result);
 
                 currentBooking.Booker = this.dbContext.Users.Where(user => currentBooking.BookerId == user.Id).Select(col => col.FirstName).First();
                 currentBooking.ToLocation = this.dbContext.Locations.Where(loc => currentBooking.To == loc.Id).Select(col => col.Name).First();

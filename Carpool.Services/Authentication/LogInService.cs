@@ -4,13 +4,11 @@ using System.Security.Claims;
 using System.Text;
 using AutoMapper;
 using Carpool.Data;
-using Carpool.Models.Authentication;
-using Carpool.Models.DbModels;
-using Carpool.Models.ResponseModels;
-using Carpool.Services.Interfaces.Authentication;
+using db=Carpool.Data.DbModels;
+using Carpool.Services.Contracts.Authentication;
+using Carpool.Models.ServiceModels.Authentication;
 using Carpool.Utilities;
 using Carpool.Utilities.Classes;
-using Carpool.Utilities.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -33,7 +31,7 @@ namespace Carpool.Services.AuthenticationServices
             {
                 if (!String.IsNullOrEmpty(model.Email))
                 {
-                    User user = await dbContext.Users.FirstOrDefaultAsync(n => n.Email == model.Email);
+                    db.User user = await this.dbContext.Users.FirstOrDefaultAsync(n => n.Email == model.Email);
 
                     if (user == null)
                     {
@@ -62,7 +60,7 @@ namespace Carpool.Services.AuthenticationServices
 
 
         //helper function
-        public string VerifyPassword(LogIn model, User user)
+        public string VerifyPassword(LogIn model, db.User user)
         {
             //PasswordEncryption.EncryptPasswordBase64(model.Password) == user.Password
             if (Carpool.Utilities.Classes.PasswordEncryption.CheckPassword(model.Password, user.Password))
@@ -79,7 +77,7 @@ namespace Carpool.Services.AuthenticationServices
 
         }
 
-        public string CreateJWT(User user)
+        public string CreateJWT(db.User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("veryverysecret.....");

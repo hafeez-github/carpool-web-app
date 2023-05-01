@@ -2,10 +2,9 @@
 using AutoMapper;
 using Carpool.API.Exceptions;
 using Carpool.Data;
-using Carpool.Models;
-using Carpool.Models.DbModels;
-using Carpool.Models.ResponseModels;
-using Carpool.Services.Interfaces;
+using db=Carpool.Data.DbModels;
+using Carpool.Services.Contracts;
+using Carpool.Models.ServiceModels;
 
 namespace Carpool.Services
 {
@@ -21,15 +20,15 @@ namespace Carpool.Services
         }
 
         //Post
-        public async Task<LocationModel> AddLocation(LocationRequest newLocation)
+        public async Task<Location> AddLocation(Location newLocation)
         {
             try
             {
-                Location location = this.mapper.Map<Location>(newLocation);
+                db.Location location = this.mapper.Map<db.Location>(newLocation);
                 await dbContext.Locations.AddAsync(location);
                 await dbContext.SaveChangesAsync();
 
-                return this.mapper.Map<LocationModel>(location);
+                return this.mapper.Map<Location>(location);
             }
             catch (Exception ex)
             {
@@ -39,19 +38,19 @@ namespace Carpool.Services
         }
 
         //Get All
-        public async Task<IEnumerable<LocationModel>> GetLocations()
+        public async Task<IEnumerable<Location>> GetLocations()
         {
             try
             {
-                List<Location> locations = dbContext.Locations.Select(loc=>loc).ToList();
-                
-                List<LocationModel> locationModels = new List<LocationModel>();
-                foreach (Location l in locations)
+                List<db.Location> locations = dbContext.Locations.Select(loc=>loc).ToList();
+                List<Location> locationResponses = new List<Location>();
+
+                foreach (db.Location l in locations)
                 {
-                    locationModels.Add(this.mapper.Map<LocationModel>(l));
+                    locationResponses.Add(this.mapper.Map<Location>(l));
                 }
 
-                return locationModels;
+                return locationResponses;
             }
             catch (Exception ex)
             {
@@ -60,16 +59,16 @@ namespace Carpool.Services
         }
 
         //Get by Id
-        public async Task<LocationModel> GetLocation(int id)
+        public async Task<Location> GetLocation(int id)
         {
             try
             {
-                Location location = await dbContext.Locations.FindAsync(id);
+                db.Location location = await dbContext.Locations.FindAsync(id);
                 if ( location== null)
                 {
                     throw new DataNotFoundException("The required location doesn't exist");
                 }
-                return this.mapper.Map<LocationModel>(location);
+                return this.mapper.Map<Location>(location);
             }
 
             catch (DataNotFoundException ex)
@@ -84,9 +83,9 @@ namespace Carpool.Services
         }
 
         //Update
-        public async Task<LocationModel> UpdateLocation(int id, LocationRequest editedLocation)
+        public async Task<Location> UpdateLocation(int id, Location editedLocation)
         {
-            Location location;
+            db.Location location;
             try
             {
                 location= await dbContext.Locations.FindAsync(id);
@@ -95,7 +94,6 @@ namespace Carpool.Services
                 {
                     throw new DataNotFoundException("Location corresponding to specified id doesn't exist");
                 }
-
 
                 location.Name = editedLocation.Name;
                 location.City = editedLocation.City;
@@ -106,7 +104,7 @@ namespace Carpool.Services
                 location.Longitude = editedLocation.Longitude;
 
                 await dbContext.SaveChangesAsync();
-                return this.mapper.Map<LocationModel>(location);
+                return this.mapper.Map<Location>(location);
             }
 
             catch (DataNotFoundException ex)
@@ -123,9 +121,9 @@ namespace Carpool.Services
 
 
         //Delete
-        public async Task<LocationModel> DeleteLocation(int id)
+        public async Task<Location> DeleteLocation(int id)
         {
-            Location location;
+            db.Location location;
             try
             {
                 location = await dbContext.Locations.FindAsync(id);
@@ -148,7 +146,7 @@ namespace Carpool.Services
                 throw;
             }
 
-            return this.mapper.Map<LocationModel>(location);
+            return this.mapper.Map<Location>(location);
         }
 
     }

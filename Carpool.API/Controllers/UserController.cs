@@ -1,11 +1,13 @@
+using AutoMapper;
 using Carpool.API.Exceptions;
-using Carpool.Models;
-using Carpool.Models.DbModels;
-using Carpool.Models.ResponseModels;
-using Carpool.Services.Interfaces;
+using Carpool.Services.Contracts;
 using Carpool.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using services = Carpool.Models.ServiceModels;
+using Carpool.API.ViewModels.RequestModels;
+using Carpool.API.ViewModels.ResponseModels;
+using AutoMapper;
 
 namespace Carpool.API.Controllers
 {
@@ -15,32 +17,31 @@ namespace Carpool.API.Controllers
     public class UserController : ControllerBase
     {
         private IUserService userService;
+        private readonly IMapper mapper;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IMapper mapper)
         {
             this.userService = userService;
+            this.mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(UserRequest user)
+        public async Task<IActionResult> Post(UserRequest model)
         {
-            ApiResponse<UserModel> response=new ApiResponse<UserModel>();
+            ApiResponse<UserResponse> response=new ApiResponse<UserResponse>();
+            services.User user = this.mapper.Map<services.User>(model);
 
             try
             {
                 response = new(201, "Success", true);
                 response.Message = "User succesfully added";
-                response.Data = await this.userService.AddUser(user);
+                response.Data = this.mapper.Map<UserResponse>(await this.userService.AddUser(user));
 
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! Unsuccessful addition";
-                response.Data = null;
-
-                return BadRequest(response);
+                throw;
             }
 
             
@@ -49,22 +50,18 @@ namespace Carpool.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            ApiResponse<IEnumerable<UserModel>> response= new ApiResponse<IEnumerable<UserModel>>();
+            ApiResponse<IEnumerable<UserResponse>> response= new ApiResponse<IEnumerable<UserResponse>>();
             try
             {
                 response = new(200, "Success", true);
                 response.Message = "Successfully fetched users";
-                response.Data = await this.userService.GetUsers();
+                response.Data = this.mapper.Map<IEnumerable<UserResponse>>(await this.userService.GetUsers());
 
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = $"Error! Unsuccessful retireval of users;\n{ex.Message}";
-                response.Data = null;
-
-                return BadRequest(response);
+                throw;
             }
             
         }
@@ -72,64 +69,49 @@ namespace Carpool.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            ApiResponse<UserModel> response=new ApiResponse<UserModel>();
+            ApiResponse<UserResponse> response=new ApiResponse<UserResponse>();
 
             try
             {
                 response = new(200, "Success", true);
                 response.Message = "Successfully fetched user";
-                response.Data = await this.userService.GetUser(id);
+                response.Data = this.mapper.Map<UserResponse>(await this.userService.GetUser(id));
 
                 return Ok(response);
             }
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
-
-                return BadRequest(response);
+                throw;
             }
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsucceful retrieval of user";
-                response.Data = null;
-
-                return BadRequest(response);
+                throw;
             }
             
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser([FromBody] UserModel editedUser)
+        public async Task<IActionResult> UpdateUser([FromBody] UserResponse model)
         {
-            ApiResponse<UserModel> response=new ApiResponse<UserModel>();
+            ApiResponse<UserResponse> response=new ApiResponse<UserResponse>();
+            services.User editedUser = this.mapper.Map<services.User>(model);
             try
             {
                 response = new(200, "Success", true);
                 response.Message = "Successfully updated user";
-                response.Data = await this.userService.UpdateUser(editedUser);
+                response.Data = this.mapper.Map<UserResponse>(await this.userService.UpdateUser(editedUser));
 
                 return Ok(response);
 
             }
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
-
-                return BadRequest(response);
+                throw;
             }
 
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful edit of the existing user";
-                response.Data = null;
-
-                return NotFound(response);
+                throw;
             }
 
         }
@@ -137,32 +119,24 @@ namespace Carpool.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            ApiResponse<UserModel> response=new ApiResponse<UserModel>();
+            ApiResponse<UserResponse> response=new ApiResponse<UserResponse>();
 
             try
             {
                 response = new(200, "Success", true);
                 response.Message = "Successfully deleted user";
-                response.Data = await this.userService.DeleteUser(id);
+                response.Data = this.mapper.Map<UserResponse>(await this.userService.DeleteUser(id));
 
                 return Ok(response);
             }
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
-
-                return BadRequest(response);
+                throw;
             }
 
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful deletion of the existing user";
-                response.Data = null;
-
-                return NotFound(response);
+                throw;
             }
 
         }

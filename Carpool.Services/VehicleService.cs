@@ -2,10 +2,9 @@
 using AutoMapper;
 using Carpool.API.Exceptions;
 using Carpool.Data;
-using Carpool.Models;
-using Carpool.Models.DbModels;
-using Carpool.Models.ResponseModels;
-using Carpool.Services.Interfaces;
+using db=Carpool.Data.DbModels;
+using Carpool.Services.Contracts;
+using Carpool.Models.ServiceModels;
 
 namespace Carpool.Services
 {
@@ -21,15 +20,15 @@ namespace Carpool.Services
         }
 
         //Post
-        public async Task<VehicleModel> AddVehicle(VehicleRequest newVehicle)
+        public async Task<Vehicle> AddVehicle(Vehicle newVehicle)
         {
             try
             {
-                Vehicle vehicle=this.mapper.Map<Vehicle>(newVehicle);
+                db.Vehicle vehicle=this.mapper.Map<db.Vehicle>(newVehicle);
                 await dbContext.Vehicles.AddAsync(vehicle);
                 await dbContext.SaveChangesAsync();
 
-                return this.mapper.Map<VehicleModel>(vehicle);
+                return this.mapper.Map<Vehicle>(vehicle);
             }
             catch (Exception ex)
             {
@@ -38,15 +37,15 @@ namespace Carpool.Services
         }
 
         //Get All
-        public async Task<IEnumerable<VehicleModel>> GetVehicles()
+        public async Task<IEnumerable<Vehicle>> GetVehicles()
         {
             try
             {
-                List<Vehicle> vehicles = this.dbContext.Vehicles.Select(v=>v).ToList();
-                List<VehicleModel> vehicleModels = new List<VehicleModel>();
-                foreach (Vehicle v in vehicles)
+                List<db.Vehicle> vehicles = this.dbContext.Vehicles.Select(v=>v).ToList();
+                List<Vehicle> vehicleModels = new List<Vehicle>();
+                foreach (db.Vehicle v in vehicles)
                 {
-                    vehicleModels.Add(this.mapper.Map<VehicleModel>(v));
+                    vehicleModels.Add(this.mapper.Map<Vehicle>(v));
                 }
 
                 return vehicleModels;
@@ -60,17 +59,17 @@ namespace Carpool.Services
         }
 
         //Get by Id
-        public async Task<VehicleModel> GetVehicle(int id)
+        public async Task<Vehicle> GetVehicle(int id)
         {
             try
             {
-                Vehicle vehicle= await dbContext.Vehicles.FindAsync(id);
+                db.Vehicle vehicle= await dbContext.Vehicles.FindAsync(id);
 
                 if (vehicle == null)
                 {
                     throw new DataNotFoundException("The required vehicle doesn't exist");
                 }
-                return this.mapper.Map<VehicleModel>(vehicle);
+                return this.mapper.Map<Vehicle>(vehicle);
             }
 
             catch (DataNotFoundException ex)
@@ -86,11 +85,11 @@ namespace Carpool.Services
         }
 
         //Update
-        public async Task<VehicleModel> UpdateVehicle(int id, VehicleRequest editedVehicle)
+        public async Task<Vehicle> UpdateVehicle(int id, Vehicle editedVehicle)
         {
             try
             {
-                Vehicle vehicle = await dbContext.Vehicles.FindAsync(id);
+                db.Vehicle vehicle = await dbContext.Vehicles.FindAsync(id);
 
                 if (vehicle == null)
                 {
@@ -102,7 +101,7 @@ namespace Carpool.Services
                 vehicle.OwnerId = editedVehicle.OwnerId;
 
                 await dbContext.SaveChangesAsync();
-                return this.mapper.Map<VehicleModel>(vehicle);
+                return this.mapper.Map<Vehicle>(vehicle);
 
             }
 
@@ -118,11 +117,11 @@ namespace Carpool.Services
         }
 
         //Delete
-        public async Task<VehicleModel> DeleteVehicle(int id)
+        public async Task<Vehicle> DeleteVehicle(int id)
         {
             try
             {
-                Vehicle vehicle = dbContext.Vehicles.Find(id);
+                db.Vehicle vehicle = dbContext.Vehicles.Find(id);
 
                 if (vehicle == null)
                 {
@@ -131,7 +130,7 @@ namespace Carpool.Services
 
                 dbContext.Vehicles.Remove(vehicle);
                 await dbContext.SaveChangesAsync();
-                return this.mapper.Map<VehicleModel>(vehicle);
+                return this.mapper.Map<Vehicle>(vehicle);
 
             }
 

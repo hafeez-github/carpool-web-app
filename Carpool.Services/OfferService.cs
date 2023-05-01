@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Carpool.Data;
-using Carpool.Models;
-using Carpool.Models.DbModels;
-using Carpool.Models.RequestModels;
-using Carpool.Models.ResponseModels;
-using Carpool.Services.Interfaces;
+using db=Carpool.Data.DbModels;
+using Carpool.Services.Contracts;
+using Carpool.Models.ServiceModels;
 
 namespace Carpool.Services
 {
@@ -19,15 +17,15 @@ namespace Carpool.Services
             this.mapper = mapper;
         }
 
-        public async Task<OfferModel> AddOfferDetails(OfferRequest model)
+        public async Task<Offer> AddOfferDetails(Offer model)
         {
             try
             {
-                Offer offer = this.mapper.Map<Offer>(model);
+                db.Offer offer = this.mapper.Map<db.Offer>(model);
                 await dbContext.Offers.AddAsync(offer);
                 await dbContext.SaveChangesAsync();
 
-                return this.mapper.Map<OfferModel>(offer);
+                return this.mapper.Map<Offer>(offer);
             }
 
             catch (Exception ex)
@@ -38,14 +36,14 @@ namespace Carpool.Services
            
         }
 
-        public async Task<List<OfferModel>> FindMatches(BookingModel booking)
+        public async Task<List<Offer>> FindMatches(Booking booking)
         {
 
-            List<Offer> filteredOffers = dbContext.Offers.Where(offer =>
+            List<db.Offer> filteredOffers = dbContext.Offers.Where(offer =>
                     (offer.Time == booking.Time) && (offer.Date.Date == booking.Date.Date)
-                ).ToList<Offer>();
+                ).ToList<db.Offer>();
 
-            List<Offer> matches = new List<Offer>();
+            List<db.Offer> matches = new List<db.Offer>();
 
             for (int i = 0; i < filteredOffers.Count; i++)
             {
@@ -106,10 +104,10 @@ namespace Carpool.Services
 
             }
 
-            List<OfferModel> offerModels = new List<OfferModel>();
-            foreach (Offer m in matches)
+            List<Offer> offerModels = new List<Offer>();
+            foreach (db.Offer m in matches)
             {
-                var match = this.mapper.Map<OfferModel>(m);
+                var match = this.mapper.Map<Offer>(m);
                 match.Offerer = this.dbContext.Users.Where(user => match.OffererId == user.Id).Select(col => col.FirstName).First();
                 match.FromLocation = this.dbContext.Locations.Where(loc => match.From == loc.Id).Select(col => col.Name).First();
                 match.ToLocation = this.dbContext.Locations.Where(loc => match.To == loc.Id).Select(col => col.Name).First();
@@ -138,15 +136,15 @@ namespace Carpool.Services
             return offeredStops;
         }
 
-        public async Task<List<OfferModel>> GetOffers(UserModel user)
+        public async Task<List<Offer>> GetOffers(User user)
         {
-            List<OfferModel> offers = new List<OfferModel>();
+            List<Offer> offers = new List<Offer>();
 
-            List<Offer> results=this.dbContext.Offers.Where(offer=>offer.OffererId==user.Id).ToList<Offer>();
+            List<db.Offer> results=this.dbContext.Offers.Where(offer=>offer.OffererId==user.Id).ToList<db.Offer>();
 
-            foreach (Offer result in results)
+            foreach (db.Offer result in results)
             {
-                OfferModel currentOffer=this.mapper.Map<OfferModel>(result);
+                Offer currentOffer=this.mapper.Map<Offer>(result);
 
                 currentOffer.Offerer = this.dbContext.Users.Where(user => currentOffer.OffererId == user.Id).Select(col => col.FirstName).First();
                 currentOffer.FromLocation = this.dbContext.Locations.Where(loc => currentOffer.From == loc.Id).Select(col => col.Name).First();

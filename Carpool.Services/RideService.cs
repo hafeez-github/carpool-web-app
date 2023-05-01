@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Carpool.Data;
-using Carpool.Models;
-using Carpool.Models.DbModels;
-using Carpool.Models.ResponseModels;
-using Carpool.Services.Interfaces;
+using db=Carpool.Data.DbModels;
+using Carpool.Models.ServiceModels;
+using Carpool.Services.Contracts;
 
 namespace Carpool.Services
 {
@@ -18,17 +17,17 @@ namespace Carpool.Services
             this.mapper = mapper;
         }
 
-        public async Task<RideModel> AddRideDetails(RideRequest model)
+        public async Task<Ride> AddRideDetails(Ride model)
         {
             try
             {
                 model.TripStartDateTime = DateTime.UtcNow;
                 model.TripEndDateTime = DateTime.UtcNow;
-                Ride ride = this.mapper.Map<Ride>(model);
+                db.Ride ride = this.mapper.Map<db.Ride>(model);
                 await dbContext.Rides.AddAsync(ride);
                 await dbContext.SaveChangesAsync();
 
-                return this.mapper.Map<RideModel>(ride);
+                return this.mapper.Map<Ride>(ride);
             }
 
             catch (Exception ex)

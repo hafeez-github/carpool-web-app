@@ -2,11 +2,10 @@
 using AutoMapper;
 using Carpool.API.Exceptions;
 using Carpool.Data;
-using Carpool.Models;
-using Carpool.Models.DbModels;
-using Carpool.Models.ResponseModels;
-using Carpool.Services.Interfaces;
+using db=Carpool.Data.DbModels;
+using Carpool.Services.Contracts;
 using Carpool.Utilities;
+using Carpool.Models.ServiceModels;
 
 namespace Carpool.Services
 {
@@ -22,16 +21,16 @@ namespace Carpool.Services
         }
 
         //Post
-        public async Task<UserModel> AddUser(UserRequest newUser)
+        public async Task<User> AddUser(User newUser)
         {
             try
             {
-                User user = this.mapper.Map<User>(newUser);
+                db.User user = this.mapper.Map<db.User>(newUser);
              
                 await dbContext.Users.AddAsync(user);
                 await dbContext.SaveChangesAsync();
 
-                return this.mapper.Map<UserModel>(user);
+                return this.mapper.Map<User>(user);
             }
             catch(Exception ex)
             {
@@ -41,15 +40,15 @@ namespace Carpool.Services
         }
 
         //Get All
-        public async Task<IEnumerable<UserModel>> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers()
         {
             try
             {
-                List<User> users = dbContext.Users.Select(u=>u).ToList();
-                List<UserModel> userModels = new List<UserModel>();
-                foreach (User u in users)
+                List<db.User> users = dbContext.Users.Select(u=>u).ToList();
+                List<User> userModels = new List<User>();
+                foreach (db.User u in users)
                 {
-                    userModels.Add(this.mapper.Map<UserModel>(u));
+                    userModels.Add(this.mapper.Map<User>(u));
                 }
 
                 return userModels;
@@ -62,17 +61,17 @@ namespace Carpool.Services
         }
 
         //Get by Id
-        public async Task<UserModel> GetUser(int id)
+        public async Task<User> GetUser(int id)
         {
             try
             {
                 
-                User user = await dbContext.Users.FindAsync(id);
+                db.User user = await dbContext.Users.FindAsync(id);
                 if (user == null)
                 {
                     throw new DataNotFoundException("The required user doesn't exist");
                 }
-                return this.mapper.Map<UserModel>(user);
+                return this.mapper.Map<User>(user);
             }
             catch (DataNotFoundException ex)
             {
@@ -86,11 +85,11 @@ namespace Carpool.Services
         }
 
         //Update
-        public async Task<UserModel> UpdateUser(UserModel editedUser)
+        public async Task<User> UpdateUser(User editedUser)
         {
             try
             {
-                User user = await dbContext.Users.FindAsync(editedUser.Id);
+                db.User user = await dbContext.Users.FindAsync(editedUser.Id);
 
                 if (user == null)
                 {
@@ -111,7 +110,7 @@ namespace Carpool.Services
 
                 await dbContext.SaveChangesAsync();
 
-                UserModel result = this.mapper.Map<UserModel>(user);
+                User result = this.mapper.Map<User>(user);
 
                 return result;
 
@@ -131,13 +130,11 @@ namespace Carpool.Services
 
 
         //Delete
-        public async Task<UserModel> DeleteUser(int id)
+        public async Task<User> DeleteUser(int id)
         {
-            ApiResponse<User> response;
-
             try
             {
-                User user = dbContext.Users.Find(id);
+                db.User user = dbContext.Users.Find(id);
                 if (user==null)
                 {
                     throw new DataNotFoundException("User corresponding to specified id doesn't exist");
@@ -145,7 +142,8 @@ namespace Carpool.Services
 
                 dbContext.Users.Remove(user);
                 await dbContext.SaveChangesAsync();
-                return this.mapper.Map<UserModel>(user);
+
+                return this.mapper.Map<User>(user);
 
             }
 
