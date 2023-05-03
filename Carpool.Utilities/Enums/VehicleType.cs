@@ -1,8 +1,8 @@
 ﻿using System;
 namespace Carpool.Utilities.Enums
 {
-	public enum VehicleType
-	{
+    public enum VehicleType
+    {
         //Numerical values correspond to the number of seats in that vehicle
         Bike = 2,
         Car = 4,
@@ -10,4 +10,3 @@ namespace Carpool.Utilities.Enums
         Bus = 30
     }
 }
-

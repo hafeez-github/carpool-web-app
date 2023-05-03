@@ -2,10 +2,10 @@
 using System.Linq;
 using AutoMapper;
 using Carpool.Data;
-using Carpool.Models.Authentication;
-using Carpool.Models.DbModels;
-using Carpool.Models.ResponseModels;
-using Carpool.Services.Interfaces.Authentication;
+using db=Carpool.Data.DbModels;
+using Carpool.Services.Contracts.Authentication;
+using Carpool.Models.ServiceModels;
+using Carpool.Models.ServiceModels.Authentication;
 using Carpool.Utilities;
 using Carpool.Utilities.Classes;
 using Carpool.Utilities.Enums;
@@ -23,17 +23,16 @@ namespace Carpool.Services.Authentication
             this.mapper = mapper;
         }
 
-        public async Task<UserModel> SignUp(SignUp model)
+        public async Task<User> SignUp(SignUp model)
         {
-            ApiResponse<User> response;
-            User user = new User()
+            db.User user = new db.User()
             {
-                Username = "defaultUsername",   
+                Username = "defaultUsername",
                 Type = UserType.AppUser,
-                IsActive=true,
-                Mobile="defaultMobile",
-                FirstName="defaultFirstName",
-                LastName="defaultLastName"
+                IsActive = true,
+                Mobile = "defaultMobile",
+                FirstName = "defaultFirstName",
+                LastName = "defaultLastName"
 
             };
 
@@ -70,7 +69,7 @@ namespace Carpool.Services.Authentication
                     await dbContext.Users.AddAsync(user);
                     await dbContext.SaveChangesAsync();
 
-                    return this.mapper.Map<UserModel>(user);
+                    return this.mapper.Map<User>(user);
                 }
                 
             }

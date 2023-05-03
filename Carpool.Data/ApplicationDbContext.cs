@@ -1,4 +1,4 @@
-﻿using Carpool.Models.DbModels;
+﻿using Carpool.Data.DbModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Carpool.Data

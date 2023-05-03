@@ -1,11 +1,12 @@
 using Carpool.API.Exceptions;
-using Carpool.Models;
-using Carpool.Models.DbModels;
-using Carpool.Models.ResponseModels;
-using Carpool.Services.Interfaces;
 using Carpool.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using services = Carpool.Models.ServiceModels;
+using Carpool.API.ViewModels.RequestModels;
+using Carpool.API.ViewModels.ResponseModels;
+using Carpool.Services.Contracts;
+using AutoMapper;
 
 namespace Carpool.API.Controllers
 {
@@ -15,156 +16,115 @@ namespace Carpool.API.Controllers
     public class LocationController : ControllerBase
     {
         private ILocationService locationService;
+        private readonly IMapper mapper;
 
-        public LocationController(ILocationService locationService)
+        public LocationController(ILocationService locationService, IMapper mapper)
         {
             this.locationService = locationService;
+            this.mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddLocation(LocationRequest location)
+        public async Task<IActionResult> AddLocation(LocationRequest model)
         {
-            ApiResponse<LocationModel> response=new ApiResponse<LocationModel>();
-
+            ApiResponse<LocationResponse> response=new ApiResponse<LocationResponse>();
+            services.Location location = this.mapper.Map<services.Location>(model);
             try
             {
                 response = new(201, "Success", true);
                 response.Message = "Location succesfully added";
-                response.Data = await this.locationService.AddLocation(location);
+                response.Data = this.mapper.Map<LocationResponse>(await this.locationService.AddLocation(location));
                 return Ok(response);
             }
-
             catch(Exception ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! Unsuccessful addition" + ex.Message;
-                response.Data = null;
-                return BadRequest(response);
+                throw;
             }
-
-            
         }
-
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            ApiResponse<IEnumerable<LocationModel>> response=new ApiResponse<IEnumerable<LocationModel>>();
-
+            ApiResponse<IEnumerable<LocationResponse>> response=new ApiResponse<IEnumerable<LocationResponse>>();
             try
             {
                 response = new (200, "Success", true);
                 response.Message = "Successfully fetched locations";
-                response.Data = await this.locationService.GetLocations();
+                response.Data = this.mapper.Map<IEnumerable<LocationResponse>>(await this.locationService.GetLocations());
 
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                response = new (404, "Failure", false);
-                response.Message = $"Error! Unsuccessful retireval of locations;\n{ex.Message}";
-                response.Data = null;
-
-                return BadRequest(response);
-
+                throw;
             }
-
         }
 
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            ApiResponse<LocationModel> response=new ApiResponse<LocationModel>();
+            ApiResponse<LocationResponse> response=new ApiResponse<LocationResponse>();
             try
             {
                 response = new(200, "Success", true);
                 response.Message = "Successfully fetched location";
-                response.Data = await this.locationService.GetLocation(id);
+                response.Data = this.mapper.Map<LocationResponse>(await this.locationService.GetLocation(id));
 
                 return Ok(response);
             }
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
-
-                return BadRequest(response);
+                throw;
             }
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsucceful retrieval of location";
-                response.Data = null;
-
-                return NotFound(response);
+                throw;
             }
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] LocationRequest editedLocation)
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] LocationRequest model)
         {
-            ApiResponse<LocationModel> response=new ApiResponse<LocationModel>();
+            ApiResponse<LocationResponse> response=new ApiResponse<LocationResponse>();
+            services.Location editedLocation = this.mapper.Map<services.Location>(model);
             try
             {
                 response = new(200, "Success", true);
                 response.Message = "Successfully updated location";
-                response.Data = await this.locationService.UpdateLocation(id, editedLocation);
+                response.Data = this.mapper.Map<LocationResponse>(await this.locationService.UpdateLocation(id, editedLocation));
 
                 return Ok(response);
             }
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
-
-                return BadRequest(response);
+                throw;
             }
-
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful edit of the existing location";
-                response.Data = null;
-
-                return NotFound(response);
+                throw;
             }
-
-            
         }
 
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            ApiResponse<LocationModel> response=new ApiResponse<LocationModel>();
+            ApiResponse<LocationResponse> response=new ApiResponse<LocationResponse>();
             try
             {
                 response = new(200, "Success", true);
                 response.Message = "Successfully deleted location";
-                response.Data = await this.locationService.DeleteLocation(id);
+                response.Data = this.mapper.Map<LocationResponse>(await this.locationService.DeleteLocation(id));
 
                 return Ok(response);
             }
             catch (DataNotFoundException ex)
             {
-                response = new(400, "Failure", false);
-                response.Message = "Error! " + ex.Message;
-                response.Data = null;
-
-                return BadRequest(response);
+                throw;
             }
-
             catch (Exception ex)
             {
-                response = new(404, "Failure", false);
-                response.Message = "Error! Unsuccessful deletion of the existing location";
-                response.Data = null;
-
-                return NotFound(response);
+                throw;
             }
-
-            
         }
     }
 }

@@ -2,8 +2,8 @@
 using Carpool.Services;
 using Carpool.Services.Authentication;
 using Carpool.Services.AuthenticationServices;
-using Carpool.Services.Interfaces;
-using Carpool.Services.Interfaces.Authentication;
+using Carpool.Services.Contracts;
+using Carpool.Services.Contracts.Authentication;
 using Carpool.API.AutoMappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,6 +19,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
+
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
@@ -82,7 +83,8 @@ builder.Services.AddCors(option =>
 {
     option.AddPolicy(name: "MyPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
+        //policy.WithOrigins("http://localhost:4200")
+        policy.AllowAnyOrigin()
         .AllowAnyHeader()
         .AllowAnyMethod();
     });
@@ -108,4 +110,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-

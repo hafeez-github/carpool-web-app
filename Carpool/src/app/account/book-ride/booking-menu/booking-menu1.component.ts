@@ -46,6 +46,7 @@ export class BookingMenu1Component implements OnInit {
       this.dataService.bookingResponse = responseData.data;
       this.toastr.success("booking done!");
       this.dataService.findMatches(responseData.data).subscribe(response=>this.dataService.matches=response.data);
+      // this.enableResultsSection();
     });
   }
 
