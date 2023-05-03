@@ -22,10 +22,8 @@ namespace Carpool.API.Controllers
             this.logInService = logInService;
             this.signUpService = signUpService;
             this.mapper = mapper;
-
         }
 
-        
         [HttpPost("[action]")]
         public async Task<IActionResult> LogIn(LogIn model)
         {
@@ -43,7 +41,6 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-
         }
 
         [HttpPost("[action]")]
@@ -62,8 +59,6 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-
-            
         }
     }
 }

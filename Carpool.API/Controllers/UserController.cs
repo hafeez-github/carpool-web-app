@@ -43,14 +43,13 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-
-            
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             ApiResponse<IEnumerable<UserResponse>> response= new ApiResponse<IEnumerable<UserResponse>>();
+
             try
             {
                 response = new(200, "Success", true);
@@ -63,7 +62,6 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-            
         }
 
         [HttpGet("{id:int}")]
@@ -87,7 +85,6 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-            
         }
 
         [HttpPut]
@@ -102,7 +99,6 @@ namespace Carpool.API.Controllers
                 response.Data = this.mapper.Map<UserResponse>(await this.userService.UpdateUser(editedUser));
 
                 return Ok(response);
-
             }
             catch (DataNotFoundException ex)
             {
@@ -138,8 +134,6 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-
         }
-
     }
 }

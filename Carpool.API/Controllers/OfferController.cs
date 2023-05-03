@@ -15,7 +15,6 @@ namespace Carpool.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class OfferController : ControllerBase
-
     {
         private IOfferService offerService;
         private readonly IMapper mapper;
@@ -43,8 +42,6 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-
-            
         }
 
         [HttpPost("[action]")]

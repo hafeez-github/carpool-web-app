@@ -36,7 +36,6 @@ namespace Carpool.Services
             {
                 throw;
             }
-            
         }
 
         //Get All
@@ -45,19 +44,13 @@ namespace Carpool.Services
             try
             {
                 List<db.User> users = dbContext.Users.Select(u=>u).ToList();
-                List<User> userModels = new List<User>();
-                foreach (db.User u in users)
-                {
-                    userModels.Add(this.mapper.Map<User>(u));
-                }
-
+                List<User> userModels = this.mapper.Map<List<User>>(users);
                 return userModels;
             }
             catch (Exception ex)
             {
                 throw;
             }
-
         }
 
         //Get by Id
@@ -65,7 +58,6 @@ namespace Carpool.Services
         {
             try
             {
-                
                 db.User user = await dbContext.Users.FindAsync(id);
                 if (user == null)
                 {
@@ -73,15 +65,10 @@ namespace Carpool.Services
                 }
                 return this.mapper.Map<User>(user);
             }
-            catch (DataNotFoundException ex)
-            {
-                throw;
-            }
             catch (Exception ex)
             {
                 throw;
             }
-
         }
 
         //Update
@@ -95,39 +82,17 @@ namespace Carpool.Services
                 {
                     throw new DataNotFoundException("User corresponding to specified ID doesn't exist");
                 }
-
-                user.Id = editedUser.Id;
-                user.FirstName = editedUser.FirstName;
-                user.LastName = editedUser.LastName;
-                user.Username = editedUser.Username;
-                user.Email = editedUser.Email;
-                user.Password = editedUser.Password;
-                user.Mobile = editedUser.Mobile;
-                user.Type = editedUser.Type;
-                user.IsActive = editedUser.IsActive;
-
-                //user =this.mapper.Map<User>(editedUser);
-
+                user =this.mapper.Map<db.User>(editedUser);
                 await dbContext.SaveChangesAsync();
-
                 User result = this.mapper.Map<User>(user);
 
                 return result;
-
             }
-
-            catch (DataNotFoundException ex)
-            {
-                throw;
-            }
-
             catch(Exception ex)
             {
                 throw;
             }
-
         }
-
 
         //Delete
         public async Task<User> DeleteUser(int id)
@@ -139,28 +104,15 @@ namespace Carpool.Services
                 {
                     throw new DataNotFoundException("User corresponding to specified id doesn't exist");
                 }
-
                 dbContext.Users.Remove(user);
                 await dbContext.SaveChangesAsync();
-
                 return this.mapper.Map<User>(user);
-
             }
-
-            catch (DataNotFoundException ex)
-            {
-                throw;
-            }
-
             catch (Exception ex)
             {
                 throw;
             }
-
         }
-
-      
-
     }
 }
 

@@ -17,7 +17,6 @@ namespace Carpool.API.Controllers
         private IRideService rideService;
         private readonly IMapper mapper;
 
-
         public RideController(IRideService rideService, IMapper mapper)
         {
             this.rideService = rideService;
@@ -42,8 +41,6 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-
         }
-
     }
 }

@@ -43,12 +43,7 @@ namespace Carpool.Services
             try
             {
                 List<db.Location> locations = dbContext.Locations.Select(loc=>loc).ToList();
-                List<Location> locationResponses = new List<Location>();
-
-                foreach (db.Location l in locations)
-                {
-                    locationResponses.Add(this.mapper.Map<Location>(l));
-                }
+                List<Location> locationResponses = this.mapper.Map<List<Location>>(locations);
 
                 return locationResponses;
             }
@@ -70,16 +65,10 @@ namespace Carpool.Services
                 }
                 return this.mapper.Map<Location>(location);
             }
-
-            catch (DataNotFoundException ex)
-            {
-                throw;
-            }
             catch (Exception ex)
             {
                 throw;
             }
-
         }
 
         //Update
@@ -88,37 +77,24 @@ namespace Carpool.Services
             db.Location location;
             try
             {
-                location= await dbContext.Locations.FindAsync(id);
+                location = await dbContext.Locations.FindAsync(id);
 
                 if (location == null)
                 {
                     throw new DataNotFoundException("Location corresponding to specified id doesn't exist");
                 }
 
-                location.Name = editedLocation.Name;
-                location.City = editedLocation.City;
-                location.Country = editedLocation.Country;
-                location.PINCode = editedLocation.PINCode;
-                location.State = editedLocation.State;
-                location.Latitude = editedLocation.Latitude;
-                location.Longitude = editedLocation.Longitude;
-
-                await dbContext.SaveChangesAsync();
-                return this.mapper.Map<Location>(location);
+                location = this.mapper.Map(editedLocation, location);
+                location.Id = id;
+                var c  = dbContext.SaveChangesAsync();
+                var res = this.mapper.Map(location, editedLocation);
+                return res;
             }
-
-            catch (DataNotFoundException ex)
-            {
-                throw;
-            }
-
             catch (Exception ex)
             {
                 throw;
             }
-
         }
-
 
         //Delete
         public async Task<Location> DeleteLocation(int id)
@@ -136,11 +112,6 @@ namespace Carpool.Services
                 dbContext.Locations.Remove(location);
                 await dbContext.SaveChangesAsync();
             }
-            catch (DataNotFoundException ex)
-            {
-                throw;
-            }
-
             catch (Exception ex)
             {
                 throw;

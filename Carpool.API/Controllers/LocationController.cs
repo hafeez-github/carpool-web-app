@@ -36,15 +36,11 @@ namespace Carpool.API.Controllers
                 response.Data = this.mapper.Map<LocationResponse>(await this.locationService.AddLocation(location));
                 return Ok(response);
             }
-
             catch(Exception ex)
             {
                 throw;
             }
-
-            
         }
-
 
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -61,9 +57,7 @@ namespace Carpool.API.Controllers
             catch (Exception ex)
             {
                 throw;
-
             }
-
         }
 
         [HttpGet("{id:int}")]
@@ -105,13 +99,10 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-
             catch (Exception ex)
             {
                 throw;
             }
-
-            
         }
 
         [HttpDelete("{id:int}")]
@@ -130,13 +121,10 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-
             catch (Exception ex)
             {
                 throw;
             }
-
-            
         }
     }
 }

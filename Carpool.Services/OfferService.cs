@@ -32,8 +32,6 @@ namespace Carpool.Services
             {
                 throw;
             }
-
-           
         }
 
         public async Task<List<Offer>> FindMatches(Booking booking)
@@ -56,7 +54,7 @@ namespace Carpool.Services
 
                     else
                     {
-                        int[] offeredStopsAsIDs = ConvertStringsToIDs(filteredOffers[i].Stops);
+                        int[] offeredStopsAsIDs = this.ConvertStringsToIDs(filteredOffers[i].Stops);
 
                         for (int j = 0; j < offeredStopsAsIDs.Length; j++)
                         {
@@ -70,7 +68,7 @@ namespace Carpool.Services
 
                 else
                 {
-                    int[] offeredStopsAsIDs = ConvertStringsToIDs(filteredOffers[i].Stops);
+                    int[] offeredStopsAsIDs = this.ConvertStringsToIDs(filteredOffers[i].Stops);
                     int index = -1;
 
                     for (int j = 0; j < offeredStopsAsIDs.Length; j++)
@@ -78,13 +76,11 @@ namespace Carpool.Services
                         if (booking.From == offeredStopsAsIDs[j])
                         {
                             index = j;
-
                             if (booking.To == filteredOffers[i].To)
                             {
                                 matches.Add(filteredOffers[i]);
                                 break;
                             }
-
                         }
                     }
 
@@ -99,9 +95,7 @@ namespace Carpool.Services
                             }
                         }
                     }
-
                 }
-
             }
 
             List<Offer> offerModels = new List<Offer>();
@@ -113,27 +107,9 @@ namespace Carpool.Services
                 match.ToLocation = this.dbContext.Locations.Where(loc => match.To == loc.Id).Select(col => col.Name).First();
 
                 offerModels.Add(match);
-                
             }
+
             return offerModels;
-        }
-
-        public int[] ConvertStringsToIDs(string stopsAsAString)
-        {
-            string[] stopsAsStrings = stopsAsAString.Split(", ");
-
-            int[] offeredStops = new int[stopsAsAString.Length]; //Stops with IDs
-
-            for (int i = 0; i < stopsAsStrings.Length; i++)
-            {
-                if (stopsAsStrings[i] == "")
-                {
-                    break;
-                }
-                offeredStops[i] = int.Parse(stopsAsStrings[i]);
-            }
-
-            return offeredStops;
         }
 
         public async Task<List<Offer>> GetOffers(User user)
@@ -155,6 +131,23 @@ namespace Carpool.Services
             return offers;
         }
 
+        //helper
+        private int[] ConvertStringsToIDs(string stopsAsAString)
+        {
+            string[] stopsAsStrings = stopsAsAString.Split(", ");
+            int[] offeredStops = new int[stopsAsAString.Length]; //Stops with IDs
+
+            for (int i = 0; i < stopsAsStrings.Length; i++)
+            {
+                if (stopsAsStrings[i] == "")
+                {
+                    break;
+                }
+                offeredStops[i] = int.Parse(stopsAsStrings[i]);
+            }
+
+            return offeredStops;
+        }
     }
 }
 

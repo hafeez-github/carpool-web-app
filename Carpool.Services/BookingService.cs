@@ -28,7 +28,6 @@ namespace Carpool.Services
 
                 return this.mapper.Map<Booking>(booking);
             }
-            
             catch (Exception ex)
             {
                 throw;
@@ -38,25 +37,18 @@ namespace Carpool.Services
         public async Task<List<Booking>> GetBookings(User user)
         {
             List<Booking> bookings = new List<Booking>();
-
             List<db.Booking> results = this.dbContext.Bookings.Where(booking => booking.BookerId == user.Id).ToList<db.Booking>();
 
             foreach (db.Booking result in results)
             {
                 Booking currentBooking = this.mapper.Map<Booking>(result);
-
                 currentBooking.Booker = this.dbContext.Users.Where(user => currentBooking.BookerId == user.Id).Select(col => col.FirstName).First();
                 currentBooking.ToLocation = this.dbContext.Locations.Where(loc => currentBooking.To == loc.Id).Select(col => col.Name).First();
                 currentBooking.FromLocation = this.dbContext.Locations.Where(loc => currentBooking.From == loc.Id).Select(col => col.Name).First();
                 bookings.Add(currentBooking);
             }
-
             return bookings;
-
         }
-
-
-
     }
 }
 

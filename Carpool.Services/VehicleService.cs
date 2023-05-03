@@ -42,11 +42,7 @@ namespace Carpool.Services
             try
             {
                 List<db.Vehicle> vehicles = this.dbContext.Vehicles.Select(v=>v).ToList();
-                List<Vehicle> vehicleModels = new List<Vehicle>();
-                foreach (db.Vehicle v in vehicles)
-                {
-                    vehicleModels.Add(this.mapper.Map<Vehicle>(v));
-                }
+                List<Vehicle> vehicleModels = this.mapper.Map<List<Vehicle>>(vehicles);
 
                 return vehicleModels;
             }
@@ -64,24 +60,16 @@ namespace Carpool.Services
             try
             {
                 db.Vehicle vehicle= await dbContext.Vehicles.FindAsync(id);
-
                 if (vehicle == null)
                 {
                     throw new DataNotFoundException("The required vehicle doesn't exist");
                 }
                 return this.mapper.Map<Vehicle>(vehicle);
             }
-
-            catch (DataNotFoundException ex)
-            {
-                throw;
-            }
-
             catch (Exception ex)
             {
                 throw;
             }
-
         }
 
         //Update
@@ -95,21 +83,13 @@ namespace Carpool.Services
                 {
                     throw new DataNotFoundException("Vehicle corresponding to specified id doesn't exist");
                 }
-
                 vehicle.Number = editedVehicle.Number;
                 vehicle.Type = editedVehicle.Type;
                 vehicle.OwnerId = editedVehicle.OwnerId;
 
                 await dbContext.SaveChangesAsync();
                 return this.mapper.Map<Vehicle>(vehicle);
-
             }
-
-            catch (DataNotFoundException ex)
-            {
-                throw;
-            }
-
             catch (Exception ex)
             {
                 throw;
@@ -131,19 +111,11 @@ namespace Carpool.Services
                 dbContext.Vehicles.Remove(vehicle);
                 await dbContext.SaveChangesAsync();
                 return this.mapper.Map<Vehicle>(vehicle);
-
             }
-
-            catch (DataNotFoundException ex)
-            {
-                throw;
-            }
-
             catch (Exception ex)
             {
                 throw;
             }
-            
         }
     }
 }

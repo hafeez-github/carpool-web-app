@@ -45,7 +45,6 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-            
         }
 
         [HttpPost("[action]")]

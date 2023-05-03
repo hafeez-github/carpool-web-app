@@ -29,55 +29,43 @@ namespace Carpool.Services.AuthenticationServices
         {
             try
             {
-                if (!String.IsNullOrEmpty(model.Email))
+                db.User user = await this.dbContext.Users.FirstOrDefaultAsync(n => n.Email == model.Email);
+
+                if (user == null)
                 {
-                    db.User user = await this.dbContext.Users.FirstOrDefaultAsync(n => n.Email == model.Email);
-
-                    if (user == null)
-                    {
-                        throw new Exception("Error! Incorect Email.");
-                    }
-                    else
-                    {
-                        return VerifyPassword(model, user);
-                        //return this.mapper.Map<UserModel>(VerifyPassword(model, user));
-                    }
+                    throw new Exception("Error! Incorrect Email");
                 }
-
                 else
                 {
-                    throw new Exception("Error! Username(or Email) cannot be empty");
+                    if (VerifyPassword(model, user)==true)
+                    {
+                        return CreateJWT(user);
+                    }
+
+                    throw new Exception("Error! Incorrect Password");
                 }
-
             }
-
             catch (Exception ex)
             {
                 throw;
             }
-
         }
-
 
         //helper function
-        public string VerifyPassword(LogIn model, db.User user)
+        private Boolean VerifyPassword(LogIn model, db.User user)
         {
-            //PasswordEncryption.EncryptPasswordBase64(model.Password) == user.Password
             if (Carpool.Utilities.Classes.PasswordEncryption.CheckPassword(model.Password, user.Password))
             {
-                
-                return CreateJWT(user);
+                return true;
             }
-
             else
             {
-                Exception ex = new Exception("Error! Incorect Password.");
-                throw ex;
+                return false;
             }
-
         }
 
-        public string CreateJWT(db.User user)
+        //helper function
+        private string CreateJWT(db.User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("veryverysecret.....");
@@ -96,7 +84,6 @@ namespace Carpool.Services.AuthenticationServices
             };
 
             var identity = new ClaimsIdentity(claims);
-
             var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -107,7 +94,6 @@ namespace Carpool.Services.AuthenticationServices
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
             return jwtTokenHandler.WriteToken(token);
         }
-
     }
 }
 

@@ -29,7 +29,6 @@ namespace Carpool.Services
 
                 return this.mapper.Map<Ride>(ride);
             }
-
             catch (Exception ex)
             {
                 throw;

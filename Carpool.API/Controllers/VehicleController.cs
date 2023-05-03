@@ -18,7 +18,6 @@ namespace Carpool.API.Controllers
         private IVehicleService vehicleService;
         private readonly IMapper mapper;
 
-
         public VehicleController(IVehicleService vehicleService, IMapper mapper)
         {
             this.vehicleService = vehicleService;
@@ -42,7 +41,6 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-
         }
 
         [HttpGet]
@@ -77,7 +75,6 @@ namespace Carpool.API.Controllers
                 response.Data = this.mapper.Map<VehicleResponse>(await this.vehicleService.GetVehicle(id));
 
                 return Ok(response);
-
             }
 
             catch (DataNotFoundException ex)
@@ -89,8 +86,6 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-
-
         }
 
         [HttpPut("{id:int}")]
@@ -136,7 +131,6 @@ namespace Carpool.API.Controllers
             {
                 throw;
             }
-
             catch (Exception ex)
             {
                 throw;
