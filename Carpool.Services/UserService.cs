@@ -82,7 +82,7 @@ namespace Carpool.Services
                 {
                     throw new DataNotFoundException("User corresponding to specified ID doesn't exist");
                 }
-                user =this.mapper.Map<db.User>(editedUser);
+                user =this.mapper.Map(editedUser, user);
                 await dbContext.SaveChangesAsync();
                 User result = this.mapper.Map<User>(user);
 

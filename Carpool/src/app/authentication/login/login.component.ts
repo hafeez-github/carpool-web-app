@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/shared/models/login';
@@ -7,6 +7,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from 'src/app/shared/models/user';
 import { UserService } from 'src/app/shared/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { UserType } from 'src/app/shared/userType';
+import { delay } from 'rxjs';
 
 
 @Component({
@@ -15,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
+  loaderOne = false;
   login:Login={
     email:'',
     password:'',
@@ -39,7 +41,8 @@ export class LoginComponent {
     
   }
 
-  submitForm(loginForm:NgForm){
+  submitForm(loginForm:NgForm, loader:HTMLDivElement){
+    this.loaderOne = true;
     let user:Login={
       email:this.login.email,
       password:this.login.password
@@ -47,20 +50,33 @@ export class LoginComponent {
 
     this.dataService.loginUser(user).subscribe(
       responseData=>{
+        // loader.style.display = 'block !important';
+        this.loaderOne=false;
+        setTimeout(() => {
+          this.loaderOne=true;
+        }, 10000);
         this.handleResponse(responseData);
         this.login.email='';
         this.login.password='';  
         loginForm.form.reset();
 
         if(this.decodedToken!=null){
+          // loader.style.display="block";
+          // setTimeout(() => {
+            // loader.style.display="none";
+          // }, 5000);
+          
           this.toastr.success('Succesful Login!');
           this.router.navigate(['/acc/menu']);
         }
         else{
+          
           alert("Error! Wrong Credentials!");
         }
+        
       }
      );
+     
   }
 
   handleResponse(responseData:any){
@@ -85,11 +101,11 @@ export class LoginComponent {
 
 
   checkUserType(type:string){
-    if(type=="AppUser")
+    if(type==UserType.AppUser)
     {
       return 1;
     }
-    else if(type=="DbAdmin"){
+    else if(type==UserType.DbAdmin){
       return 2;
     }
     else return 3;
