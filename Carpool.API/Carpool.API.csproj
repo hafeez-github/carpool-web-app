@@ -7,8 +7,8 @@
     <UserSecretsId>71b48fba-ae11-46ee-b59e-4de01d4df28d</UserSecretsId>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
@@ -27,10 +27,10 @@
     <Folder Include="AutoMappings\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Carpool.Models\Carpool.Models.csproj">
+    <ProjectReference Include="..\Carpool.Services\Carpool.Services.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\Carpool.Services\Carpool.Services.csproj">
+    <ProjectReference Include="..\Carpool.Utilities\Carpool.Utilities.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
