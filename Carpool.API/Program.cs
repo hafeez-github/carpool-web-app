@@ -60,6 +60,7 @@ builder.Services.AddScoped<IOfferService, OfferService>();
 builder.Services.AddScoped<IRideService, RideService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddAuthentication(x =>
 {

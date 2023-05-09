@@ -24,6 +24,8 @@ namespace Carpool.API.Controllers
             this.mapper = mapper;
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<string>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("[action]")]
         public async Task<IActionResult> LogIn(LogIn model)
         {
@@ -43,6 +45,8 @@ namespace Carpool.API.Controllers
             }
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<UserResponse>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)] 
         [HttpPost("[action]")]
         public async Task<IActionResult> SignUp(SignUp model)
         {

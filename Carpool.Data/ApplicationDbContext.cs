@@ -25,6 +25,10 @@ namespace Carpool.Data
 
         public DbSet<Ride> Rides { get; set; }
 
+        public DbSet<Offer_Info> Offer_Infos { get; set; }
+
+        public DbSet<Booking_Info> Booking_Infos { get; set; }
+
     }
 }
 
