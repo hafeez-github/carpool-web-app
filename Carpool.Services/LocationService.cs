@@ -86,9 +86,9 @@ namespace Carpool.Services
 
                 location = this.mapper.Map(editedLocation, location);
                 location.Id = id;
-                var c  = dbContext.SaveChangesAsync();
-                var res = this.mapper.Map(location, editedLocation);
-                return res;
+
+                dbContext.SaveChangesAsync();
+                return this.mapper.Map(location, editedLocation);
             }
             catch (Exception ex)
             {
@@ -97,7 +97,7 @@ namespace Carpool.Services
         }
 
         //Delete
-        public async Task<Location> DeleteLocation(int id)
+        public async Task DeleteLocation(int id)
         {
             db.Location location;
             try
@@ -117,7 +117,6 @@ namespace Carpool.Services
                 throw;
             }
 
-            return this.mapper.Map<Location>(location);
         }
 
     }

@@ -1,4 +1,4 @@
-<div>
+<div >
     <div class="row vh-100">
 
         <div class="col-8 bg-img-cover">
@@ -12,7 +12,7 @@
             <h4 class="gray-font-color ms-5 tag-line fw-bold">RIDES ON TAP</h4>
         </div>
 
-        <div class="col-sm-12 col-md-4 bg-img-login bg-color-tint">
+        <div class="col-sm-12 col-md-4 bg-img-login bg-color-tint" >
             <form class="my-3 mx-5 p-2" id="login-form" #loginForm="ngForm" (ngSubmit)="submitForm(loginForm)">
                 <br>
                 <h1 class="fw-bold text-white text-center login-header p-3">Log In</h1>
@@ -43,7 +43,9 @@
 
                 <div class="text-center">
                     <button type="submit" class="btn m-2 px-4 p-2 rounded-5 border-0 submit-button"
-                        [disabled]="(!loginForm.form.valid)"><span class="text-white fw-bold">Submit</span></button>
+                        [disabled]="(!loginForm.form.valid)">
+                        <span class="text-white fw-bold">Submit</span>
+                    </button>
                 </div>
 
                 <br>

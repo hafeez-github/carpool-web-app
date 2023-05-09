@@ -23,6 +23,8 @@ namespace Carpool.API.Controllers
             this.mapper = mapper;
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<RideResponse>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> Post(RideRequest model)
         {

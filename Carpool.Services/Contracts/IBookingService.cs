@@ -5,6 +5,6 @@ namespace Carpool.Services.Contracts
 	public interface IBookingService
 	{
         Task<Booking> AddBookingDetails(Booking model);
-        Task<List<Booking>> GetBookings(User user);
+        Task<List<Booking>> GetBookings();
     }
 }

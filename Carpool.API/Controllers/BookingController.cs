@@ -29,6 +29,8 @@ namespace Carpool.API.Controllers
             this.mapper = mapper;
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<BookingResponse>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> Post(BookingRequest bookingRequest)
         {
@@ -47,17 +49,18 @@ namespace Carpool.API.Controllers
             }
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<List<BookingResponse>>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("[action]")]
         public async Task<IActionResult> GetBookings(UserResponse model)
         {
             ApiResponse<List<BookingResponse>> response = new ApiResponse<List<BookingResponse>>();
-            services.User user = this.mapper.Map<services.User>(model);
 
             try
             {
                 response = new(200, "Success", true);
                 response.Message = "Bookings succesfully fetched";
-                response.Data = this.mapper.Map<List<BookingResponse>>(await this.bookingService.GetBookings(user));
+                response.Data = this.mapper.Map<List<BookingResponse>>(await this.bookingService.GetBookings());
 
                 return Ok(response);
             }

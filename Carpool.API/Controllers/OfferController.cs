@@ -25,6 +25,8 @@ namespace Carpool.API.Controllers
             this.mapper = mapper;
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<OfferResponse>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> Post(OfferRequest model)
         {
@@ -44,6 +46,8 @@ namespace Carpool.API.Controllers
             }
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<List<OfferResponse>>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("[action]")]
         public async Task<IActionResult> FindMatches(BookingResponse model)
         {
@@ -64,17 +68,17 @@ namespace Carpool.API.Controllers
             }
         }
 
-
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<List<OfferResponse>>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("[action]")]
-        public async Task<IActionResult> GetOffers(UserResponse model)
+        public async Task<IActionResult> GetOffers()
         {
             ApiResponse<List<OfferResponse>> response = new ApiResponse<List<OfferResponse>>();
-            services.User user = this.mapper.Map<services.User>(model);
             try
             {
                 response = new(200, "Success", true);
                 response.Message = "Offers succesfully fetched";
-                response.Data = this.mapper.Map<List<OfferResponse>>(await this.offerService.GetOffers(user));
+                response.Data = this.mapper.Map<List<OfferResponse>>(await this.offerService.GetOffers());
 
                 return Ok(response);
             }

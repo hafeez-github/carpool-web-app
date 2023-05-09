@@ -48,6 +48,23 @@ export class DataService {
     return this.http.post<APIResponse<string>>(`${this.apiURL}/authentication/login`, user);
   }
 
+  updateUser(user:User){
+    var res=this.http.put<APIResponse<User>>(`${this.apiURL}/User`, user);
+    return res;
+  }
+
+  offerRide(request:OfferRequest){
+    return this.http.post<APIResponse<OfferResponse>>(`${this.apiURL}/Offer`, request);
+  }
+
+  bookRide(request:BookingRequest){
+    return this.http.post<APIResponse<BookingResponse>>(`${this.apiURL}/Booking`, request);
+  }
+
+  findMatches(booking:BookingResponse){
+    return this.http.post<APIResponse<OfferResponse[]>>(`${this.apiURL}/Offer/FindMatches`, booking);
+  }
+
   fetchOffers(user: User) {
     return this.http.post<APIResponse<OfferResponse[]>>(`${this.apiURL}/Offer/GetOffers`, user);
   }
@@ -60,24 +77,8 @@ export class DataService {
     return this.http.get<APIResponse<Location[]>>(`${this.apiURL}/Location`);
   }
 
-  bookRide(request:BookingRequest){
-    return this.http.post<APIResponse<BookingResponse>>(`${this.apiURL}/Booking`, request);
-  }
-
-  findMatches(booking:BookingResponse){
-    return this.http.post<APIResponse<OfferResponse[]>>(`${this.apiURL}/Offer/FindMatches`, booking);
-  }
-
-  offerRide(request:OfferRequest){
-    return this.http.post<APIResponse<OfferResponse>>(`${this.apiURL}/Offer`, request);
-  }
-
   logRideTransaction(transaction:RideRequest){
     return this.http.post<APIResponse<RideResponse>>(`${this.apiURL}/Ride`, transaction);
-  }
-
-  updateUser(user:User){
-    return this.http.put<APIResponse<User>>(`${this.apiURL}/User`, user);
   }
 
 }

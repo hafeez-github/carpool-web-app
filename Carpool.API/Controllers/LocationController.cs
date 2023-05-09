@@ -24,6 +24,9 @@ namespace Carpool.API.Controllers
             this.mapper = mapper;
         }
 
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<LocationResponse>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> AddLocation(LocationRequest model)
         {
@@ -42,6 +45,8 @@ namespace Carpool.API.Controllers
             }
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<IEnumerable<LocationResponse>>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -60,6 +65,8 @@ namespace Carpool.API.Controllers
             }
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<LocationResponse>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
@@ -82,6 +89,8 @@ namespace Carpool.API.Controllers
             }
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<LocationResponse>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] LocationRequest model)
         {
@@ -105,6 +114,8 @@ namespace Carpool.API.Controllers
             }
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<LocationResponse>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
@@ -113,8 +124,6 @@ namespace Carpool.API.Controllers
             {
                 response = new(200, "Success", true);
                 response.Message = "Successfully deleted location";
-                response.Data = this.mapper.Map<LocationResponse>(await this.locationService.DeleteLocation(id));
-
                 return Ok(response);
             }
             catch (DataNotFoundException ex)

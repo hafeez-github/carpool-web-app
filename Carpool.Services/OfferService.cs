@@ -3,6 +3,7 @@ using Carpool.Data;
 using db=Carpool.Data.DbModels;
 using Carpool.Services.Contracts;
 using Carpool.Models.ServiceModels;
+using Microsoft.AspNetCore.Http;
 
 namespace Carpool.Services
 {
@@ -10,11 +11,14 @@ namespace Carpool.Services
 	{
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public OfferService(ApplicationDbContext dbContext, IMapper mapper)
+
+        public OfferService(ApplicationDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor)
 		{
             this.dbContext = dbContext;
             this.mapper = mapper;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Offer> AddOfferDetails(Offer model)
@@ -102,29 +106,28 @@ namespace Carpool.Services
             foreach (db.Offer m in matches)
             {
                 var match = this.mapper.Map<Offer>(m);
-                match.Offerer = this.dbContext.Users.Where(user => match.OffererId == user.Id).Select(col => col.FirstName).First();
-                match.FromLocation = this.dbContext.Locations.Where(loc => match.From == loc.Id).Select(col => col.Name).First();
-                match.ToLocation = this.dbContext.Locations.Where(loc => match.To == loc.Id).Select(col => col.Name).First();
 
+                db.Offer_Info temp = this.dbContext.Offer_Infos.Where(offer => offer.OfferId == m.Id).First();
+                match = this.mapper.Map(temp, match);
                 offerModels.Add(match);
             }
 
             return offerModels;
         }
 
-        public async Task<List<Offer>> GetOffers(User user)
+        public async Task<List<Offer>> GetOffers()
         {
             List<Offer> offers = new List<Offer>();
 
-            List<db.Offer> results=this.dbContext.Offers.Where(offer=>offer.OffererId==user.Id).ToList<db.Offer>();
+            int userId= Convert.ToInt32(this.httpContextAccessor.HttpContext.User.FindFirst("id").Value);
+            
+            List<db.Offer> results=this.dbContext.Offers.Where(offer=>offer.OffererId== userId).ToList<db.Offer>();
 
             foreach (db.Offer result in results)
             {
-                Offer currentOffer=this.mapper.Map<Offer>(result);
-
-                currentOffer.Offerer = this.dbContext.Users.Where(user => currentOffer.OffererId == user.Id).Select(col => col.FirstName).First();
-                currentOffer.FromLocation = this.dbContext.Locations.Where(loc => currentOffer.From == loc.Id).Select(col => col.Name).First();
-                currentOffer.ToLocation = this.dbContext.Locations.Where(loc => currentOffer.To == loc.Id).Select(col => col.Name).First();
+                Offer currentOffer = this.mapper.Map<Offer>(result);
+                db.Offer_Info temp = this.dbContext.Offer_Infos.Where(offer => offer.OfferId == result.Id).First();
+                currentOffer=this.mapper.Map(temp, currentOffer);
                 offers.Add(currentOffer);
             }
 

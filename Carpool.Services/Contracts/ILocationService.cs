@@ -9,7 +9,7 @@ namespace Carpool.Services.Contracts
         Task<IEnumerable<Location>> GetLocations();
         Task<Location> GetLocation(int id);
         Task<Location> UpdateLocation(int id,Location editedLocation);
-        Task<Location> DeleteLocation(int id);
+        Task DeleteLocation(int id);
     }
 }
 

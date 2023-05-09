@@ -7,7 +7,7 @@ namespace Carpool.Services.Contracts
 	{
         Task<Offer> AddOfferDetails(Offer model);
         Task<List<Offer>> FindMatches(Booking booking);
-        Task<List<Offer>> GetOffers(User user);
+        Task<List<Offer>> GetOffers();
         
     }
 }
