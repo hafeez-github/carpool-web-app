@@ -1,4 +1,4 @@
 export const environment={
     production: true,
-    domain:'http://prod.domain.com/'
+    baseUrl:'https://carpoolwebapp.azurewebsites.net/api'
 };
