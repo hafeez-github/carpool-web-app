@@ -19,10 +19,12 @@
   <ItemGroup>
     <None Remove="Controllers\" />
     <None Remove="AutoMappings\" />
+    <None Remove="User\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="AutoMappings\" />
+    <Folder Include="User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Carpool.Services\Carpool.Services.csproj">

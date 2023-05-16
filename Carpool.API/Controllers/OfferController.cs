@@ -8,6 +8,7 @@ using services = Carpool.Models.ServiceModels;
 using Carpool.API.ViewModels.RequestModels;
 using Carpool.API.ViewModels.ResponseModels;
 using AutoMapper;
+using Carpool.API.User;
 
 namespace Carpool.API.Controllers
 {
@@ -18,11 +19,13 @@ namespace Carpool.API.Controllers
     {
         private IOfferService offerService;
         private readonly IMapper mapper;
+        private readonly UserContext builder;
 
-        public OfferController(IOfferService offerService, IMapper mapper)
+        public OfferController(IOfferService offerService, IMapper mapper, UserContext builder)
         {
             this.offerService = offerService;
             this.mapper = mapper;
+            this.builder = builder;
         }
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<OfferResponse>))]

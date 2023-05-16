@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Carpool.API.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,8 +61,11 @@ builder.Services.AddScoped<IOfferService, OfferService>();
 builder.Services.AddScoped<IRideService, RideService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IVehicleService, VehicleService>();
-builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<UserContextBuilder>();
+builder.Services.AddScoped(c=>c.GetRequiredService<UserContextBuilder>().BuildContext());
+    
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
