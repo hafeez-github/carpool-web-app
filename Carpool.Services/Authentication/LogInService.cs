@@ -25,7 +25,7 @@ namespace Carpool.Services.AuthenticationServices
             this.mapper = mapper;
         }
 
-        public async Task<string> LogIn(LogIn model)
+        public async Task<Boolean> LogIn(LogIn model)
         {
             try
             {
@@ -39,11 +39,24 @@ namespace Carpool.Services.AuthenticationServices
                 {
                     if (VerifyPassword(model, user) == true)
                     {
-                        return CreateJWT(user);
+                        return true;
                     }
 
                     throw new Exception("Error! Incorrect Password");
                 }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<string> GetJWT(LogIn model)
+        {
+            try
+            {
+                db.User user = await this.dbContext.Users.FirstOrDefaultAsync(n => n.Email == model.Email);
+                return CreateJWT(user);
             }
             catch (Exception ex)
             {

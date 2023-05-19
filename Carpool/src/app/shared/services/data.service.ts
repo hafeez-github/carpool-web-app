@@ -45,7 +45,11 @@ export class DataService {
   }
 
   loginUser(user: Login) {
-    return this.http.post<APIResponse<string>>(`${this.apiURL}/authentication/login`, user);
+    return this.http.post<APIResponse<boolean>>(`${this.apiURL}/authentication/login`, user);
+  }
+
+  getJWT(user: Login) {
+    return this.http.post<APIResponse<string>>(`${this.apiURL}/Authentication/GetJWT`, user);
   }
 
   updateUser(user:User){

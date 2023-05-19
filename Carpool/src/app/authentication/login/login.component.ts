@@ -48,21 +48,24 @@ export class LoginComponent {
     };
 
     this.dataService.loginUser(user).subscribe(
-      responseData=>{
-        this.handleResponse(responseData);
-        this.login.email='';
-        this.login.password='';  
-        loginForm.form.reset();
-
-        if(this.decodedToken!=null){          
-          this.toastr.success('Succesful Login!');
-          this.router.navigate(['/acc/menu']);
+      loginResponse=>{
+        if(loginResponse.data==true){
+            this.dataService.getJWT(user).subscribe(responseData=>{
+            this.handleResponse(responseData);
+            this.login.email='';
+            this.login.password='';  
+            loginForm.form.reset();
+    
+            if(this.decodedToken!=null){          
+              this.toastr.success('Succesful Login!');
+              this.router.navigate(['/acc/menu']);
+            }
+            else{
+              
+              alert("Error! Wrong Credentials!");
+            }
+          });
         }
-        else{
-          
-          alert("Error! Wrong Credentials!");
-        }
-        
       }
      );
      

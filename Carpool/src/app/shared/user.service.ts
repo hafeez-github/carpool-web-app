@@ -8,21 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class UserService {
 
   constructor() {
-
   }
-
-  // static loggedinUser:User={
-  //   id:1,
-  //   firstName:'',
-  //   lastName:'',
-  //   username:'',
-  //   type:1,
-  //   email:'',
-  //   password:'',
-  //   mobile:'',
-  //   isActive:false
-  // };
-
 
   storeInLocalStorage(key:string, value:any){
     if(typeof value=='string'){
@@ -42,10 +28,6 @@ export class UserService {
       return null;
     }
   }
-
-  // getPropertyFromLocalStorage(key:string, property:string){
-  //   return this.getFromLocalStorage(key)[property];
-  // }
 
   clearLocalStorage(){
     localStorage.clear();

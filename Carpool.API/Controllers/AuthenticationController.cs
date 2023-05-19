@@ -24,12 +24,12 @@ namespace Carpool.API.Controllers
             this.mapper = mapper;
         }
 
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<string>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<Boolean>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("[action]")]
         public async Task<IActionResult> LogIn(LogIn model)
         {
-            ApiResponse<string> response = new ApiResponse<string>();
+            ApiResponse<Boolean> response = new ApiResponse<Boolean>();
             services.LogIn login = this.mapper.Map<services.LogIn>(model);
             try
             {
@@ -44,6 +44,29 @@ namespace Carpool.API.Controllers
                 throw;
             }
         }
+
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<string>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost("[action]")]
+        public async Task<IActionResult> GetJWT(LogIn model)
+        {
+            ApiResponse<string> response = new ApiResponse<string>();
+            services.LogIn login = this.mapper.Map<services.LogIn>(model);
+            try
+            {
+                response = new(200, "Success", true);
+                response.Message = "Succesful Login";
+                response.Data = await this.logInService.GetJWT(login);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<UserResponse>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

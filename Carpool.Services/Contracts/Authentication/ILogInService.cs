@@ -7,7 +7,8 @@ namespace Carpool.Services.Contracts.Authentication
 {
     public interface ILogInService
     {
-        Task<string> LogIn(LogIn model);
+        Task<Boolean> LogIn(LogIn model);
+        Task<string> GetJWT(LogIn model);
     }
 }
 
