@@ -1,8 +1,10 @@
 ﻿using System;
+using Carpool.Models.ServiceModels;
+
 namespace Carpool.API.User
 {
-	public interface IUserContextBuilder
-	{
+    public interface IUserContextBuilder
+    {
         UserContext BuildContext();
     }
 }

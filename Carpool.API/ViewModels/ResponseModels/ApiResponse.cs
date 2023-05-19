@@ -3,8 +3,8 @@ using Carpool.API.Contracts;
 
 namespace Carpool.API.ViewModels.ResponseModels
 {
-	public class ApiResponse<T> : IApiResponse<T>
-	{
+    public class ApiResponse<T> : IApiResponse<T>
+    {
         public int StatusCode { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }

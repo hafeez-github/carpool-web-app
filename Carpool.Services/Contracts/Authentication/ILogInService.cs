@@ -5,8 +5,8 @@ using Carpool.Models.ServiceModels.Authentication;
 
 namespace Carpool.Services.Contracts.Authentication
 {
-	public interface ILogInService
-	{
+    public interface ILogInService
+    {
         Task<string> LogIn(LogIn model);
     }
 }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Carpool.Models.ServiceModels
 {
     public class Ride
-	{
+    {
         public int Id { get; set; }
 
         public int BookingId { get; set; }
@@ -21,4 +21,4 @@ namespace Carpool.Models.ServiceModels
         public DateTime TripEndDateTime { get; set; } = DateTime.UtcNow;
     }
 }
-    
+

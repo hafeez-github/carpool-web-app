@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using AutoMapper;
 using Carpool.Data;
-using db=Carpool.Data.DbModels;
+using db = Carpool.Data.DbModels;
 using Carpool.Services.Contracts.Authentication;
 using Carpool.Models.ServiceModels.Authentication;
 using Carpool.Utilities;
@@ -15,12 +15,12 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Carpool.Services.AuthenticationServices
 {
-	public class LogInService:ILogInService
-	{
+    public class LogInService : ILogInService
+    {
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
         public LogInService(ApplicationDbContext dbContext, IMapper mapper)
-		{
+        {
             this.dbContext = dbContext;
             this.mapper = mapper;
         }
@@ -37,7 +37,7 @@ namespace Carpool.Services.AuthenticationServices
                 }
                 else
                 {
-                    if (VerifyPassword(model, user)==true)
+                    if (VerifyPassword(model, user) == true)
                     {
                         return CreateJWT(user);
                     }

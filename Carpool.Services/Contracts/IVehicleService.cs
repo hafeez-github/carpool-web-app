@@ -3,8 +3,8 @@ using Carpool.Models.ServiceModels;
 
 namespace Carpool.Services.Contracts
 {
-	public interface IVehicleService
-	{
+    public interface IVehicleService
+    {
         Task<Vehicle> AddVehicle(Vehicle vehicle);
         Task<IEnumerable<Vehicle>> GetVehicles();
         Task<Vehicle> GetVehicle(int id);

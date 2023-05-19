@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Carpool.API.ViewModels.RequestModels
 {
-	public class LocationRequest
-	{
+    public class LocationRequest
+    {
         [Required(ErrorMessage = "Name required")]
         public String Name { get; set; }
 

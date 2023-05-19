@@ -3,16 +3,16 @@ using AutoMapper;
 using Carpool.API.ViewModels.RequestModels;
 using Carpool.API.ViewModels.Authentication;
 using Carpool.API.ViewModels.ResponseModels;
-using service=Carpool.Models.ServiceModels;
-using db=Carpool.Data.DbModels;
+using service = Carpool.Models.ServiceModels;
+using db = Carpool.Data.DbModels;
 
 
 namespace Carpool.API.AutoMappings
 {
-	public class MappingProfile:Profile
-	{
-		public MappingProfile()
-		{
+    public class MappingProfile : Profile
+    {
+        public MappingProfile()
+        {
             CreateMap<service.Offer, db.Offer>().ReverseMap();
             CreateMap<service.Location, db.Location>().ReverseMap();
             CreateMap<service.Ride, db.Ride>().ReverseMap();
@@ -28,7 +28,7 @@ namespace Carpool.API.AutoMappings
             CreateMap<RideRequest, service.Ride>().ReverseMap();
             CreateMap<UserRequest, service.User>().ReverseMap();
             CreateMap<LocationRequest, service.Location>().ReverseMap();
-            CreateMap<LogIn ,service.Authentication.LogIn>().ReverseMap();
+            CreateMap<LogIn, service.Authentication.LogIn>().ReverseMap();
             CreateMap<SignUp, service.Authentication.SignUp>().ReverseMap();
 
             CreateMap<BookingResponse, service.Booking>().ReverseMap();
@@ -38,6 +38,6 @@ namespace Carpool.API.AutoMappings
             CreateMap<LocationResponse, service.Location>().ReverseMap();
             CreateMap<VehicleResponse, service.Vehicle>().ReverseMap();
         }
-	}
+    }
 }
 

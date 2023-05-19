@@ -7,7 +7,7 @@ namespace Carpool.Data.DbModels
 {
     [Table("Offer_Info")]
     public class Offer_Info
-	{
+    {
         [Key]
         public int OfferId { get; set; }
 

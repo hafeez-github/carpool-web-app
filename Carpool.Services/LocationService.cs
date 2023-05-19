@@ -2,14 +2,14 @@
 using AutoMapper;
 using Carpool.API.Exceptions;
 using Carpool.Data;
-using db=Carpool.Data.DbModels;
+using db = Carpool.Data.DbModels;
 using Carpool.Services.Contracts;
 using Carpool.Models.ServiceModels;
 
 namespace Carpool.Services
 {
-	public class LocationService:ILocationService
-	{
+    public class LocationService : ILocationService
+    {
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
 
@@ -42,7 +42,7 @@ namespace Carpool.Services
         {
             try
             {
-                List<db.Location> locations = dbContext.Locations.Select(loc=>loc).ToList();
+                List<db.Location> locations = dbContext.Locations.Select(loc => loc).ToList();
                 List<Location> locationResponses = this.mapper.Map<List<Location>>(locations);
 
                 return locationResponses;
@@ -59,7 +59,7 @@ namespace Carpool.Services
             try
             {
                 db.Location location = await dbContext.Locations.FindAsync(id);
-                if ( location== null)
+                if (location == null)
                 {
                     throw new DataNotFoundException("The required location doesn't exist");
                 }

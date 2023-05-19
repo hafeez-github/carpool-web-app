@@ -5,7 +5,7 @@ using Carpool.Utilities.Enums;
 namespace Carpool.Models.ServiceModels
 {
     public class Vehicle
-	{
+    {
         public int Id { get; set; }
 
         public string Number { get; set; }

@@ -7,17 +7,17 @@ using Microsoft.AspNetCore.Http;
 
 namespace Carpool.Services
 {
-	public class BookingService:IBookingService
-	{
+    public class BookingService : IBookingService
+    {
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
-        private IHttpContextAccessor httpContextAccessor;
+        private UserContext userContext;
 
-        public BookingService(ApplicationDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor)
-		{
+        public BookingService(ApplicationDbContext dbContext, IMapper mapper, UserContext userContext)
+        {
             this.dbContext = dbContext;
             this.mapper = mapper;
-            this.httpContextAccessor = httpContextAccessor;
+            this.userContext = userContext;
         }
 
         public async Task<Booking> AddBookingDetails(Booking model)
@@ -40,7 +40,7 @@ namespace Carpool.Services
         public async Task<List<Booking>> GetBookings()
         {
             List<Booking> bookings = new List<Booking>();
-            int userId = Convert.ToInt32(this.httpContextAccessor.HttpContext.User.FindFirst("id").Value);
+            int userId = this.userContext.Id;
 
             List<db.Booking> results = this.dbContext.Bookings.Where(booking => booking.BookerId == userId).ToList<db.Booking>();
 

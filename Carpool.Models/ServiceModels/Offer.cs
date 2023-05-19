@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Carpool.Models.ServiceModels
 {
     public class Offer
-	{
+    {
         public int Id { get; set; }
 
         public int OffererId { get; set; }

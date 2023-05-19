@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Security.Claims;
+using Carpool.Models.ServiceModels;
 
 namespace Carpool.API.User
 {
-    public class UserContextBuilder 
+    public class UserContextBuilder
     {
         private readonly IHttpContextAccessor httpContextAccessor;
         private UserContext Context;

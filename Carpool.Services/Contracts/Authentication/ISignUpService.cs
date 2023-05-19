@@ -5,8 +5,8 @@ using Carpool.Utilities;
 
 namespace Carpool.Services.Contracts.Authentication
 {
-	public interface ISignUpService
-	{
+    public interface ISignUpService
+    {
         Task<User> SignUp(SignUp model);
     }
 }

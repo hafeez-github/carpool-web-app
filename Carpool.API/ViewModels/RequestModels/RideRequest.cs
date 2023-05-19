@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Carpool.API.ViewModels.RequestModels
 {
-	public class RideRequest
-	{
-		public RideRequest()
-		{
-		}
+    public class RideRequest
+    {
+        public RideRequest()
+        {
+        }
 
         [Required(ErrorMessage = "BookingId required")]
         public int BookingId { get; set; }

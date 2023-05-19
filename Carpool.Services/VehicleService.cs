@@ -2,19 +2,19 @@
 using AutoMapper;
 using Carpool.API.Exceptions;
 using Carpool.Data;
-using db=Carpool.Data.DbModels;
+using db = Carpool.Data.DbModels;
 using Carpool.Services.Contracts;
 using Carpool.Models.ServiceModels;
 
 namespace Carpool.Services
 {
-	public class VehicleService:IVehicleService
-	{
+    public class VehicleService : IVehicleService
+    {
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
 
         public VehicleService(ApplicationDbContext dbContext, IMapper mapper)
-		{
+        {
             this.dbContext = dbContext;
             this.mapper = mapper;
         }
@@ -24,7 +24,7 @@ namespace Carpool.Services
         {
             try
             {
-                db.Vehicle vehicle=this.mapper.Map<db.Vehicle>(newVehicle);
+                db.Vehicle vehicle = this.mapper.Map<db.Vehicle>(newVehicle);
                 await dbContext.Vehicles.AddAsync(vehicle);
                 await dbContext.SaveChangesAsync();
 
@@ -41,7 +41,7 @@ namespace Carpool.Services
         {
             try
             {
-                List<db.Vehicle> vehicles = this.dbContext.Vehicles.Select(v=>v).ToList();
+                List<db.Vehicle> vehicles = this.dbContext.Vehicles.Select(v => v).ToList();
                 List<Vehicle> vehicleModels = this.mapper.Map<List<Vehicle>>(vehicles);
 
                 return vehicleModels;
@@ -59,7 +59,7 @@ namespace Carpool.Services
         {
             try
             {
-                db.Vehicle vehicle= await dbContext.Vehicles.FindAsync(id);
+                db.Vehicle vehicle = await dbContext.Vehicles.FindAsync(id);
                 if (vehicle == null)
                 {
                     throw new DataNotFoundException("The required vehicle doesn't exist");

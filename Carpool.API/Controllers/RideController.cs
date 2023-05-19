@@ -5,7 +5,7 @@ using Carpool.Services.Contracts;
 using Carpool.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using services=Carpool.Models.ServiceModels;
+using services = Carpool.Models.ServiceModels;
 
 namespace Carpool.API.Controllers
 {
@@ -28,7 +28,7 @@ namespace Carpool.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(RideRequest model)
         {
-            ApiResponse<RideResponse> response=new ApiResponse<RideResponse>();
+            ApiResponse<RideResponse> response = new ApiResponse<RideResponse>();
             services.Ride ride = this.mapper.Map<services.Ride>(model);
             try
             {

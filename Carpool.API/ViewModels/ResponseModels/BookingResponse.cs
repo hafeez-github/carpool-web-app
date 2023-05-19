@@ -1,11 +1,11 @@
 ﻿using System;
 namespace Carpool.API.ViewModels.ResponseModels
 {
-	public class BookingResponse
-	{
-		public BookingResponse()
-		{
-		}
+    public class BookingResponse
+    {
+        public BookingResponse()
+        {
+        }
 
         public int Id { get; set; }
 

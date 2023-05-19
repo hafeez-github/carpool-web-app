@@ -20,5 +20,6 @@
     <ProjectReference Include="..\Carpool.Data\Carpool.Data.csproj" />
     <ProjectReference Include="..\Carpool.Utilities\Carpool.Utilities.csproj" />
     <ProjectReference Include="..\Carpool.Models\Carpool.Models.csproj" />
+    <ProjectReference Include="..\Carpool.Models\Carpool.Models.csproj" />
   </ItemGroup>
 </Project>

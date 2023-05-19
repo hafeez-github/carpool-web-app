@@ -3,19 +3,19 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Carpool.API.ViewModels.ResponseModels
 {
-	public class OfferResponse
+    public class OfferResponse
     {
-		public OfferResponse()
-		{
-		}
+        public OfferResponse()
+        {
+        }
 
-        public int Id { get; set; } 
+        public int Id { get; set; }
 
         public int OffererId { get; set; }
 
         public int From { get; set; }
 
-        public int To { get; set; } 
+        public int To { get; set; }
 
         public string Time { get; set; }
 

@@ -6,7 +6,7 @@ namespace Carpool.Data.DbModels
 {
     [Table("Booking_Info")]
     public class Booking_Info
-	{
+    {
         [Key]
         public int BookingId { get; set; }
 
@@ -15,5 +15,5 @@ namespace Carpool.Data.DbModels
         public String FromLocation { get; set; }
 
         public String ToLocation { get; set; }
-	}
+    }
 }

@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Carpool.Models.ServiceModels
 {
     public class Location
-	{
-		public Location()
-		{
-		}
+    {
+        public Location()
+        {
+        }
 
         public int Id { get; set; }
 

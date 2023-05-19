@@ -4,11 +4,11 @@ using Carpool.Utilities.Enums;
 
 namespace Carpool.API.ViewModels.RequestModels
 {
-	public class VehicleRequest
-	{
-		public VehicleRequest()
-		{
-		}
+    public class VehicleRequest
+    {
+        public VehicleRequest()
+        {
+        }
 
         public string Number { get; set; }
 

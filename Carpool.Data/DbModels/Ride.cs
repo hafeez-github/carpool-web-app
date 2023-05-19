@@ -6,7 +6,7 @@ namespace Carpool.Data.DbModels
 {
     [Table("Ride")]
     public class Ride
-	{
+    {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -24,4 +24,4 @@ namespace Carpool.Data.DbModels
         public DateTime TripEndDateTime { get; set; } = DateTime.UtcNow;
     }
 }
-    
+

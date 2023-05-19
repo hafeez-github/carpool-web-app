@@ -65,8 +65,8 @@ builder.Services.AddScoped<IVehicleService, VehicleService>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<UserContextBuilder>();
-builder.Services.AddScoped(c=>c.GetRequiredService<UserContextBuilder>().BuildContext());
-    
+builder.Services.AddScoped(c => c.GetRequiredService<UserContextBuilder>().BuildContext());
+
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -76,11 +76,11 @@ builder.Services.AddAuthentication(x =>
         x.RequireHttpsMetadata = false;
         x.SaveToken = true;
         x.TokenValidationParameters = new TokenValidationParameters
-        { 
+        {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("veryverysecret.....")),
-            ValidateAudience=false,
-            ValidateIssuer=false
+            ValidateAudience = false,
+            ValidateIssuer = false
         };
     }
 );

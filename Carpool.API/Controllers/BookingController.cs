@@ -34,7 +34,7 @@ namespace Carpool.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(BookingRequest bookingRequest)
         {
-            ApiResponse<BookingResponse> response=new ApiResponse<BookingResponse>();
+            ApiResponse<BookingResponse> response = new ApiResponse<BookingResponse>();
             services.Booking booking = this.mapper.Map<services.Booking>(bookingRequest);
             try
             {

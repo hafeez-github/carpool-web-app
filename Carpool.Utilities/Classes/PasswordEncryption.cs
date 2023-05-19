@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Carpool.Utilities.Classes
 {
-	public class PasswordEncryption
-	{
-		public PasswordEncryption()
-		{
-		}
+    public class PasswordEncryption
+    {
+        public PasswordEncryption()
+        {
+        }
 
         public static string EncryptPassword(string plainText)
         {

@@ -1,24 +1,24 @@
 ﻿using AutoMapper;
 using Carpool.Data;
-using db=Carpool.Data.DbModels;
+using db = Carpool.Data.DbModels;
 using Carpool.Services.Contracts;
 using Carpool.Models.ServiceModels;
 using Microsoft.AspNetCore.Http;
 
 namespace Carpool.Services
 {
-	public class OfferService:IOfferService
-	{
+    public class OfferService : IOfferService
+    {
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
-        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly UserContext userContext;
 
 
-        public OfferService(ApplicationDbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor)
-		{
+        public OfferService(ApplicationDbContext dbContext, IMapper mapper, UserContext userContext)
+        {
             this.dbContext = dbContext;
             this.mapper = mapper;
-            this.httpContextAccessor = httpContextAccessor;
+            this.userContext = userContext;
         }
 
         public async Task<Offer> AddOfferDetails(Offer model)
@@ -119,15 +119,15 @@ namespace Carpool.Services
         {
             List<Offer> offers = new List<Offer>();
 
-            int userId= Convert.ToInt32(this.httpContextAccessor.HttpContext.User.FindFirst("id").Value);
-            
-            List<db.Offer> results=this.dbContext.Offers.Where(offer=>offer.OffererId== userId).ToList<db.Offer>();
+            int userId = this.userContext.Id;
+
+            List<db.Offer> results = this.dbContext.Offers.Where(offer => offer.OffererId == userId).ToList<db.Offer>();
 
             foreach (db.Offer result in results)
             {
                 Offer currentOffer = this.mapper.Map<Offer>(result);
                 db.Offer_Info temp = this.dbContext.Offer_Infos.Where(offer => offer.OfferId == result.Id).First();
-                currentOffer=this.mapper.Map(temp, currentOffer);
+                currentOffer = this.mapper.Map(temp, currentOffer);
                 offers.Add(currentOffer);
             }
 

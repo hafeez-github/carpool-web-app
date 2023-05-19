@@ -29,7 +29,7 @@ namespace Carpool.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(VehicleRequest model)
         {
-            ApiResponse<VehicleResponse> response=new ApiResponse<VehicleResponse>();
+            ApiResponse<VehicleResponse> response = new ApiResponse<VehicleResponse>();
             services.Vehicle vehicle = this.mapper.Map<services.Vehicle>(model);
             try
             {
@@ -50,7 +50,7 @@ namespace Carpool.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            ApiResponse<IEnumerable<VehicleResponse>> response=new ApiResponse<IEnumerable<VehicleResponse>>();
+            ApiResponse<IEnumerable<VehicleResponse>> response = new ApiResponse<IEnumerable<VehicleResponse>>();
             try
             {
                 response = new(200, "Success", true);
@@ -72,7 +72,7 @@ namespace Carpool.API.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            ApiResponse<VehicleResponse> response=new ApiResponse<VehicleResponse>();
+            ApiResponse<VehicleResponse> response = new ApiResponse<VehicleResponse>();
 
             try
             {
@@ -82,12 +82,6 @@ namespace Carpool.API.Controllers
 
                 return Ok(response);
             }
-
-            catch (DataNotFoundException ex)
-            {
-                throw;
-            }
-
             catch (Exception ex)
             {
                 throw;
@@ -99,7 +93,7 @@ namespace Carpool.API.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] VehicleRequest model)
         {
-            ApiResponse<VehicleResponse> response=new ApiResponse<VehicleResponse>();
+            ApiResponse<VehicleResponse> response = new ApiResponse<VehicleResponse>();
             services.Vehicle editedVehicle = this.mapper.Map<services.Vehicle>(model);
 
             try
@@ -110,11 +104,6 @@ namespace Carpool.API.Controllers
 
                 return Ok(response);
             }
-            catch (DataNotFoundException ex)
-            {
-                throw;
-            }
-
             catch (Exception ex)
             {
                 throw;
@@ -127,7 +116,7 @@ namespace Carpool.API.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            ApiResponse<VehicleResponse> response=new ApiResponse<VehicleResponse>();
+            ApiResponse<VehicleResponse> response = new ApiResponse<VehicleResponse>();
 
             try
             {
@@ -136,10 +125,6 @@ namespace Carpool.API.Controllers
                 response.Data = this.mapper.Map<VehicleResponse>(await this.vehicleService.DeleteVehicle(id));
 
                 return Ok(response);
-            }
-            catch (DataNotFoundException ex)
-            {
-                throw;
             }
             catch (Exception ex)
             {

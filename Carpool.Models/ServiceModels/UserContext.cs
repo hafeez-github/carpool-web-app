@@ -2,10 +2,10 @@
 using System.Security.Claims;
 using Carpool.Utilities.Enums;
 
-namespace Carpool.API.User
+namespace Carpool.Models.ServiceModels
 {
-	public class UserContext
-	{
+    public class UserContext
+    {
         public int Id { get; set; }
 
         public string FirstName { get; set; }

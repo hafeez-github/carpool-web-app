@@ -3,11 +3,11 @@ using Carpool.Utilities.Enums;
 
 namespace Carpool.API.ViewModels.ResponseModels
 {
-	public class UserResponse
+    public class UserResponse
     {
-		public UserResponse()
-		{
-		}
+        public UserResponse()
+        {
+        }
 
         public int Id { get; set; }
 

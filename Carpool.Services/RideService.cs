@@ -1,18 +1,18 @@
 ﻿using AutoMapper;
 using Carpool.Data;
-using db=Carpool.Data.DbModels;
+using db = Carpool.Data.DbModels;
 using Carpool.Models.ServiceModels;
 using Carpool.Services.Contracts;
 
 namespace Carpool.Services
 {
-	public class RideService:IRideService
-	{
+    public class RideService : IRideService
+    {
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
 
         public RideService(ApplicationDbContext dbContext, IMapper mapper)
-		{
+        {
             this.dbContext = dbContext;
             this.mapper = mapper;
         }

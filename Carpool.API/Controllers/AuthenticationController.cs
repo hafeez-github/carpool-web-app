@@ -1,7 +1,7 @@
 using Carpool.API.ViewModels.Authentication;
 using Carpool.API.ViewModels.ResponseModels;
 using Carpool.Services.Contracts.Authentication;
-using services=Carpool.Models.ServiceModels.Authentication;
+using services = Carpool.Models.ServiceModels.Authentication;
 using Carpool.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,8 +29,8 @@ namespace Carpool.API.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> LogIn(LogIn model)
         {
-            ApiResponse<string> response=new ApiResponse<string>();
-            services.LogIn login=this.mapper.Map<services.LogIn>(model);
+            ApiResponse<string> response = new ApiResponse<string>();
+            services.LogIn login = this.mapper.Map<services.LogIn>(model);
             try
             {
                 response = new(200, "Success", true);
@@ -46,11 +46,11 @@ namespace Carpool.API.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<UserResponse>))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)] 
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("[action]")]
         public async Task<IActionResult> SignUp(SignUp model)
         {
-            ApiResponse<UserResponse> response=new ApiResponse<UserResponse>();
+            ApiResponse<UserResponse> response = new ApiResponse<UserResponse>();
             services.SignUp signup = this.mapper.Map<services.SignUp>(model);
             try
             {
@@ -59,7 +59,7 @@ namespace Carpool.API.Controllers
                 response.Data = this.mapper.Map<UserResponse>(await this.signUpService.SignUp(signup));
                 return Ok(response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }

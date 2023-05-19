@@ -7,7 +7,7 @@ namespace Carpool.Data.DbModels
 {
     [Table("User")]
     public class User
-	{
+    {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -21,17 +21,17 @@ namespace Carpool.Data.DbModels
         public UserType Type { get; set; }
 
         public string Email { get; set; }
-            
+
         public string Password { get; set; }
-        
+
         public string Mobile { get; set; }
 
         public bool IsActive { get; set; }
 
         public User()
-		{
+        {
 
         }
-	}
+    }
 }
 

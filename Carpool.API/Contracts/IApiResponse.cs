@@ -1,11 +1,11 @@
 ﻿using System;
 namespace Carpool.API.Contracts
 {
-	public class IApiResponse<T>
-	{
-		public IApiResponse()
-		{
-		}
+    public class IApiResponse<T>
+    {
+        public IApiResponse()
+        {
+        }
 
         public int StatusCode { get; set; }
         public string Status { get; set; }

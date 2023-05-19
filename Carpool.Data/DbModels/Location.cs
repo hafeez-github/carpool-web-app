@@ -6,7 +6,7 @@ namespace Carpool.Data.DbModels
 {
     [Table("Location")]
     public class Location
-	{
+    {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

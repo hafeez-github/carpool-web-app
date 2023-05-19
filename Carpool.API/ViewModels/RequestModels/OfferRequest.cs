@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Carpool.API.ViewModels.RequestModels
 {
-	public class OfferRequest
-	{
+    public class OfferRequest
+    {
         [Required(ErrorMessage = "BookerId required")]
         public int OffererId { get; set; }
 
@@ -25,8 +25,8 @@ namespace Carpool.API.ViewModels.RequestModels
         public DateTime OfferedDateTime { get; set; } = DateTime.UtcNow;
 
         public OfferRequest()
-		{
-		}
-	}
+        {
+        }
+    }
 }
 

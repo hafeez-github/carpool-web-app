@@ -4,8 +4,8 @@ using Carpool.Utilities.Enums;
 
 namespace Carpool.API.ViewModels.RequestModels
 {
-	public class UserRequest
-	{
+    public class UserRequest
+    {
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

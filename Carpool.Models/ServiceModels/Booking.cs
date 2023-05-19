@@ -6,7 +6,7 @@ namespace Carpool.Models.ServiceModels
 {
     public class Booking
     {
-        
+
         public int Id { get; set; }
 
         public int BookerId { get; set; }
